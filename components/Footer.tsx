@@ -1,47 +1,76 @@
-import Link from "next/link";
-import { nav, site } from "@/lib/data";
+import { site } from "@/lib/data";
 
 export function Footer() {
   return (
-    <footer className="border-t border-[color:var(--color-line)] bg-[color:var(--color-olive-50)]">
-      <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 md:grid-cols-4">
-        <div>
-          <p className="font-display text-2xl text-[color:var(--color-teal-deep)]">ArtDent {site.city}</p>
-          <p className="mt-3 text-sm text-[color:var(--color-ink)]/80">
+    <footer style={{ background: "var(--card)", color: "var(--teal-deep)", overflow: "hidden" }}>
+      <div style={{
+        maxWidth: 1280, margin: "0 auto", padding: "clamp(56px, 7vw, 96px) clamp(16px, 3vw, 40px) 0",
+        display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "clamp(28px, 4vw, 56px)",
+      }}>
+        <div style={{ display: "grid", gap: 14, alignContent: "start" }}>
+          <span style={{ display: "flex", alignItems: "baseline", gap: 9 }}>
+            <span className="font-display" style={{ fontSize: 27, color: "var(--teal-deep)" }}>ArtDent</span>
+            <span className="font-mono-label" style={{ fontSize: 10.5, fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold-label)" }}>{site.city}</span>
+          </span>
+          <p style={{ margin: 0, fontSize: 14.5, lineHeight: 1.65, color: "var(--muted)", maxWidth: "30ch" }}>
             Clinică stomatologică cu servicii complete: implantologie, ortodonție, estetică dentară și profilaxie.
           </p>
-        </div>
-
-        <div>
-          <p className="font-mono-label text-xs uppercase tracking-[0.16em] text-[color:var(--color-gold-deep)]">Linkuri rapide</p>
-          <ul className="mt-3 space-y-2 text-sm">
-            {nav.filter((n) => n.href !== "/").map((item) => (
-              <li key={item.href}><Link href={item.href}>{item.label}</Link></li>
+          <div style={{ display: "flex", gap: 10, paddingTop: 4 }}>
+            {["FB", "IG", "TT"].map((s) => (
+              <a key={s} href="#" className="social-circle" style={{ width: 38, height: 38, borderRadius: "50%", display: "grid", placeItems: "center", fontSize: 12, fontWeight: 600 }}>{s}</a>
             ))}
-          </ul>
-        </div>
-
-        <div>
-          <p className="font-mono-label text-xs uppercase tracking-[0.16em] text-[color:var(--color-gold-deep)]">Contact &amp; program</p>
-          <p className="mt-3 text-sm">{site.address}</p>
-          <p className="text-sm">{site.hours}</p>
-          <a href={site.phoneHref} className="text-sm font-mono-label">{site.phone}</a>
-        </div>
-
-        <div>
-          <p className="font-mono-label text-xs uppercase tracking-[0.16em] text-[color:var(--color-gold-deep)]">Unde ne găsești</p>
-          <div className="mt-3 h-32 rounded-lg border border-[color:var(--color-line)] bg-white/60 grid place-items-center text-xs text-[color:var(--color-ink)]/50">
-            Hartă Google Maps
           </div>
+        </div>
+
+        <div style={{ display: "grid", alignContent: "start" }}>
+          <span className="font-display" style={{ fontSize: 18, letterSpacing: "0.02em", color: "var(--teal-deep)", paddingBottom: 14 }}>LINKURI RAPIDE</span>
+          {[
+            { label: "Servicii", href: "/servicii" },
+            { label: "Despre noi", href: "/despre" },
+            { label: "Echipă", href: "/echipa" },
+            { label: "Prețuri", href: "/servicii" },
+            { label: "Blog", href: "/blog" },
+            { label: "Contact", href: "/contact" },
+          ].map((l, i, arr) => (
+            <a key={l.label} href={l.href} className="footer-link" style={{
+              fontSize: 15, fontWeight: 500, padding: "13px 0", borderTop: "1px solid var(--line)",
+              borderBottom: i === arr.length - 1 ? "1px solid var(--line)" : undefined,
+            }}>{l.label}</a>
+          ))}
+        </div>
+
+        <div style={{ display: "grid", gap: 12, alignContent: "start" }}>
+          <span className="font-display" style={{ fontSize: 18, color: "var(--teal-deep)" }}>Contact &amp; Program</span>
+          <p style={{ margin: 0, fontSize: 14.5, lineHeight: 1.7, color: "var(--muted)", maxWidth: "34ch" }}>{site.address}. {site.hours}.</p>
+          <a href={site.phoneHref} className="footer-link" style={{ fontSize: 15.5, fontWeight: 600 }}>{site.phone}</a>
+        </div>
+
+        <div style={{ display: "grid", gap: 12, alignContent: "start" }}>
+          <span className="font-display" style={{ fontSize: 18, color: "var(--teal-deep)" }}>Unde ne găsești</span>
+          <iframe
+            src={site.mapsEmbed}
+            style={{ border: "1px solid var(--line)", borderRadius: 8, width: "100%", minHeight: 140 }}
+            loading="lazy"
+            title="Hartă ArtDent Slobozia"
+          />
         </div>
       </div>
 
-      <div className="mx-auto flex max-w-6xl flex-col gap-2 border-t border-[color:var(--color-line)] px-5 py-6 text-xs text-[color:var(--color-ink)]/60 md:flex-row md:justify-between">
-        <p>© {new Date().getFullYear()} ArtDent Slobozia. Toate drepturile rezervate. CUI: {site.cui}</p>
-        <div className="flex gap-4">
-          <span>Termeni și condiții</span>
-          <span>Politica de confidențialitate</span>
+      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "clamp(24px, 3vw, 36px) clamp(16px, 3vw, 40px) 0" }}>
+        <div style={{ borderTop: "1px solid var(--line)", paddingTop: 20, display: "flex", flexWrap: "wrap", gap: "10px 24px", justifyContent: "space-between", fontSize: 12.5, color: "var(--muted)" }}>
+          <span>© 2026 ArtDent Slobozia. Toate drepturile rezervate.</span>
+          <span style={{ display: "flex", flexWrap: "wrap", gap: "10px 20px" }}>
+            <span>CUI: {site.cui}</span>
+            <a href="/contact" style={{ color: "var(--muted)" }}>Termeni și condiții</a>
+            <a href="/contact" style={{ color: "var(--muted)" }}>Politica de confidențialitate</a>
+          </span>
         </div>
+      </div>
+
+      <div style={{ padding: "clamp(16px, 3vw, 32px) 0 clamp(4px, 1vw, 12px)", textAlign: "center", overflow: "visible" }}>
+        <span className="font-display" style={{ fontSize: "clamp(80px, 15vw, 220px)", lineHeight: 1.15, color: "var(--teal-deep)", letterSpacing: "-0.01em", whiteSpace: "nowrap" }}>
+          ArtDent Slobozia
+        </span>
       </div>
     </footer>
   );

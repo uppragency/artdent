@@ -1,17 +1,18 @@
-// Conținut sursă: designul de homepage aprobat (ArtDent Homepage v2).
-// Rândurile marcate ca "de completat" nu au fost confirmate de client și
-// trebuie înlocuite cu date reale înainte de lansare.
+// Sursă: designul aprobat "ArtDent Homepage v2" + documentul de specificații.
+// Rândurile marcate „de completat" nu au fost confirmate de client.
 
 export const site = {
   name: "ArtDent",
   city: "Slobozia",
   phone: "0723 192 716",
-  phoneHref: "tel:+40723192716",
+  phoneHref: "tel:0723192716",
   whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "40723192716",
-  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "programari@artdentslobozia.ro", // de completat: adresa reală
+  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "programari@artdentslobozia.ro", // de completat
   address: "Al. Feroviarului 1, Slobozia, Ialomița, 920030",
   hours: "Luni – Vineri, 09:00 – 19:00",
-  cui: "RO00000000", // de completat: CUI real
+  cui: "RO00000000", // de completat
+  mapsEmbed: "https://maps.google.com/maps?q=Al.+Feroviarului+1,+Slobozia&z=15&output=embed",
+  googleReviewsUrl: "https://www.google.com/search?q=artdent+slobozia+recenzii",
 };
 
 export const nav = [
@@ -19,15 +20,23 @@ export const nav = [
   { label: "Servicii", href: "/servicii" },
   { label: "Despre noi", href: "/despre" },
   { label: "Echipă", href: "/echipa" },
-  { label: "Testimoniale", href: "/testimoniale" },
+  { label: "Prețuri", href: "/servicii" },
   { label: "Contact", href: "/contact" },
 ];
 
-export const heroStats = [
-  { value: "20+", label: "ani de experiență clinică", description: "Practică neîntreruptă în stomatologie generală și implantologie." },
-  { value: "11", label: "ediții Implanto Days", description: "Participare la congresul de implantologie de la Poiana Brașov." },
-  { value: "1000+", label: "pacienți tratați", description: "Din Slobozia și întreg județul Ialomița." },
-  { value: "4.9", label: "rating mediu Google", description: "Rată de satisfacție confirmată de recenziile pacienților." },
+export const serviceOptions = [
+  "Consultație",
+  "Implantologie și protetică",
+  "Ortodonție",
+  "Estetică și cosmetică dentară",
+  "Tratamente generale",
+  "Chirurgie buco-dentară",
+];
+
+export const featuredSolutions = [
+  { num: "01", title: "Implantologie și Protetică Avansată", text: "Reabilitări funcționale complete, planificate digital înainte de intervenție. Implant, bont și coroană într-un flux controlat, cu un rezultat care se integrează natural în zâmbet." },
+  { num: "02", title: "Ortodonție Modernă", text: "Aparate fixe și gutiere transparente pentru copii și adulți. Alinierea dinților se face pe baza unui plan clar, cu etape și durată comunicate de la început." },
+  { num: "03", title: "Estetică și Cosmetică Dentară", text: "Albire profesională, fațete și coroane ceramice. Forma și culoarea se stabilesc împreună cu tine, cu simulare înainte de orice lucrare definitivă." },
 ];
 
 export const processSteps = [
@@ -35,12 +44,6 @@ export const processSteps = [
   { n: "2", title: "Consultație și diagnostic", text: "Discutăm ce te deranjează, facem examinarea clinică și, dacă e nevoie, radiografii digitale." },
   { n: "3", title: "Plan de tratament", text: "Primești un plan clar, cu etape, durată și costuri. Nimic nu începe fără acordul tău." },
   { n: "4", title: "Începerea tratamentului", text: "Tratamentul se face în etapa stabilită împreună, cu explicații la fiecare pas." },
-];
-
-export const featuredServices = [
-  { num: "01", title: "Implantologie și Protetică Avansată", text: "Reabilitări funcționale complete, planificate digital înainte de intervenție. Implant, bont și coroană într-un flux controlat, cu un rezultat care se integrează natural în zâmbet." },
-  { num: "02", title: "Ortodonție Modernă", text: "Aparate fixe și gutiere transparente pentru copii și adulți. Alinierea dinților se face pe baza unui plan clar, cu etape și durată comunicate de la început." },
-  { num: "03", title: "Estetică și Cosmetică Dentară", text: "Albire profesională, fațete și coroane ceramice. Forma și culoarea se stabilesc împreună cu tine, cu simulare înainte de orice lucrare definitivă." },
 ];
 
 export const usp = [
@@ -65,22 +68,32 @@ export const pricing = [
   { title: "Aparat dentar ortodontic", price: "de la 3.500 lei", text: "Fix sau gutiere transparente, cu plată etapizată pe durata tratamentului.", popular: false },
 ];
 
+export const galleryItems = ["Recepție clinică", "Sală de tratament 1", "Sală de tratament 2", "Cabinet radiologie", "Zonă de sterilizare", "Sală de așteptare"];
+
 export const beforeAfterCases = [
   "Albire dentară profesională", "Fațete ceramice", "Corectare aliniere",
   "Implant dentar unic", "Reconstrucție protetică", "Estetică gingivală",
 ];
 
-export const team = [
-  {
-    name: "Dr. Mihaela Zupcu",
-    role: "Medic coordonator",
-    specializations: ["Implantologie orală", "Ortodonție", "Estetică dentară", "Stomatologie generală"],
-    bio: "Peste 20 de ani de experiență clinică și competență în implantologie orală. A participat la 11 ediții ale congresului Implanto Days de la Poiana Brașov, unde se discută protocoalele actuale în implantologie.",
-  },
-  // De completat / de confirmat cu clinica: restul echipei medicale.
-  { name: "Dr. Andrei Pop", role: "Ortodonție", specializations: ["Ortodonție"], bio: "" },
-  { name: "Dr. Ioana Marin", role: "Estetică dentară", specializations: ["Estetică dentară"], bio: "" },
-  { name: "Dr. Cristian Toma", role: "Chirurgie buco-dentară", specializations: ["Chirurgie buco-dentară"], bio: "" },
+export const heroStats = [
+  { key: "years", target: 20, suffix: "+", label: "ani de experiență clinică", description: "Practică neîntreruptă în stomatologie generală și implantologie." },
+  { key: "congresses", target: 11, suffix: "", label: "ediții Implanto Days", description: "Participare la congresul de implantologie de la Poiana Brașov." },
+  { key: "patients", target: 1000, suffix: "+", label: "pacienți tratați", description: "Din Slobozia și întreg județul Ialomița." },
+  { key: "rating", target: 4.9, suffix: "", label: "rating mediu Google", description: "Rată de satisfacție confirmată de recenziile pacienților.", decimal: true },
+];
+
+export const doctor = {
+  name: "Dr. Mihaela Zupcu",
+  role: "Medic coordonator",
+  specializations: ["Implantologie orală", "Ortodonție", "Estetică dentară", "Stomatologie generală"],
+  bio: "Peste 20 de ani de experiență clinică și competență în implantologie orală. A participat la 11 ediții ale congresului Implanto Days de la Poiana Brașov, unde se discută protocoalele actuale în implantologie.",
+};
+
+// De completat / de confirmat cu clinica — nume neconfirmate din designul aprobat.
+export const teamMembers = [
+  { name: "Dr. Andrei Pop", role: "Ortodonție" },
+  { name: "Dr. Ioana Marin", role: "Estetică dentară" },
+  { name: "Dr. Cristian Toma", role: "Chirurgie buco-dentară" },
 ];
 
 export const faqs = [
@@ -91,11 +104,19 @@ export const faqs = [
   { q: "Cum se plătește tratamentul?", a: "Poți plăti pe etape, în funcție de fazele tratamentului. Prețurile sunt comunicate integral înainte de începere, fără costuri adăugate pe parcurs." },
 ];
 
-export const serviceOptions = [
-  "Consultație",
-  "Implantologie și protetică",
-  "Ortodonție",
-  "Estetică și cosmetică dentară",
-  "Tratamente generale",
-  "Chirurgie buco-dentară",
+export const articles = [
+  { tag: "PREVENȚIE", title: "Cum previi cariile dentare", excerpt: "Obiceiuri simple de igienă orală care reduc semnificativ riscul de carii." },
+  { tag: "ESTETICĂ", title: "Ce este albirea profesională și cum funcționează", excerpt: "Diferența dintre albirea de cabinet și produsele de acasă, explicată pas cu pas." },
+  { tag: "ORTODONȚIE", title: "Ortodonție la adulți: nu este niciodată prea târziu", excerpt: "De ce tot mai mulți adulți aleg aparate fixe sau gutiere transparente." },
 ];
+
+export const fallbackReviews = [
+  { text: "Text recenzie preluat live din profilul Google al clinicii.", name: "nume pacient", initial: "N", meta: "Google · acum 2 săptămâni" },
+  { text: "Text recenzie preluat live din profilul Google al clinicii.", name: "nume pacient", initial: "N", meta: "Google · acum 1 lună" },
+  { text: "Text recenzie preluat live din profilul Google al clinicii.", name: "nume pacient", initial: "N", meta: "Google · acum 2 luni" },
+];
+
+export const calendarLink =
+  "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" + encodeURIComponent("Programare ArtDent Slobozia") +
+  "&details=" + encodeURIComponent("Programare la clinica ArtDent, Al. Feroviarului 1, Slobozia") +
+  "&location=" + encodeURIComponent("Al. Feroviarului 1, Slobozia");

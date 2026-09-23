@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { BookingProvider } from "@/lib/booking-context";
+import { BookingModal } from "@/components/BookingModal";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { site } from "@/lib/data";
+import { WhatsAppFloat } from "@/components/WhatsAppFloat";
+import { MobileStickyBar } from "@/components/MobileStickyBar";
 
 export const metadata: Metadata = {
   title: "ArtDent Slobozia — Clinică stomatologică: implantologie, ortodonție, estetică dentară",
@@ -41,16 +44,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           />
         )}
       </head>
-      <body>
-        <Header />
-        <main>{children}</main>
-        <Footer />
-        <a
-          href={`tel:${site.phoneHref.replace("tel:", "")}`}
-          className="fixed bottom-4 right-4 z-50 rounded-full bg-[color:var(--color-teal-deep)] px-5 py-3 text-sm text-white shadow-lg md:hidden"
-        >
-          Sună acum
-        </a>
+      <body style={{ overflowX: "hidden", paddingBottom: 80 }}>
+        <BookingProvider>
+          <Header />
+          {children}
+          <Footer />
+          <BookingModal />
+          <WhatsAppFloat />
+          <MobileStickyBar />
+        </BookingProvider>
       </body>
     </html>
   );
