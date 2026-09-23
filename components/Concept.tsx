@@ -20,12 +20,14 @@ export function Concept() {
             <span style={{ fontSize: 10.5, fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)" }}>Dental boutique</span>
             <span className="font-display" style={{ fontSize: 25, lineHeight: 1.12, color: "oklch(0.97 0.012 90)" }}>Implantologie avansată în Slobozia</span>
           </div>
-          <div className="diagonal-stripes" style={{ borderRadius: 6, minHeight: 190, display: "grid", placeItems: "center" }}>
-            <span className="font-mono-label" style={{ fontSize: 11.5, color: "var(--muted)", textAlign: "center", padding: 12 }}>unit dentar<br />foto verticală</span>
-          </div>
-          <div className="diagonal-stripes" style={{ gridColumn: "span 2", borderRadius: 6, minHeight: 200, display: "grid", placeItems: "center" }}>
-            <span className="font-mono-label" style={{ fontSize: 11.5, color: "var(--muted)", textAlign: "center", padding: 12 }}>sală de tratament — cadru larg, lumină naturală</span>
-          </div>
+          <div style={{
+            borderRadius: 6, minHeight: 190, overflow: "hidden",
+            backgroundImage: "url(/images/unit-dentar-vertical.jpg)", backgroundSize: "cover", backgroundPosition: "center",
+          }} />
+          <div style={{
+            gridColumn: "span 2", borderRadius: 6, minHeight: 200, overflow: "hidden",
+            backgroundImage: "url(/images/sala-tratament-larg.jpg)", backgroundSize: "cover", backgroundPosition: "center",
+          }} />
         </div>
 
         <div style={{ display: "grid", gap: 24, justifyItems: "start" }}>
