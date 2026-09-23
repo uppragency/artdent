@@ -64,10 +64,10 @@ export function Hero() {
           gridTemplateColumns: "1fr 1fr", gridTemplateRows: "1.35fr 1fr", gap: 10,
           padding: "clamp(24px, 4vw, 56px) 0", minHeight: 420,
         }}>
-          <div className="diagonal-stripes-dark" style={{ gridColumn: "span 2", position: "relative", display: "grid", placeItems: "center", borderRadius: 6 }}>
-            <span className="font-mono-label" style={{ fontSize: 12, color: "oklch(0.86 0.02 190)", textAlign: "center", padding: 12 }}>
-              portret pacient / medic<br />fotografie reală, cadru larg
-            </span>
+          <div style={{
+            gridColumn: "span 2", position: "relative", borderRadius: 6, overflow: "hidden",
+            backgroundImage: "url(/images/portret-pacient-medic.jpg)", backgroundSize: "cover", backgroundPosition: "center",
+          }}>
             <div style={{
               position: "absolute", top: -16, right: -12, background: "#fff", borderRadius: 999,
               padding: "12px 18px", display: "flex", alignItems: "center", gap: 8,
@@ -77,12 +77,14 @@ export function Hero() {
               <span style={{ fontSize: 13.5, fontWeight: 700, color: "var(--teal-deeper)" }}>4,9 Google</span>
             </div>
           </div>
-          <div className="diagonal-stripes-dark-sm" style={{ display: "grid", placeItems: "center", borderRadius: 6 }}>
-            <span className="font-mono-label" style={{ fontSize: 11, color: "oklch(0.86 0.02 190)", textAlign: "center", padding: 10 }}>cabinet</span>
-          </div>
-          <div className="diagonal-stripes-dark-sm" style={{ display: "grid", placeItems: "center", borderRadius: 6 }}>
-            <span className="font-mono-label" style={{ fontSize: 11, color: "oklch(0.86 0.02 190)", textAlign: "center", padding: 10 }}>detaliu tratament</span>
-          </div>
+          <div style={{
+            borderRadius: 6, overflow: "hidden",
+            backgroundImage: "url(/images/cabinet.jpeg)", backgroundSize: "cover", backgroundPosition: "center",
+          }} />
+          <div style={{
+            borderRadius: 6, overflow: "hidden",
+            backgroundImage: "url(/images/detaliu-tratament.jpg)", backgroundSize: "cover", backgroundPosition: "center",
+          }} />
         </div>
       </div>
 
