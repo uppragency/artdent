@@ -1,4 +1,4 @@
-import { usp, site } from "@/lib/data";
+import { usp, site, values } from "@/lib/data";
 import { BookingSection } from "@/components/BookingSection";
 
 export const metadata = { title: "Despre noi — ArtDent Slobozia" };
@@ -6,16 +6,31 @@ export const metadata = { title: "Despre noi — ArtDent Slobozia" };
 export default function DesprePage() {
   return (
     <>
-    <section style={{ maxWidth: 860, margin: "0 auto", padding: "clamp(64px, 8vw, 112px) clamp(16px, 3vw, 40px)" }}>
+    <section style={{ maxWidth: 1100, margin: "0 auto", padding: "clamp(64px, 8vw, 112px) clamp(16px, 3vw, 40px) clamp(48px, 6vw, 80px)" }}>
       <span style={{ fontSize: 11, fontWeight: 500, letterSpacing: "0.22em", textTransform: "uppercase", color: "var(--gold-label)" }}>Despre noi</span>
-      <h1 className="font-display" style={{ margin: "10px 0 0", fontWeight: 400, fontSize: "clamp(34px, 5vw, 52px)", lineHeight: 1.05, letterSpacing: "-0.015em", color: "var(--teal-deep)" }}>
-        Concept dental boutique, în {site.city}
+      <h1 className="font-display" style={{ margin: "10px 0 0", fontWeight: 400, fontSize: "clamp(34px, 5vw, 52px)", lineHeight: 1.05, letterSpacing: "-0.015em", color: "var(--teal-deep)", maxWidth: "18ch" }}>
+        Te ajutăm să-ți recapeți zâmbetul
       </h1>
-      <p style={{ marginTop: 20, fontSize: 16, lineHeight: 1.7, color: "var(--muted-3)" }}>
-        ArtDent funcționează ca o clinică de proximitate cu standard de oraș mare: aparatură performantă, protocoale medicale respectate la fiecare pas și timp alocat fiecărui pacient, pentru ca tratamentul să fie explicat înainte de a fi început. Fiecare plan de tratament pornește de la un diagnostic riguros, nu de la o soluție rapidă aplicată tuturor pacienților.
-      </p>
 
-      <div style={{ marginTop: 40, display: "grid", gap: 24 }}>
+      <div style={{ marginTop: 40, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "clamp(28px, 4vw, 48px)", alignItems: "center" }}>
+        <div style={{
+          borderRadius: 10, overflow: "hidden", minHeight: 320,
+          backgroundImage: "url(/images/portret-pacient-medic.jpg)", backgroundSize: "cover", backgroundPosition: "center",
+        }} />
+        <div style={{ display: "grid", gap: 16 }}>
+          <p style={{ margin: 0, fontSize: 16.5, lineHeight: 1.7, color: "var(--muted-3)" }}>
+            Profesioniști cu experiență oferă una dintre cele mai bune experiențe medicale într-un mediu curat și modern.
+          </p>
+          <p style={{ margin: 0, fontSize: 15.5, lineHeight: 1.75, color: "var(--muted-2)" }}>
+            Centrul stomatologic ArtDent reprezintă un concept modern, unic, care se identifică prin atmosfera plăcută, dotare performantă și servicii de înaltă calitate. Centrul ArtDent aduce în prim plan calitatea, seriozitatea și eficiența serviciilor medicale pe termen lung.
+          </p>
+          <p style={{ margin: 0, fontSize: 15.5, lineHeight: 1.75, color: "var(--muted-2)" }}>
+            Beneficiind de sisteme ultramoderne de igienă și sterilizare, specialiștii cu o calificare înaltă realizează cele mai performante și dificile lucrări stomatologice.
+          </p>
+        </div>
+      </div>
+
+      <div style={{ marginTop: 48, display: "grid", gap: 24 }}>
         {usp.map((u) => (
           <div key={u.title} style={{ borderLeft: "2px solid var(--gold)", paddingLeft: 20 }}>
             <p style={{ margin: 0, fontWeight: 600, color: "var(--teal-deep)" }}>{u.title}</p>
@@ -31,6 +46,37 @@ export default function DesprePage() {
         <a href={site.phoneHref} className="font-mono-label" style={{ display: "inline-block", marginTop: 4 }}>{site.phone}</a>
       </div>
     </section>
+
+    <section className="dot-grid-gold" style={{ background: "var(--cream-section)", borderRadius: "48px 48px 0 0", marginTop: -48, position: "relative", zIndex: 1 }}>
+      <div style={{
+        maxWidth: 1100, margin: "0 auto",
+        padding: "clamp(72px, 9vw, 112px) clamp(16px, 3vw, 40px) clamp(56px, 7vw, 96px)",
+      }}>
+        <div style={{ display: "grid", gap: 12, justifyItems: "center", textAlign: "center", marginBottom: "clamp(32px, 4vw, 48px)" }}>
+          <span style={{ fontSize: 11, fontWeight: 500, letterSpacing: "0.22em", textTransform: "uppercase", color: "var(--gold-label)" }}>Valorile ArtDent</span>
+          <h2 className="font-display" style={{ margin: 0, fontWeight: 400, fontSize: "clamp(28px, 4vw, 44px)", lineHeight: 1.1, letterSpacing: "-0.015em", maxWidth: "20ch" }}>
+            Valorile noastre de bază ne definesc munca
+          </h2>
+        </div>
+
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 16 }}>
+          {values.map((v) => (
+            <div key={v.num} style={{ border: "1px solid var(--line)", borderRadius: 8, background: "var(--card)", padding: 26, display: "grid", gap: 8 }}>
+              <span className="font-mono-label" style={{ fontSize: 12.5, color: "var(--gold-label-2)" }}>{v.num}</span>
+              <h3 style={{ margin: 0, fontSize: 17.5, fontWeight: 600, letterSpacing: "-0.01em", color: "var(--teal-deep)" }}>{v.title}</h3>
+              <p style={{ margin: 0, fontSize: 14, lineHeight: 1.6, color: "var(--muted)" }}>{v.text}</p>
+            </div>
+          ))}
+        </div>
+
+        <div style={{ display: "flex", justifyContent: "center", marginTop: 40 }}>
+          <a href="/servicii" className="btn-teal" style={{ fontSize: 15.5, fontWeight: 600, padding: "16px 30px", borderRadius: 4, minHeight: 52, display: "flex", alignItems: "center" }}>
+            Servicii
+          </a>
+        </div>
+      </div>
+    </section>
+
     <BookingSection />
     </>
   );

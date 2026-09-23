@@ -43,7 +43,7 @@ export function Header() {
           <a href="/servicii" className="nav-link" style={{ fontSize: 14.5, fontWeight: 500, padding: "4px 0" }}>Servicii</a>
           <a href="/despre" className="nav-link" style={{ fontSize: 14.5, fontWeight: 500, padding: "4px 0" }}>Despre noi</a>
           <a href="/echipa" className="nav-link" style={{ fontSize: 14.5, fontWeight: 500, padding: "4px 0" }}>Echipă</a>
-          <a href="/servicii" className="nav-link" style={{ fontSize: 14.5, fontWeight: 500, padding: "4px 0" }}>Prețuri</a>
+          <a href="/preturi" className="nav-link" style={{ fontSize: 14.5, fontWeight: 500, padding: "4px 0" }}>Prețuri</a>
           <a href="/contact" className="nav-link" style={{ fontSize: 14.5, fontWeight: 500, padding: "4px 0" }}>Contact</a>
         </nav>
 
@@ -80,7 +80,7 @@ export function Header() {
           <a href="/servicii" className="mobile-nav-link" style={{ padding: "13px 0", fontSize: 17, fontWeight: 500, color: "rgba(255,255,255,0.82)", borderBottom: "1px solid rgba(255,255,255,0.14)" }}>Servicii</a>
           <a href="/despre" className="mobile-nav-link" style={{ padding: "13px 0", fontSize: 17, fontWeight: 500, color: "rgba(255,255,255,0.82)", borderBottom: "1px solid rgba(255,255,255,0.14)" }}>Despre noi</a>
           <a href="/echipa" className="mobile-nav-link" style={{ padding: "13px 0", fontSize: 17, fontWeight: 500, color: "rgba(255,255,255,0.82)", borderBottom: "1px solid rgba(255,255,255,0.14)" }}>Echipă</a>
-          <a href="/servicii" className="mobile-nav-link" style={{ padding: "13px 0", fontSize: 17, fontWeight: 500, color: "rgba(255,255,255,0.82)", borderBottom: "1px solid rgba(255,255,255,0.14)" }}>Prețuri</a>
+          <a href="/preturi" className="mobile-nav-link" style={{ padding: "13px 0", fontSize: 17, fontWeight: 500, color: "rgba(255,255,255,0.82)", borderBottom: "1px solid rgba(255,255,255,0.14)" }}>Prețuri</a>
           <a href="/contact" className="mobile-nav-link" style={{ padding: "13px 0", fontSize: 17, fontWeight: 500, color: "rgba(255,255,255,0.82)" }}>Contact</a>
           <a href={site.phoneHref} className="mobile-nav-link" style={{ padding: "13px 0", fontSize: 17, fontWeight: 700, color: "oklch(0.72 0.18 27)", borderBottom: "1px solid rgba(255,255,255,0.14)", borderTop: "1px solid rgba(255,255,255,0.14)", marginTop: 4 }}>Urgențe dentare</a>
           <a href={site.phoneHref} style={{ marginTop: 14, background: "#fff", color: "var(--teal-700)", fontSize: 16, fontWeight: 600, padding: 15, borderRadius: 999, textAlign: "center" }}>

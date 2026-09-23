@@ -8,7 +8,6 @@ import { GalleryAndBeforeAfter } from "@/components/GalleryAndBeforeAfter";
 import { Stats } from "@/components/Stats";
 import { Team } from "@/components/Team";
 import { Faq } from "@/components/Faq";
-import { Blog } from "@/components/Blog";
 import { Testimonials } from "@/components/Testimonials";
 import { BookingSection } from "@/components/BookingSection";
 
@@ -28,7 +27,7 @@ export default function HomePage() {
               Tot ce ai nevoie, într-un singur loc
             </h2>
           </div>
-          <a href="/servicii" style={{ fontSize: 15, fontWeight: 600 }}>Vezi lista de prețuri →</a>
+          <a href="/preturi" style={{ fontSize: 15, fontWeight: 600 }}>Vezi lista de prețuri →</a>
         </div>
         <ServicesGrid />
       </section>
@@ -38,7 +37,6 @@ export default function HomePage() {
       <Stats />
       <Team />
       <Faq />
-      <Blog />
       <Testimonials />
       <BookingSection />
     </>

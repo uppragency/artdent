@@ -13,7 +13,7 @@ export function Pricing() {
               Prețuri clare, fără costuri ascunse
             </h2>
           </div>
-          <a href="/servicii" style={{ fontSize: 15, fontWeight: 600, color: "var(--teal-600)" }}>Lista completă de prețuri →</a>
+          <a href="/preturi" style={{ fontSize: 15, fontWeight: 600, color: "var(--teal-600)" }}>Lista completă de prețuri →</a>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: 16 }}>
           {pricing.map((p) => (

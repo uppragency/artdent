@@ -20,7 +20,7 @@ export const nav = [
   { label: "Servicii", href: "/servicii" },
   { label: "Despre noi", href: "/despre" },
   { label: "Echipă", href: "/echipa" },
-  { label: "Prețuri", href: "/servicii" },
+  { label: "Prețuri", href: "/preturi" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -66,6 +66,13 @@ export const pricing = [
   { title: "Igienizare completă", price: "de la 250 lei", text: "Detartraj, periaj profesional și air-flow.", popular: false },
   { title: "Implant dentar", price: "de la 2.500 lei", text: "Implant, bont și coroană finală, planificate digital.", popular: true },
   { title: "Aparat dentar ortodontic", price: "de la 3.500 lei", text: "Fix sau gutiere transparente, cu plată etapizată pe durata tratamentului.", popular: false },
+];
+
+export const values = [
+  { num: "01", title: "Realizarea tratamentelor dentare de înaltă calitate", text: "Construim relații puternice și crearea unor pacienți-prieteni ArtDent pe viață." },
+  { num: "02", title: "Susținerea excelenței și a fericirii membrilor echipei", text: "Căutarea continuă a oportunităților pentru a inova și pentru a îmbunătăți experiența la ArtDent." },
+  { num: "03", title: "Pasiune", text: "Dedicarea și grija pentru a atinge cele mai înalte standarde." },
+  { num: "04", title: "Îndeplinirea misiunii", text: "Servicii și susținere dedicate comunității locale." },
 ];
 
 export const priceCategories = [
