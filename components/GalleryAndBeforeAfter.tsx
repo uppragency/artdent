@@ -47,15 +47,10 @@ export function GalleryAndBeforeAfter() {
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 14 }}>
           {galleryItems.map((item) => (
-            <div key={item.src} style={{
-              position: "relative", aspectRatio: "4/3", borderRadius: 6, overflow: "hidden",
+            <div key={item.src} role="img" aria-label={item.label} style={{
+              aspectRatio: "4/3", borderRadius: 6, overflow: "hidden",
               backgroundImage: `url(${item.src})`, backgroundSize: "cover", backgroundPosition: "center",
-            }}>
-              <span className="font-mono-label" style={{
-                position: "absolute", left: 10, bottom: 10, fontSize: 11, color: "#fff",
-                background: "rgba(2,47,58,0.55)", padding: "4px 9px", borderRadius: 4,
-              }}>{item.label}</span>
-            </div>
+            }} />
           ))}
         </div>
       </section>

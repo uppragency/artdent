@@ -77,6 +77,13 @@ export const galleryItems = [
   { src: "/images/gallery/sterilizare-1.jpg", label: "Zonă de sterilizare" },
   { src: "/images/gallery/sterilizare-2.jpg", label: "Instrumentar sterilizat" },
   { src: "/images/gallery/zona-copii.jpg", label: "Zonă dedicată copiilor" },
+  { src: "/images/gallery/tratament-detaliu-1.jpg", label: "Tratament în cabinet" },
+  { src: "/images/gallery/tratament-detaliu-2.jpg", label: "Tratament în cabinet" },
+  { src: "/images/gallery/tratament-detaliu-3.jpg", label: "Tratament în cabinet" },
+  { src: "/images/gallery/tratament-detaliu-4.jpg", label: "Tratament în cabinet" },
+  { src: "/images/gallery/tratament-detaliu-5.jpg", label: "Tratament în cabinet" },
+  { src: "/images/gallery/tratament-detaliu-6.jpg", label: "Tratament în cabinet" },
+  { src: "/images/gallery/tratament-detaliu-7.jpg", label: "Tratament în cabinet" },
 ];
 
 export const beforeAfterCases = [
