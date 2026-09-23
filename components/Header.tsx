@@ -72,7 +72,11 @@ export function Header() {
 
       {menuOpen && (
         <nav data-mob style={{
-          maxWidth: 1240, margin: "8px auto 0", background: "rgba(3, 104, 126, 0.7)",
+          position: "absolute", top: "100%", left: 0, right: 0, zIndex: 60,
+          padding: "0 clamp(12px, 3vw, 32px)",
+        }}>
+        <div style={{
+          maxWidth: 1240, margin: "8px auto 0", background: "rgba(3, 104, 126, 0.92)",
           backdropFilter: "blur(18px)", WebkitBackdropFilter: "blur(18px)", borderRadius: 20,
           padding: "8px 22px 18px", display: "grid", boxShadow: "0 18px 40px -24px rgba(2, 47, 58, 0.55)",
         }}>
@@ -86,6 +90,7 @@ export function Header() {
           <a href={site.phoneHref} style={{ marginTop: 14, background: "#fff", color: "var(--teal-700)", fontSize: 16, fontWeight: 600, padding: 15, borderRadius: 999, textAlign: "center" }}>
             Sună acum · {site.phone}
           </a>
+        </div>
         </nav>
       )}
     </header>

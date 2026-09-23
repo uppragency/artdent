@@ -11,7 +11,7 @@ export function Hero() {
       className="dot-grid-teal"
       style={{
         position: "relative",
-        marginTop: "calc(-68px - clamp(10px, 1.4vw, 18px))",
+        marginTop: "-86px",
         background: "radial-gradient(circle at 22% 8%, oklch(0.34 0.05 195) 0%, #024B5C 55%)",
         backgroundBlendMode: "normal",
         color: "oklch(0.97 0.012 90)",
@@ -25,7 +25,7 @@ export function Hero() {
 
       <div style={{
         maxWidth: 1280, margin: "0 auto",
-        padding: "calc(68px + clamp(10px, 1.4vw, 18px)) clamp(16px, 3vw, 40px) 0",
+        padding: "86px clamp(16px, 3vw, 40px) 0",
         display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
         gap: "clamp(28px, 4vw, 56px)", alignItems: "center", minHeight: "min(88vh, 760px)",
       }}>

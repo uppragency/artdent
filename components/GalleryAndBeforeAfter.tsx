@@ -1,7 +1,22 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { beforeAfterCases, galleryItems } from "@/lib/data";
+
+const INITIAL_MOBILE_COUNT = 6;
+const LOAD_STEP = 2;
+
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 900px)");
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+  return isMobile;
+}
 
 function BeforeAfterCard({ label }: { label: string }) {
   const [value, setValue] = useState(50);
@@ -36,6 +51,11 @@ function BeforeAfterCard({ label }: { label: string }) {
 }
 
 export function GalleryAndBeforeAfter() {
+  const isMobile = useIsMobile();
+  const [visibleCount, setVisibleCount] = useState(INITIAL_MOBILE_COUNT);
+  const visibleItems = isMobile ? galleryItems.slice(0, visibleCount) : galleryItems;
+  const canLoadMore = isMobile && visibleCount < galleryItems.length;
+
   return (
     <section className="noise-overlay" style={{
       backgroundColor: "var(--peach-section)", borderRadius: "48px 48px 0 0", marginTop: -48, position: "relative", zIndex: 1,
@@ -46,13 +66,28 @@ export function GalleryAndBeforeAfter() {
           <h2 className="font-display" style={{ margin: 0, fontWeight: 400, fontSize: "clamp(30px, 4.4vw, 50px)", lineHeight: 1.05, letterSpacing: "-0.015em" }}>Galerie foto</h2>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 14 }}>
-          {galleryItems.map((item) => (
+          {visibleItems.map((item) => (
             <div key={item.src} role="img" aria-label={item.label} style={{
               aspectRatio: "4/3", borderRadius: 6, overflow: "hidden",
               backgroundImage: `url(${item.src})`, backgroundSize: "cover", backgroundPosition: "center",
             }} />
           ))}
         </div>
+        {canLoadMore && (
+          <div style={{ display: "flex", justifyContent: "center", marginTop: 24 }}>
+            <button
+              type="button"
+              onClick={() => setVisibleCount((c) => Math.min(c + LOAD_STEP, galleryItems.length))}
+              className="btn-outline-dark"
+              style={{
+                fontFamily: "inherit", fontSize: 14.5, fontWeight: 600, padding: "13px 24px",
+                borderRadius: 4, minHeight: 48, background: "none", cursor: "pointer",
+              }}
+            >
+              Încarcă mai multe poze
+            </button>
+          </div>
+        )}
       </section>
 
       <section style={{ maxWidth: 1280, margin: "0 auto", padding: "0 clamp(16px, 3vw, 40px) clamp(64px, 8vw, 112px)" }}>
