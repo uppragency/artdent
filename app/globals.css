@@ -57,6 +57,14 @@ a:hover { color: var(--gold-label); }
 .font-mono-label { font-family: var(--font-mono); }
 
 @media (max-width: 900px) { [data-desk] { display: none !important; } }
+@media (max-width: 700px) {
+  .solution-row {
+    grid-template-columns: auto 1fr !important;
+    row-gap: 10px !important;
+  }
+  .solution-row h3 { grid-column: 2; }
+  .solution-row > div { grid-column: 1 / -1; }
+}
 @media (min-width: 901px) { [data-mob] { display: none !important; } }
 
 @keyframes artdentBob { 0%, 100% { transform: translateY(0) scale(1); opacity: .9 } 50% { transform: translateY(10px) scale(1.15); opacity: .35 } }

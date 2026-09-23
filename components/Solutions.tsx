@@ -15,7 +15,7 @@ export function Solutions() {
       </div>
       <div style={{ display: "grid" }}>
         {featuredSolutions.map((s, i) => (
-          <div key={s.num} style={{
+          <div key={s.num} className="solution-row" style={{
             display: "grid", gridTemplateColumns: "minmax(0, auto) minmax(240px, 1.1fr) minmax(260px, 1.4fr)",
             gap: "clamp(16px, 3vw, 44px)", padding: "clamp(24px, 3vw, 34px) 0",
             borderTop: "1px solid var(--line)",
