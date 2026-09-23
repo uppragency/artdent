@@ -68,7 +68,16 @@ export const pricing = [
   { title: "Aparat dentar ortodontic", price: "de la 3.500 lei", text: "Fix sau gutiere transparente, cu plată etapizată pe durata tratamentului.", popular: false },
 ];
 
-export const galleryItems = ["Recepție clinică", "Sală de tratament 1", "Sală de tratament 2", "Cabinet radiologie", "Zonă de sterilizare", "Sală de așteptare"];
+export const galleryItems = [
+  { src: "/images/gallery/cabinet-stomatologic.jpg", label: "Cabinet stomatologic" },
+  { src: "/images/gallery/sala-tratament-1.jpg", label: "Sală de tratament" },
+  { src: "/images/gallery/sala-tratament-copii.jpg", label: "Sală de tratament pentru copii" },
+  { src: "/images/gallery/consultatie-pediatrica.jpg", label: "Consultație pediatrică" },
+  { src: "/images/gallery/tratament-cabinet.jpg", label: "Tratament în cabinet" },
+  { src: "/images/gallery/sterilizare-1.jpg", label: "Zonă de sterilizare" },
+  { src: "/images/gallery/sterilizare-2.jpg", label: "Instrumentar sterilizat" },
+  { src: "/images/gallery/zona-copii.jpg", label: "Zonă dedicată copiilor" },
+];
 
 export const beforeAfterCases = [
   "Albire dentară profesională", "Fațete ceramice", "Corectare aliniere",

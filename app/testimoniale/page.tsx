@@ -1,5 +1,6 @@
 import { Testimonials } from "@/components/Testimonials";
 import { GalleryAndBeforeAfter } from "@/components/GalleryAndBeforeAfter";
+import { BookingSection } from "@/components/BookingSection";
 
 export const metadata = { title: "Testimoniale & Rezultate — ArtDent Slobozia" };
 
@@ -10,6 +11,7 @@ export default function TestimonialePage() {
         <Testimonials />
       </div>
       <GalleryAndBeforeAfter />
+      <BookingSection />
     </>
   );
 }

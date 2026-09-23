@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { calendarLink, serviceOptions } from "@/lib/data";
+import { calendarLink } from "@/lib/data";
 import { supabase } from "@/lib/supabase";
 
 export function BookingFormFields({ dark = false }: { dark?: boolean }) {
@@ -14,12 +14,11 @@ export function BookingFormFields({ dark = false }: { dark?: boolean }) {
     e.preventDefault();
     setSending(true);
     const form = new FormData(e.currentTarget);
-    const service = String(form.get("service") || "");
     await supabase.from("contact_submissions").insert({
       name: String(form.get("name") || ""),
       phone: String(form.get("phone") || ""),
       email: String(form.get("email") || ""),
-      message: service ? `Serviciu dorit: ${service}` : null,
+      message: null,
       source_page: typeof window !== "undefined" ? window.location.pathname : null,
     });
     setSending(false);
@@ -42,11 +41,6 @@ export function BookingFormFields({ dark = false }: { dark?: boolean }) {
       </label>
       <label style={labelStyle}>Email
         <input name="email" type="email" placeholder="nume@exemplu.ro" style={inputStyle} />
-      </label>
-      <label style={labelStyle}>Serviciu dorit
-        <select name="service" style={inputStyle}>
-          {serviceOptions.map((s) => <option key={s}>{s}</option>)}
-        </select>
       </label>
       <button type="submit" disabled={sending} className="btn-teal" style={{
         marginTop: 4, fontFamily: "inherit", fontSize: 16, fontWeight: 600, padding: "16px 24px",

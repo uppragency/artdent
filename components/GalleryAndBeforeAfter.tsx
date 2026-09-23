@@ -46,9 +46,15 @@ export function GalleryAndBeforeAfter() {
           <h2 className="font-display" style={{ margin: 0, fontWeight: 400, fontSize: "clamp(30px, 4.4vw, 50px)", lineHeight: 1.05, letterSpacing: "-0.015em" }}>Galerie foto</h2>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 14 }}>
-          {galleryItems.map((label) => (
-            <div key={label} className="diagonal-stripes" style={{ aspectRatio: "4/3", borderRadius: 6, display: "grid", placeItems: "center" }}>
-              <span className="font-mono-label" style={{ fontSize: 11, color: "var(--muted)", textAlign: "center", padding: 10 }}>{label}</span>
+          {galleryItems.map((item) => (
+            <div key={item.src} style={{
+              position: "relative", aspectRatio: "4/3", borderRadius: 6, overflow: "hidden",
+              backgroundImage: `url(${item.src})`, backgroundSize: "cover", backgroundPosition: "center",
+            }}>
+              <span className="font-mono-label" style={{
+                position: "absolute", left: 10, bottom: 10, fontSize: 11, color: "#fff",
+                background: "rgba(2,47,58,0.55)", padding: "4px 9px", borderRadius: 4,
+              }}>{item.label}</span>
             </div>
           ))}
         </div>

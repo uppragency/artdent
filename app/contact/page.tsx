@@ -1,10 +1,12 @@
 import { site } from "@/lib/data";
 import { BookingFormFields } from "@/components/BookingFormFields";
+import { BookingSection } from "@/components/BookingSection";
 
 export const metadata = { title: "Contact — ArtDent Slobozia" };
 
 export default function ContactPage() {
   return (
+    <>
     <section style={{
       maxWidth: 1000, margin: "0 auto", padding: "clamp(64px, 8vw, 112px) clamp(16px, 3vw, 40px)",
       display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 48,
@@ -37,5 +39,7 @@ export default function ContactPage() {
         <BookingFormFields />
       </div>
     </section>
+    <BookingSection />
+    </>
   );
 }

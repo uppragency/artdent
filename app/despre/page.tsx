@@ -1,9 +1,11 @@
 import { usp, site } from "@/lib/data";
+import { BookingSection } from "@/components/BookingSection";
 
 export const metadata = { title: "Despre noi — ArtDent Slobozia" };
 
 export default function DesprePage() {
   return (
+    <>
     <section style={{ maxWidth: 860, margin: "0 auto", padding: "clamp(64px, 8vw, 112px) clamp(16px, 3vw, 40px)" }}>
       <span style={{ fontSize: 11, fontWeight: 500, letterSpacing: "0.22em", textTransform: "uppercase", color: "var(--gold-label)" }}>Despre noi</span>
       <h1 className="font-display" style={{ margin: "10px 0 0", fontWeight: 400, fontSize: "clamp(34px, 5vw, 52px)", lineHeight: 1.05, letterSpacing: "-0.015em", color: "var(--teal-deep)" }}>
@@ -29,5 +31,7 @@ export default function DesprePage() {
         <a href={site.phoneHref} className="font-mono-label" style={{ display: "inline-block", marginTop: 4 }}>{site.phone}</a>
       </div>
     </section>
+    <BookingSection />
+    </>
   );
 }
