@@ -13,13 +13,31 @@ export function Testimonials() {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    supabase
-      .from("testimonials")
-      .select("patient_name, text, source")
-      .order("display_order", { ascending: true })
-      .limit(6)
-      .then(({ data }) => {
-        if (data && data.length > 0) {
+    let cancelled = false;
+
+    async function loadReviews() {
+      // Try live Google reviews first.
+      try {
+        const res = await fetch("/api/google-reviews");
+        if (res.ok) {
+          const data = await res.json();
+          if (Array.isArray(data?.reviews) && data.reviews.length > 0 && !cancelled) {
+            setReviews(data.reviews);
+            return;
+          }
+        }
+      } catch {
+        // ignore — fall through to Supabase
+      }
+
+      // Fall back to manually curated testimonials in Supabase.
+      try {
+        const { data } = await supabase
+          .from("testimonials")
+          .select("patient_name, text, source")
+          .order("display_order", { ascending: true })
+          .limit(6);
+        if (Array.isArray(data) && data.length > 0 && !cancelled) {
           setReviews(data.map((d: { patient_name: string; text: string; source: string | null }) => ({
             text: d.text,
             name: d.patient_name,
@@ -27,7 +45,13 @@ export function Testimonials() {
             meta: d.source || "Google",
           })));
         }
-      });
+      } catch {
+        // ignore — keep the static fallback already in state
+      }
+    }
+
+    loadReviews();
+    return () => { cancelled = true; };
   }, []);
 
   useEffect(() => {
