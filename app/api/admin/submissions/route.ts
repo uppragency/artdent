@@ -13,6 +13,10 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   }
 
+  if (!process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    return NextResponse.json({ error: "missing_service_role_key" }, { status: 500 });
+  }
+
   const supabaseAdmin = getSupabaseAdmin();
   const { data, error } = await supabaseAdmin
     .from("contact_submissions")
@@ -20,6 +24,7 @@ export async function GET(req: NextRequest) {
     .order("created_at", { ascending: false });
 
   if (error) {
+    console.error("admin/submissions supabase error:", error.message, error);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 

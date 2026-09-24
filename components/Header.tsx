@@ -7,7 +7,6 @@ import { site, services } from "@/lib/data";
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [megaOpen, setMegaOpen] = useState(false);
   const { openModal } = useBooking();
 
   useEffect(() => {
@@ -41,13 +40,52 @@ export function Header() {
 
         <nav data-desk style={{ display: "flex", alignItems: "center", gap: "clamp(18px, 2vw, 32px)" }}>
           <a href="/" style={{ fontSize: 14.5, fontWeight: 600, color: "#fff", padding: "4px 0", borderBottom: "2px solid #83D3E4" }}>Acasă</a>
-          <div onMouseEnter={() => setMegaOpen(true)} onMouseLeave={() => setMegaOpen(false)} style={{ padding: "4px 0" }}>
+          <div className="services-mega" style={{ padding: "4px 0" }}>
             <a href="/servicii" className="nav-link" style={{ fontSize: 14.5, fontWeight: 500, display: "inline-flex", alignItems: "center", gap: 5 }}>
               Servicii
-              <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ transform: megaOpen ? "rotate(180deg)" : undefined, transition: "transform .2s ease" }}>
+              <svg className="mega-arrow" width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                 <path d="M6 9l6 6 6-6" />
               </svg>
             </a>
+
+            <div className="mega-panel" data-desk style={{ position: "absolute", top: "100%", left: 0, right: 0, zIndex: 60, padding: "0 clamp(12px, 3vw, 32px)" }}>
+              <div style={{
+                maxWidth: 1240, margin: "10px auto 0", background: "rgba(3, 104, 126, 0.96)",
+                backdropFilter: "blur(18px)", WebkitBackdropFilter: "blur(18px)", borderRadius: 20,
+                padding: "clamp(24px, 3vw, 36px)", boxShadow: "0 24px 50px -24px rgba(2, 47, 58, 0.6)",
+                display: "grid", gridTemplateColumns: "minmax(180px, 240px) 1fr", gap: "clamp(24px, 3vw, 44px)",
+              }}>
+                <div style={{ display: "grid", gap: 12, alignContent: "start", borderRight: "1px solid rgba(255,255,255,0.14)", paddingRight: "clamp(16px, 2vw, 32px)" }}>
+                  <span className="font-mono-label" style={{ fontSize: 10.5, fontWeight: 500, letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(255,255,255,0.55)" }}>Servicii</span>
+                  <h3 className="font-display" style={{ margin: 0, fontSize: 24, lineHeight: 1.15, color: "#fff" }}>Tot ce ai nevoie, într-un singur loc</h3>
+                  <p style={{ margin: 0, fontSize: 13.5, lineHeight: 1.6, color: "rgba(255,255,255,0.72)" }}>
+                    Explorează fiecare tratament în detaliu, cu beneficii și răspunsuri la întrebările frecvente.
+                  </p>
+                  <a href="/servicii" className="btn-outline-light-noscale" style={{ marginTop: 6, fontSize: 13.5, fontWeight: 600, padding: "11px 18px", borderRadius: 4, display: "inline-flex", width: "fit-content" }}>
+                    Vezi toate serviciile →
+                  </a>
+                </div>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "6px 24px" }}>
+                  {services.map((s) => (
+                    <a
+                      key={s.slug}
+                      href={`/servicii/${s.slug}`}
+                      style={{
+                        display: "grid", gridTemplateColumns: "auto 1fr", gap: 12, alignItems: "start",
+                        padding: "12px 10px", borderRadius: 8, color: "#fff",
+                      }}
+                      className="mega-menu-item"
+                    >
+                      <span className="font-mono-label" style={{ fontSize: 11, color: "var(--gold)", paddingTop: 2 }}>{s.num}</span>
+                      <span style={{ display: "grid", gap: 3 }}>
+                        <span style={{ fontSize: 15, fontWeight: 600 }}>{s.title}</span>
+                        <span style={{ fontSize: 12.5, lineHeight: 1.5, color: "rgba(255,255,255,0.68)" }}>{s.text}</span>
+                      </span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
           <a href="/despre" className="nav-link" style={{ fontSize: 14.5, fontWeight: 500, padding: "4px 0" }}>Despre noi</a>
           <a href="/echipa" className="nav-link" style={{ fontSize: 14.5, fontWeight: 500, padding: "4px 0" }}>Echipă</a>
@@ -77,53 +115,6 @@ export function Header() {
           </button>
         </div>
       </div>
-
-      {megaOpen && (
-        <div
-          data-desk
-          onMouseEnter={() => setMegaOpen(true)}
-          onMouseLeave={() => setMegaOpen(false)}
-          style={{ position: "absolute", top: "100%", left: 0, right: 0, zIndex: 60, padding: "0 clamp(12px, 3vw, 32px)" }}
-        >
-          <div style={{
-            maxWidth: 1240, margin: "10px auto 0", background: "rgba(3, 104, 126, 0.96)",
-            backdropFilter: "blur(18px)", WebkitBackdropFilter: "blur(18px)", borderRadius: 20,
-            padding: "clamp(24px, 3vw, 36px)", boxShadow: "0 24px 50px -24px rgba(2, 47, 58, 0.6)",
-            display: "grid", gridTemplateColumns: "minmax(180px, 240px) 1fr", gap: "clamp(24px, 3vw, 44px)",
-          }}>
-            <div style={{ display: "grid", gap: 12, alignContent: "start", borderRight: "1px solid rgba(255,255,255,0.14)", paddingRight: "clamp(16px, 2vw, 32px)" }}>
-              <span className="font-mono-label" style={{ fontSize: 10.5, fontWeight: 500, letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(255,255,255,0.55)" }}>Servicii</span>
-              <h3 className="font-display" style={{ margin: 0, fontSize: 24, lineHeight: 1.15, color: "#fff" }}>Tot ce ai nevoie, într-un singur loc</h3>
-              <p style={{ margin: 0, fontSize: 13.5, lineHeight: 1.6, color: "rgba(255,255,255,0.72)" }}>
-                Explorează fiecare tratament în detaliu, cu beneficii și răspunsuri la întrebările frecvente.
-              </p>
-              <a href="/servicii" className="btn-outline-light-noscale" style={{ marginTop: 6, fontSize: 13.5, fontWeight: 600, padding: "11px 18px", borderRadius: 4, display: "inline-flex", width: "fit-content" }}>
-                Vezi toate serviciile →
-              </a>
-            </div>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "6px 24px" }}>
-              {services.map((s) => (
-                <a
-                  key={s.slug}
-                  href={`/servicii/${s.slug}`}
-                  onClick={() => setMegaOpen(false)}
-                  style={{
-                    display: "grid", gridTemplateColumns: "auto 1fr", gap: 12, alignItems: "start",
-                    padding: "12px 10px", borderRadius: 8, color: "#fff",
-                  }}
-                  className="mega-menu-item"
-                >
-                  <span className="font-mono-label" style={{ fontSize: 11, color: "var(--gold)", paddingTop: 2 }}>{s.num}</span>
-                  <span style={{ display: "grid", gap: 3 }}>
-                    <span style={{ fontSize: 15, fontWeight: 600 }}>{s.title}</span>
-                    <span style={{ fontSize: 12.5, lineHeight: 1.5, color: "rgba(255,255,255,0.68)" }}>{s.text}</span>
-                  </span>
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
 
       {menuOpen && (
         <nav data-mob style={{

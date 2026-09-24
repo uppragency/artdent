@@ -13,10 +13,11 @@ type Submission = {
 };
 
 export function AdminPanel() {
-  const [status, setStatus] = useState<"checking" | "locked" | "unlocked">("checking");
+  const [status, setStatus] = useState<"checking" | "locked" | "unlocked" | "server_error">("checking");
   const [submissions, setSubmissions] = useState<Submission[]>([]);
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [serverError, setServerError] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
   async function loadSubmissions() {
@@ -25,8 +26,12 @@ export function AdminPanel() {
       const data = await res.json();
       setSubmissions(data.submissions || []);
       setStatus("unlocked");
-    } else {
+    } else if (res.status === 401) {
       setStatus("locked");
+    } else {
+      const data = await res.json().catch(() => ({}));
+      setServerError(data.error || `Eroare server (${res.status})`);
+      setStatus("server_error");
     }
   }
 
@@ -60,6 +65,20 @@ export function AdminPanel() {
 
   if (status === "checking") {
     return <p style={{ padding: 40, fontSize: 14, color: "var(--muted)" }}>Se încarcă…</p>;
+  }
+
+  if (status === "server_error") {
+    return (
+      <div style={{ maxWidth: 520, margin: "60px auto", padding: 24 }}>
+        <h1 className="font-display" style={{ margin: 0, fontSize: 22, color: "var(--teal-deep)" }}>Eroare de configurare</h1>
+        <p style={{ marginTop: 12, fontSize: 14, lineHeight: 1.6, color: "var(--muted)" }}>
+          Parola e corectă, dar citirea programărilor din Supabase a eșuat. Cod eroare: <code>{serverError}</code>
+        </p>
+        <p style={{ marginTop: 12, fontSize: 13.5, lineHeight: 1.6, color: "var(--muted)" }}>
+          Verifică în Vercel că <code>SUPABASE_SERVICE_ROLE_KEY</code> conține exact cheia „service_role" din Supabase (Project Settings → API), fără spații sau linii goale adăugate la copiere.
+        </p>
+      </div>
+    );
   }
 
   if (status === "locked") {
