@@ -4,6 +4,7 @@
 export const site = {
   name: "ArtDent",
   city: "Slobozia",
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://artdentslobozia.ro",
   phone: "0723 192 716",
   phoneHref: "tel:0723192716",
   whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "40723192716",

@@ -14,6 +14,7 @@ export default function DesprePage() {
       title="Te ajutăm să-ți recapeți zâmbetul"
       accent="zâmbetul"
       crumbs={[{ label: "Acasă", href: "/" }, { label: "Despre noi" }]}
+      currentPath="/despre"
     />
 
     <section style={{ background: "linear-gradient(180deg, #fff 0%, var(--white-to-blue) 100%)" }}>

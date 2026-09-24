@@ -12,6 +12,7 @@ export default function TestimonialePage() {
         eyebrow="Testimoniale & rezultate"
         title="Ce spun pacienții noștri"
         crumbs={[{ label: "Acasă", href: "/" }, { label: "Testimoniale" }]}
+      currentPath="/testimoniale"
       />
       <Testimonials />
       <GalleryAndBeforeAfter />

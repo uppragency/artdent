@@ -10,6 +10,7 @@ export default function TermeniPage() {
         eyebrow="Informații legale"
         title="Termeni și condiții"
         crumbs={[{ label: "Acasă", href: "/" }, { label: "Termeni și condiții" }]}
+      currentPath="/termeni-si-conditii"
       />
       <section style={{ background: "linear-gradient(180deg, #fff 0%, var(--white-to-blue) 100%)" }}>
         <div style={{ maxWidth: 760, margin: "0 auto", padding: "clamp(56px, 7vw, 88px) clamp(16px, 3vw, 40px)", display: "grid", gap: 32 }}>

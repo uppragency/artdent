@@ -11,6 +11,7 @@ export default function MultumimPage() {
         eyebrow="Solicitare trimisă"
         title="Mulțumim! Te contactăm în curând"
         crumbs={[{ label: "Acasă", href: "/" }, { label: "Mulțumim" }]}
+      currentPath="/multumim"
       />
       <section style={{ background: "linear-gradient(180deg, #fff 0%, var(--white-to-blue) 100%)", textAlign: "center" }}>
         <Suspense fallback={null}>

@@ -1,6 +1,20 @@
 import { ToothMotif } from "@/components/ToothMotif";
+import { site } from "@/lib/data";
 
 type Crumb = { label: string; href?: string };
+
+function breadcrumbJsonLd(crumbs: Crumb[], currentPath?: string) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: crumbs.map((c, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: c.label,
+      item: `${site.siteUrl}${c.href || currentPath || ""}`,
+    })),
+  };
+}
 
 function renderTitle(title: string, accent?: string) {
   if (!accent) return title;
@@ -15,8 +29,10 @@ function renderTitle(title: string, accent?: string) {
   );
 }
 
-export function PageHero({ eyebrow, title, crumbs, accent }: { eyebrow?: string; title: string; crumbs: Crumb[]; accent?: string }) {
+export function PageHero({ eyebrow, title, crumbs, accent, currentPath }: { eyebrow?: string; title: string; crumbs: Crumb[]; accent?: string; currentPath?: string }) {
   return (
+    <>
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd(crumbs, currentPath)) }} />
     <section
       className="dot-grid-teal noise-overlay"
       style={{
@@ -59,5 +75,6 @@ export function PageHero({ eyebrow, title, crumbs, accent }: { eyebrow?: string;
         </h1>
       </div>
     </section>
+    </>
   );
 }

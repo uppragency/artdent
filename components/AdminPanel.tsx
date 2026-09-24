@@ -10,8 +10,19 @@ type Submission = {
   message: string | null;
   source_page: string | null;
   status: string;
+  note: string | null;
   created_at: string;
 };
+
+const DAY_MS = 24 * 60 * 60 * 1000;
+
+function whatsappLink(phone: string | null, name: string) {
+  if (!phone) return null;
+  const digits = phone.replace(/[^0-9]/g, "");
+  const withCountry = digits.startsWith("40") ? digits : digits.startsWith("0") ? `40${digits.slice(1)}` : digits;
+  const msg = `Bună ziua ${name}, vă contactăm de la ArtDent Slobozia legat de cererea dvs. de programare.`;
+  return `https://wa.me/${withCountry}?text=${encodeURIComponent(msg)}`;
+}
 
 const STATUS_OPTIONS: { value: string; label: string; bg: string; text: string }[] = [
   { value: "noua", label: "Nouă", bg: "oklch(0.93 0.03 230)", text: "oklch(0.4 0.1 230)" },
@@ -88,16 +99,33 @@ export function AdminPanel() {
     });
   }
 
+  const noteTimers = useState(() => new Map<string, ReturnType<typeof setTimeout>>())[0];
+
+  function updateNoteLocal(id: string, note: string) {
+    setSubmissions((prev) => prev.map((s) => (s.id === id ? { ...s, note } : s)));
+    const existing = noteTimers.get(id);
+    if (existing) clearTimeout(existing);
+    const timer = setTimeout(async () => {
+      await fetch(`/api/admin/submissions/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ note }),
+      });
+    }, 700);
+    noteTimers.set(id, timer);
+  }
+
   const stats = useMemo(() => {
     const now = new Date();
     const todayStr = now.toDateString();
-    let today = 0, thisMonth = 0;
+    let today = 0, thisMonth = 0, stale = 0;
     for (const s of submissions) {
       const d = new Date(s.created_at);
       if (d.toDateString() === todayStr) today++;
       if (d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear()) thisMonth++;
+      if (s.status === "noua" && now.getTime() - d.getTime() > DAY_MS) stale++;
     }
-    return { today, thisMonth };
+    return { today, thisMonth, stale };
   }, [submissions]);
 
   const filtered = useMemo(() => {
@@ -191,6 +219,13 @@ export function AdminPanel() {
           <div style={{ fontSize: 26, fontWeight: 700, color: "var(--teal-deep)" }}>{stats.today}</div>
           <div style={{ fontSize: 13, color: "var(--muted)" }}>Astăzi</div>
         </div>
+        <div style={{
+          border: `1px solid ${stats.stale > 0 ? "oklch(0.7 0.15 27)" : "var(--line)"}`, borderRadius: 8, padding: "16px 18px",
+          background: stats.stale > 0 ? "oklch(0.97 0.03 27)" : "var(--card)",
+        }}>
+          <div style={{ fontSize: 26, fontWeight: 700, color: stats.stale > 0 ? "oklch(0.5 0.19 27)" : "var(--teal-deep)" }}>{stats.stale}</div>
+          <div style={{ fontSize: 13, color: "var(--muted)" }}>Nerezolvate &gt;24h</div>
+        </div>
       </div>
 
       {/* Filtre */}
@@ -228,26 +263,49 @@ export function AdminPanel() {
               <tr style={{ background: "var(--cream-section)" }}>
                 <th style={{ textAlign: "left", padding: "12px 16px" }}>Data</th>
                 <th style={{ textAlign: "left", padding: "12px 16px" }}>Nume</th>
-                <th style={{ textAlign: "left", padding: "12px 16px" }}>Telefon</th>
-                <th style={{ textAlign: "left", padding: "12px 16px" }}>Email</th>
+                <th style={{ textAlign: "left", padding: "12px 16px" }}>Contact</th>
                 <th style={{ textAlign: "left", padding: "12px 16px" }}>Pagină</th>
                 <th style={{ textAlign: "left", padding: "12px 16px" }}>Status</th>
+                <th style={{ textAlign: "left", padding: "12px 16px" }}>Notă internă</th>
               </tr>
             </thead>
             <tbody>
               {filtered.map((s) => {
                 const meta = statusMeta(s.status);
+                const isStale = s.status === "noua" && Date.now() - new Date(s.created_at).getTime() > DAY_MS;
+                const wa = whatsappLink(s.phone, s.name);
                 return (
-                  <tr key={s.id} style={{ borderTop: "1px solid var(--line)" }}>
+                  <tr key={s.id} style={{ borderTop: "1px solid var(--line)", background: isStale ? "oklch(0.97 0.03 27 / 0.5)" : undefined }}>
                     <td style={{ padding: "12px 16px", whiteSpace: "nowrap", color: "var(--muted)" }}>
+                      {isStale && (
+                        <span title="Nerezolvată de peste 24h" style={{
+                          display: "inline-block", width: 8, height: 8, borderRadius: "50%",
+                          background: "oklch(0.55 0.19 27)", marginRight: 8, verticalAlign: "middle",
+                        }} />
+                      )}
                       {new Date(s.created_at).toLocaleString("ro-RO")}
                     </td>
                     <td style={{ padding: "12px 16px", fontWeight: 600 }}>{s.name}</td>
                     <td style={{ padding: "12px 16px" }}>
-                      {s.phone ? <a href={`tel:${s.phone}`} style={{ color: "var(--teal-600)" }}>{s.phone}</a> : "—"}
-                    </td>
-                    <td style={{ padding: "12px 16px" }}>
-                      {s.email ? <a href={`mailto:${s.email}`} style={{ color: "var(--teal-600)" }}>{s.email}</a> : "—"}
+                      <div style={{ display: "grid", gap: 4 }}>
+                        {s.phone && <a href={`tel:${s.phone}`} style={{ color: "var(--teal-600)" }}>{s.phone}</a>}
+                        {s.email && <a href={`mailto:${s.email}`} style={{ color: "var(--teal-600)", fontSize: 12.5 }}>{s.email}</a>}
+                        {!s.phone && !s.email && "—"}
+                        <div style={{ display: "flex", gap: 8, marginTop: 2 }}>
+                          {s.phone && (
+                            <a href={`tel:${s.phone}`} style={{
+                              fontSize: 11.5, fontWeight: 600, padding: "4px 9px", borderRadius: 999,
+                              background: "var(--gold-tint-bg)", color: "var(--gold-tint-text)",
+                            }}>Sună</a>
+                          )}
+                          {wa && (
+                            <a href={wa} target="_blank" rel="noreferrer" style={{
+                              fontSize: 11.5, fontWeight: 600, padding: "4px 9px", borderRadius: 999,
+                              background: "oklch(0.93 0.06 155)", color: "oklch(0.4 0.1 155)",
+                            }}>WhatsApp</a>
+                          )}
+                        </div>
+                      </div>
                     </td>
                     <td style={{ padding: "12px 16px", color: "var(--muted)" }}>{s.source_page || "—"}</td>
                     <td style={{ padding: "12px 16px" }}>
@@ -263,6 +321,18 @@ export function AdminPanel() {
                           <option key={opt.value} value={opt.value}>{opt.label}</option>
                         ))}
                       </select>
+                    </td>
+                    <td style={{ padding: "12px 16px", minWidth: 200 }}>
+                      <textarea
+                        defaultValue={s.note || ""}
+                        onChange={(e) => updateNoteLocal(s.id, e.target.value)}
+                        placeholder="ex: a sunat, reprogramăm marți…"
+                        rows={2}
+                        style={{
+                          fontFamily: "inherit", fontSize: 12.5, padding: "6px 8px", borderRadius: 4,
+                          border: "1px solid var(--line)", width: "100%", resize: "vertical", color: "var(--ink)",
+                        }}
+                      />
                     </td>
                   </tr>
                 );

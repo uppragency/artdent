@@ -3,9 +3,11 @@
 import { useBooking } from "@/lib/booking-context";
 import { site } from "@/lib/data";
 import { TrustBadges } from "@/components/TrustBadges";
+import { useCtaVariant } from "@/lib/use-cta-variant";
 
 export function Hero() {
   const { openModal } = useBooking();
+  const cta = useCtaVariant();
 
   return (
     <section
@@ -43,10 +45,10 @@ export function Hero() {
             Implantologie, ortodonție și estetică dentară într-o clinică unde fiecare plan de tratament pornește de la un diagnostic riguros și o discuție onestă.
           </p>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 12, paddingTop: 6 }}>
-            <a href="#programare" onClick={(e) => { e.preventDefault(); openModal(); }} className="btn-gold" style={{
+            <a href="#programare" onClick={(e) => { e.preventDefault(); cta.trackClick(); openModal(); }} className="btn-gold" style={{
               fontSize: 16, fontWeight: 600, padding: "17px 30px", borderRadius: 4, minHeight: 54, display: "flex", alignItems: "center",
             }}>
-              Programează-te acum
+              {cta.label}
             </a>
             <a href={site.phoneHref} className="btn-outline-light" style={{
               fontSize: 16, fontWeight: 600, padding: "17px 30px", borderRadius: 4, minHeight: 54, display: "flex", alignItems: "center",

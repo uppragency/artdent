@@ -7,6 +7,7 @@ import { Footer } from "@/components/Footer";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import { MobileStickyBar } from "@/components/MobileStickyBar";
 import { CookieConsent } from "@/components/CookieConsent";
+import { ExitIntentPopup } from "@/components/ExitIntentPopup";
 import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
@@ -55,6 +56,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <WhatsAppFloat />
           <MobileStickyBar />
           <CookieConsent />
+          <ExitIntentPopup />
           <Analytics />
         </BookingProvider>
       </body>

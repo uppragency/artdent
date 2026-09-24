@@ -22,13 +22,22 @@ export function BookingFormFields({
     const name = String(form.get("name") || "");
     const phone = String(form.get("phone") || "");
     const sourcePage = typeof window !== "undefined" ? window.location.pathname : null;
+    const submittedEmail = String(form.get("email") || "");
     await supabase.from("contact_submissions").insert({
       name,
       phone,
-      email: String(form.get("email") || ""),
+      email: submittedEmail,
       message: null,
       source_page: sourcePage,
     });
+    // Notificare email către clinică — dezactivată temporar la cererea clientului.
+    // Pentru reactivare, decomentează blocul de mai jos (rămâne fire-and-forget,
+    // nu blochează redirect-ul pacientului).
+    // fetch("/api/notify-submission", {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify({ name, phone, email: submittedEmail, sourcePage }),
+    // }).catch(() => {});
     setSending(false);
     setSent(true);
     const params = new URLSearchParams({ name, phone });

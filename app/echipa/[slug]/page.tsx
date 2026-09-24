@@ -30,6 +30,7 @@ export default async function TeamMemberPage({ params }: { params: Promise<{ slu
         eyebrow="Echipa medicală"
         title={member.name}
         crumbs={[{ label: "Acasă", href: "/" }, { label: "Echipă", href: "/echipa" }, { label: member.name }]}
+        currentPath={`/echipa/${slug}`}
       />
 
       <section style={{ background: "linear-gradient(180deg, #fff 0%, var(--white-to-blue) 100%)" }}>

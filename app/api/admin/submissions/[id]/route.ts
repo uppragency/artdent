@@ -16,22 +16,34 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
   }
 
   const { id } = await params;
-  let status = "";
+  let body: { status?: string; note?: string };
   try {
-    const body = await req.json();
-    status = String(body?.status || "");
+    body = await req.json();
   } catch {
     return NextResponse.json({ error: "invalid_request" }, { status: 400 });
   }
 
-  if (!VALID_STATUSES.includes(status)) {
-    return NextResponse.json({ error: "invalid_status" }, { status: 400 });
+  const update: { status?: string; note?: string } = {};
+
+  if (body.status !== undefined) {
+    if (!VALID_STATUSES.includes(body.status)) {
+      return NextResponse.json({ error: "invalid_status" }, { status: 400 });
+    }
+    update.status = body.status;
+  }
+
+  if (body.note !== undefined) {
+    update.note = String(body.note).slice(0, 2000);
+  }
+
+  if (Object.keys(update).length === 0) {
+    return NextResponse.json({ error: "invalid_request" }, { status: 400 });
   }
 
   const supabaseAdmin = getSupabaseAdmin();
   const { error } = await supabaseAdmin
     .from("contact_submissions")
-    .update({ status })
+    .update(update)
     .eq("id", id);
 
   if (error) {

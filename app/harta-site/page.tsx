@@ -13,6 +13,7 @@ const groups: { title: string; links: { label: string; href: string }[] }[] = [
       { label: "Servicii", href: "/servicii" },
       { label: "Prețuri", href: "/preturi" },
       { label: "Testimoniale & rezultate", href: "/testimoniale" },
+      { label: "Întrebări frecvente", href: "/intrebari-frecvente" },
       { label: "Contact", href: "/contact" },
     ],
   },
@@ -41,6 +42,7 @@ export default function HartaSitePage() {
         eyebrow="Navigare"
         title="Harta site-ului"
         crumbs={[{ label: "Acasă", href: "/" }, { label: "Harta site" }]}
+        currentPath="/harta-site"
       />
       <section style={{ background: "linear-gradient(180deg, #fff 0%, var(--white-to-blue) 100%)" }}>
         <div style={{ maxWidth: 900, margin: "0 auto", padding: "clamp(56px, 7vw, 88px) clamp(16px, 3vw, 40px)", display: "grid", gap: 40 }}>

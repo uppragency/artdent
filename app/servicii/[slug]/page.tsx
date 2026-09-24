@@ -49,6 +49,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         eyebrow="Servicii"
         title={service.title}
         crumbs={[{ label: "Acasă", href: "/" }, { label: "Servicii", href: "/servicii" }, { label: service.title }]}
+        currentPath={`/servicii/${slug}`}
       />
 
       <section style={{ background: "linear-gradient(180deg, #fff 0%, var(--white-to-blue) 100%)" }}>

@@ -14,6 +14,7 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
       eyebrow="Contact"
       title="Programează-te astăzi"
       crumbs={[{ label: "Acasă", href: "/" }, { label: "Contact" }]}
+      currentPath="/contact"
     />
     <section style={{ background: "linear-gradient(180deg, #fff 0%, var(--white-to-blue) 100%)" }}>
       <div style={{
