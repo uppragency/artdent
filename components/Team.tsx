@@ -55,7 +55,7 @@ export function Team() {
 
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16, marginTop: 20 }}>
         {teamMembers.map((t) => (
-          <div key={t.name} style={{ display: "grid", border: "1px solid var(--line)", borderRadius: 8, overflow: "hidden", background: "var(--card)" }}>
+          <div key={t.name} className="team-card" style={{ display: "grid", border: "1px solid var(--line)", borderRadius: 8, overflow: "hidden", background: "var(--card)" }}>
             {mediaLoaded ? (
               <div className="diagonal-stripes" style={{ aspectRatio: "4/3", display: "grid", placeItems: "center" }}>
                 <span className="font-mono-label" style={{ fontSize: 10.5, color: "var(--muted)", textAlign: "center", padding: 8 }}>portret · {t.name}</span>

@@ -1,5 +1,6 @@
 import { site } from "@/lib/data";
 import { BookingFormFields } from "@/components/BookingFormFields";
+import { TrustBadges } from "@/components/TrustBadges";
 
 export function BookingSection() {
   return (
@@ -29,6 +30,7 @@ export function BookingSection() {
               {site.phone}
             </a>
           </div>
+          <TrustBadges light />
         </div>
         <div style={{ padding: "clamp(24px, 3vw, 36px)", borderRadius: 10, background: "var(--cream)", color: "var(--ink)" }}>
           <BookingFormFields dark />

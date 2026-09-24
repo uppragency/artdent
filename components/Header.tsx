@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { useBooking } from "@/lib/booking-context";
 import { site, services } from "@/lib/data";
 
@@ -8,6 +9,11 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const { openModal } = useBooking();
+  const pathname = usePathname();
+
+  const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(href + "/"));
+  const navCls = (href: string) => `nav-link${isActive(href) ? " nav-link-active" : ""}`;
+  const mobCls = (href: string) => `mobile-nav-link${isActive(href) ? " nav-link-active" : ""}`;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
@@ -31,17 +37,17 @@ export function Header() {
         minHeight: headerMinH, transition: "min-height .3s ease",
         display: "flex", alignItems: "center", justifyContent: "space-between", gap: 20, borderRadius: 999,
       }}>
-        <a href="/" style={{ display: "flex", alignItems: "baseline", gap: 8, color: "#fff", flex: "0 0 auto" }}>
-          <span className="font-display" style={{ fontSize: 26, letterSpacing: "-0.01em" }}>ArtDent</span>
+        <a href="/" className="logo-mark" style={{ display: "flex", alignItems: "baseline", gap: 8, color: "#fff", flex: "0 0 auto" }}>
+          <span className="font-display logo-text" style={{ fontSize: 26, letterSpacing: "-0.01em" }}>ArtDent</span>
           <span className="font-mono-label" style={{ fontSize: 10, fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.6)" }}>
             {site.city}
           </span>
         </a>
 
         <nav data-desk style={{ display: "flex", alignItems: "center", alignSelf: "stretch", gap: "clamp(18px, 2vw, 32px)" }}>
-          <a href="/" style={{ fontSize: 14.5, fontWeight: 600, color: "#fff", padding: "4px 0", borderBottom: "2px solid #83D3E4" }}>Acasă</a>
+          <a href="/" className={navCls("/")} style={{ fontSize: 14.5, fontWeight: 600, padding: "4px 0" }}>Acasă</a>
           <div className="services-mega" style={{ alignSelf: "stretch", display: "flex", alignItems: "center" }}>
-            <a href="/servicii" className="nav-link" style={{ fontSize: 14.5, fontWeight: 500, display: "inline-flex", alignItems: "center", gap: 5 }}>
+            <a href="/servicii" className={navCls("/servicii")} style={{ fontSize: 14.5, fontWeight: 500, display: "inline-flex", alignItems: "center", gap: 5 }}>
               Servicii
               <svg className="mega-arrow" width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                 <path d="M6 9l6 6 6-6" />
@@ -87,10 +93,10 @@ export function Header() {
               </div>
             </div>
           </div>
-          <a href="/despre" className="nav-link" style={{ fontSize: 14.5, fontWeight: 500, padding: "4px 0" }}>Despre noi</a>
-          <a href="/echipa" className="nav-link" style={{ fontSize: 14.5, fontWeight: 500, padding: "4px 0" }}>Echipă</a>
-          <a href="/preturi" className="nav-link" style={{ fontSize: 14.5, fontWeight: 500, padding: "4px 0" }}>Prețuri</a>
-          <a href="/contact" className="nav-link" style={{ fontSize: 14.5, fontWeight: 500, padding: "4px 0" }}>Contact</a>
+          <a href="/despre" className={navCls("/despre")} style={{ fontSize: 14.5, fontWeight: 500, padding: "4px 0" }}>Despre noi</a>
+          <a href="/echipa" className={navCls("/echipa")} style={{ fontSize: 14.5, fontWeight: 500, padding: "4px 0" }}>Echipă</a>
+          <a href="/preturi" className={navCls("/preturi")} style={{ fontSize: 14.5, fontWeight: 500, padding: "4px 0" }}>Prețuri</a>
+          <a href="/contact" className={navCls("/contact")} style={{ fontSize: 14.5, fontWeight: 500, padding: "4px 0" }}>Contact</a>
         </nav>
 
         <div style={{ display: "flex", alignItems: "center", gap: 10, flex: "0 0 auto" }}>
@@ -126,12 +132,12 @@ export function Header() {
           backdropFilter: "blur(18px)", WebkitBackdropFilter: "blur(18px)", borderRadius: 20,
           padding: "8px 22px 18px", display: "grid", boxShadow: "0 18px 40px -24px rgba(2, 47, 58, 0.55)",
         }}>
-          <a href="/" className="mobile-nav-link" style={{ padding: "13px 0", fontSize: 17, fontWeight: 600, color: "#fff", borderBottom: "1px solid rgba(255,255,255,0.14)" }}>Acasă</a>
-          <a href="/servicii" className="mobile-nav-link" style={{ padding: "13px 0", fontSize: 17, fontWeight: 500, color: "rgba(255,255,255,0.82)", borderBottom: "1px solid rgba(255,255,255,0.14)" }}>Servicii</a>
-          <a href="/despre" className="mobile-nav-link" style={{ padding: "13px 0", fontSize: 17, fontWeight: 500, color: "rgba(255,255,255,0.82)", borderBottom: "1px solid rgba(255,255,255,0.14)" }}>Despre noi</a>
-          <a href="/echipa" className="mobile-nav-link" style={{ padding: "13px 0", fontSize: 17, fontWeight: 500, color: "rgba(255,255,255,0.82)", borderBottom: "1px solid rgba(255,255,255,0.14)" }}>Echipă</a>
-          <a href="/preturi" className="mobile-nav-link" style={{ padding: "13px 0", fontSize: 17, fontWeight: 500, color: "rgba(255,255,255,0.82)", borderBottom: "1px solid rgba(255,255,255,0.14)" }}>Prețuri</a>
-          <a href="/contact" className="mobile-nav-link" style={{ padding: "13px 0", fontSize: 17, fontWeight: 500, color: "rgba(255,255,255,0.82)" }}>Contact</a>
+          <a href="/" className={mobCls("/")} style={{ padding: "13px 0", fontSize: 17, fontWeight: 600, color: "#fff", borderBottom: "1px solid rgba(255,255,255,0.14)" }}>Acasă</a>
+          <a href="/servicii" className={mobCls("/servicii")} style={{ padding: "13px 0", fontSize: 17, fontWeight: 500, color: "rgba(255,255,255,0.82)", borderBottom: "1px solid rgba(255,255,255,0.14)" }}>Servicii</a>
+          <a href="/despre" className={mobCls("/despre")} style={{ padding: "13px 0", fontSize: 17, fontWeight: 500, color: "rgba(255,255,255,0.82)", borderBottom: "1px solid rgba(255,255,255,0.14)" }}>Despre noi</a>
+          <a href="/echipa" className={mobCls("/echipa")} style={{ padding: "13px 0", fontSize: 17, fontWeight: 500, color: "rgba(255,255,255,0.82)", borderBottom: "1px solid rgba(255,255,255,0.14)" }}>Echipă</a>
+          <a href="/preturi" className={mobCls("/preturi")} style={{ padding: "13px 0", fontSize: 17, fontWeight: 500, color: "rgba(255,255,255,0.82)", borderBottom: "1px solid rgba(255,255,255,0.14)" }}>Prețuri</a>
+          <a href="/contact" className={mobCls("/contact")} style={{ padding: "13px 0", fontSize: 17, fontWeight: 500, color: "rgba(255,255,255,0.82)" }}>Contact</a>
           <a href={site.phoneHref} className="mobile-nav-link" style={{ padding: "13px 0", fontSize: 17, fontWeight: 700, color: "oklch(0.72 0.18 27)", borderBottom: "1px solid rgba(255,255,255,0.14)", borderTop: "1px solid rgba(255,255,255,0.14)", marginTop: 4 }}>Urgențe dentare</a>
           <a href={site.phoneHref} style={{ marginTop: 14, background: "#fff", color: "var(--teal-700)", fontSize: 16, fontWeight: 600, padding: 15, borderRadius: 999, textAlign: "center" }}>
             Sună acum · {site.phone}

@@ -1,12 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { calendarLink } from "@/lib/data";
+import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 
 export function BookingFormFields({ dark = false }: { dark?: boolean }) {
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
+  const router = useRouter();
 
   const inputBg = dark ? "oklch(0.995 0.003 190)" : "#fff";
 
@@ -23,6 +24,7 @@ export function BookingFormFields({ dark = false }: { dark?: boolean }) {
     });
     setSending(false);
     setSent(true);
+    setTimeout(() => router.push("/multumim"), 900);
   }
 
   const labelStyle: React.CSSProperties = { display: "grid", gap: 7, fontSize: 13, fontWeight: 600, color: "var(--ink-soft)" };
@@ -42,23 +44,24 @@ export function BookingFormFields({ dark = false }: { dark?: boolean }) {
       <label style={labelStyle}>Email
         <input name="email" type="email" placeholder="nume@exemplu.ro" style={inputStyle} />
       </label>
-      <button type="submit" disabled={sending} className="btn-teal" style={{
+      <button type="submit" disabled={sending || sent} className="btn-teal" style={{
         marginTop: 4, fontFamily: "inherit", fontSize: 16, fontWeight: 600, padding: "16px 24px",
-        border: 0, borderRadius: 4, cursor: "pointer", minHeight: 54,
+        border: 0, borderRadius: 4, cursor: sending || sent ? "default" : "pointer", minHeight: 54,
+        display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
+        background: sent ? "oklch(0.5 0.12 155)" : undefined, transition: "background .25s ease",
       }}>
-        {sending ? "Se trimite…" : "Trimite solicitarea"}
+        {sent ? (
+          <>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ animation: "artdentPop .3s ease" }}>
+              <path d="M5 13l4 4L19 7" />
+            </svg>
+            Trimis
+          </>
+        ) : sending ? "Se trimite…" : "Trimite solicitarea"}
       </button>
       <span style={{ fontSize: 12.5, lineHeight: 1.5, color: "oklch(0.55 0.015 195)" }}>
-        {sent ? "Solicitare trimisă. Te contactăm în aceeași zi pentru confirmare." : "Te contactăm telefonic pentru confirmare. Datele nu sunt folosite în alt scop."}
+        {sent ? "Te redirecționăm…" : "Te contactăm telefonic pentru confirmare. Datele nu sunt folosite în alt scop."}
       </span>
-      {sent && (
-        <a href={calendarLink} target="_blank" rel="noreferrer" className="btn-outline-dark" style={{
-          textAlign: "center", fontSize: 14.5, fontWeight: 600, padding: "13px 20px",
-          borderRadius: 4, minHeight: 48, display: "flex", alignItems: "center", justifyContent: "center",
-        }}>
-          Adaugă în calendar
-        </a>
-      )}
     </form>
   );
 }

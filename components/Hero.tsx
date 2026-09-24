@@ -2,6 +2,7 @@
 
 import { useBooking } from "@/lib/booking-context";
 import { site } from "@/lib/data";
+import { TrustBadges } from "@/components/TrustBadges";
 
 export function Hero() {
   const { openModal } = useBooking();
@@ -53,6 +54,7 @@ export function Hero() {
               Sună acum
             </a>
           </div>
+          <TrustBadges light />
           <div style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 13, color: "oklch(0.8 0.015 190)" }}>
             <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--gold)" }} />
             <span>{site.address} · {site.hours}</span>

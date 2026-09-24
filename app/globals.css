@@ -125,6 +125,18 @@ a:hover { color: var(--gold-label); }
 .mega-arrow { transition: transform .2s ease; }
 .services-mega:hover .mega-arrow { transform: rotate(180deg); }
 
+.team-card { transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+.team-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px -24px rgba(2,47,58,0.35); border-color: oklch(0.72 0.07 88); }
+
+.logo-mark { transition: opacity .2s ease; }
+.logo-mark:hover .logo-text { color: var(--gold); }
+.logo-text { transition: color .2s ease; }
+
+.nav-link-active { color: #fff !important; position: relative; }
+.nav-link-active::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px; background: #83D3E4; border-radius: 2px;
+}
+
 .service-card { border: 1px solid var(--line); background: var(--card); color: var(--ink); transition: opacity .5s ease, transform .5s ease, border-color .2s ease, box-shadow .2s ease; }
 .service-card:hover { border-color: oklch(0.72 0.07 88); box-shadow: 0 20px 40px -28px rgba(2,47,58,0.35); }
 .service-card:hover .service-card-list { grid-template-rows: 1fr !important; }
