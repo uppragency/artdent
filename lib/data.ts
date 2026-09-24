@@ -461,6 +461,7 @@ export const doctor = {
   role: "Medic coordonator · Medic Dentist",
   specializations: ["Implantologie orală", "Ortodonție", "Estetică dentară", "Stomatologie generală"],
   bio: "Peste 20 de ani de experiență clinică și competență în implantologie orală. A participat la 11 ediții ale congresului Implanto Days de la Poiana Brașov, unde se discută protocoalele actuale în implantologie.",
+  image: "/images/team/dr-mihaela-zupcu.jpg",
 };
 
 export const teamMembers = [
@@ -470,6 +471,7 @@ export const teamMembers = [
     role: "Medic Dentist",
     specializations: ["Endodonție"],
     bio: "Competență în endodonție, cu experiență în tratamente de canal realizate cu tehnici moderne, pentru salvarea dintelui natural ori de câte ori este posibil.",
+    image: "/images/team/dr-ghenadie-tibuleac.jpg",
   },
   {
     slug: "dr-afif-al-jaboobi",
@@ -477,6 +479,7 @@ export const teamMembers = [
     role: "Medic Specialist Chirurgie OMF",
     specializations: ["Chirurgie oro-maxilo-facială"],
     bio: "Medic specialist în chirurgie oro-maxilo-facială, cu experiență în extracții complexe, chirurgie parodontală și intervenții chirurgicale buco-dentare.",
+    image: "/images/team/dr-afif-al-jaboobi.jpg",
   },
   {
     slug: "dr-maxim-tulbure",
@@ -484,6 +487,7 @@ export const teamMembers = [
     role: "Medic Specialist în Ortodonție și Ortopedie dento-facială",
     specializations: ["Ortodonție", "Ortopedie dento-facială"],
     bio: "Medic specialist în ortodonție și ortopedie dento-facială, cu preocupare pentru tratamente ortodontice adaptate atât copiilor, cât și adulților.",
+    image: "/images/team/dr-maxim-tulbure.jpg",
   },
   {
     slug: "maria-voicu",
@@ -491,6 +495,7 @@ export const teamMembers = [
     role: "Asistentă Medicală",
     specializations: ["Asistență medicală"],
     bio: "Asistentă medicală în cadrul echipei ArtDent, implicată în pregătirea și buna desfășurare a fiecărei proceduri.",
+    image: "/images/team/maria-voicu.jpg",
   },
   {
     slug: "alina-cojocaru",
@@ -498,6 +503,7 @@ export const teamMembers = [
     role: "Asistentă Medicală",
     specializations: ["Asistență medicală"],
     bio: "Asistentă medicală în cadrul echipei ArtDent, dedicată confortului și siguranței pacienților pe parcursul tratamentelor.",
+    image: "/images/team/alina-cojocaru.jpg",
   },
   {
     slug: "mela-moraru",
@@ -505,6 +511,7 @@ export const teamMembers = [
     role: "Tehnician dentar",
     specializations: ["Tehnică dentară"],
     bio: "Tehnician dentar cu experiență îndelungată, responsabil de execuția lucrărilor protetice ale clinicii.",
+    image: "/images/team/mela-moraru.jpg",
   },
 ];
 

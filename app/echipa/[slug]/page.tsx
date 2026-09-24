@@ -34,9 +34,7 @@ export default async function TeamMemberPage({ params }: { params: Promise<{ slu
 
       <section style={{ background: "linear-gradient(180deg, #fff 0%, var(--white-to-blue) 100%)" }}>
         <div style={{ maxWidth: 760, margin: "0 auto", padding: "clamp(56px, 7vw, 88px) clamp(16px, 3vw, 40px)" }}>
-          <div className="diagonal-stripes" style={{ aspectRatio: "16/9", borderRadius: 10, display: "grid", placeItems: "center", marginBottom: 32 }}>
-            <span className="font-mono-label" style={{ fontSize: 12, color: "var(--muted)" }}>portret profesional · {member.name}</span>
-          </div>
+          <div style={{ aspectRatio: "16/9", borderRadius: 10, marginBottom: 32, backgroundImage: `url(${member.image})`, backgroundSize: "cover", backgroundPosition: "center" }} />
 
           <span style={{ fontSize: 11, fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold-label)" }}>{member.role}</span>
           <p style={{ marginTop: 16, fontSize: 16, lineHeight: 1.75, color: "var(--muted-2)", maxWidth: "60ch" }}>{member.bio}</p>
