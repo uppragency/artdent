@@ -7,6 +7,7 @@ import { Footer } from "@/components/Footer";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import { MobileStickyBar } from "@/components/MobileStickyBar";
 import { CookieConsent } from "@/components/CookieConsent";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   title: "ArtDent Slobozia — Clinică stomatologică: implantologie, ortodonție, estetică dentară",
@@ -54,6 +55,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <WhatsAppFloat />
           <MobileStickyBar />
           <CookieConsent />
+          <Analytics />
         </BookingProvider>
       </body>
     </html>
