@@ -11,7 +11,7 @@ export function BookingSection() {
     }}>
       <div style={{ position: "absolute", width: 360, height: 360, borderRadius: "50%", background: "oklch(0.83 0.1 88 / 0.13)", filter: "blur(70px)", top: -100, right: -80, pointerEvents: "none" }} />
       <div style={{
-        maxWidth: 1280, margin: "0 auto", padding: "calc(clamp(56px, 7vw, 104px) + 48px) clamp(16px, 3vw, 40px)",
+        maxWidth: 1280, margin: "0 auto", padding: "calc(clamp(56px, 7vw, 104px) + 48px + 20px) clamp(16px, 3vw, 40px) clamp(56px, 7vw, 104px)",
         display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "clamp(32px, 5vw, 72px)", alignItems: "center",
       }}>
         <div style={{ display: "grid", gap: 22, justifyItems: "start" }}>
