@@ -27,20 +27,20 @@ export function CookieConsent() {
 
   return (
     <div className="cookie-bar" style={{
-      background: "var(--cream)", border: "1px solid var(--line)", borderRadius: 10,
-      padding: 18, boxShadow: "0 20px 44px -20px rgba(2,47,58,0.35)",
-      display: "grid", gap: 10,
+      background: "var(--cream)", border: "1px solid var(--line)", borderRadius: 12,
+      padding: "22px 22px", boxShadow: "0 -8px 40px -12px rgba(2,47,58,0.35), 0 20px 44px -20px rgba(2,47,58,0.35)",
+      display: "grid", gap: 14,
     }}>
-      <p style={{ margin: 0, fontSize: 13, lineHeight: 1.55, color: "var(--ink-soft)" }}>
+      <p style={{ margin: 0, fontSize: 14.5, lineHeight: 1.6, color: "var(--ink-soft)" }}>
         Folosim cookie-uri pentru a-ți oferi o experiență mai bună pe site. Vezi{" "}
         <a href="/politica-cookie-uri" style={{ color: "var(--teal-600)", fontWeight: 600 }}>politica de cookie-uri</a>.
       </p>
-      <div style={{ display: "flex", gap: 8 }}>
+      <div style={{ display: "flex", gap: 10 }}>
         <button
           type="button"
           onClick={() => choose("accepted")}
           className="btn-teal"
-          style={{ fontFamily: "inherit", fontSize: 13, fontWeight: 600, padding: "9px 16px", border: 0, borderRadius: 4, cursor: "pointer", flex: "1 1 auto" }}
+          style={{ fontFamily: "inherit", fontSize: 15, fontWeight: 600, padding: "13px 20px", border: 0, borderRadius: 4, cursor: "pointer", flex: "1 1 auto", minHeight: 48 }}
         >
           Accept
         </button>
@@ -48,7 +48,7 @@ export function CookieConsent() {
           type="button"
           onClick={() => choose("declined")}
           className="btn-outline-dark"
-          style={{ fontFamily: "inherit", fontSize: 13, fontWeight: 600, padding: "9px 16px", background: "none", borderRadius: 4, cursor: "pointer", flex: "0 0 auto" }}
+          style={{ fontFamily: "inherit", fontSize: 15, fontWeight: 600, padding: "13px 20px", background: "none", borderRadius: 4, cursor: "pointer", flex: "0 0 auto", minHeight: 48 }}
         >
           Refuz
         </button>

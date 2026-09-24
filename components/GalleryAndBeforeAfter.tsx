@@ -65,17 +65,13 @@ export function GalleryAndBeforeAfter() {
           <span style={{ fontSize: 11, fontWeight: 500, letterSpacing: "0.22em", textTransform: "uppercase", color: "var(--gold-label)" }}>Clinica noastră</span>
           <h2 className="font-display" style={{ margin: 0, fontWeight: 400, fontSize: "clamp(30px, 4.4vw, 50px)", lineHeight: 1.05, letterSpacing: "-0.015em" }}>Galerie foto</h2>
         </div>
-        <div style={{ columnWidth: 240, columnGap: 14 }}>
-          {visibleItems.map((item, i) => {
-            const ratios = ["4/3", "3/4", "1/1", "4/3", "3/4"];
-            return (
-              <div key={item.src} role="img" aria-label={item.label} style={{
-                breakInside: "avoid", marginBottom: 14, aspectRatio: ratios[i % ratios.length],
-                borderRadius: 6, overflow: "hidden",
-                backgroundImage: `url(${item.src})`, backgroundSize: "cover", backgroundPosition: "center",
-              }} />
-            );
-          })}
+        <div className="gallery-grid">
+          {visibleItems.map((item) => (
+            <div key={item.src} role="img" aria-label={item.label} style={{
+              aspectRatio: "4/3", borderRadius: 6, overflow: "hidden",
+              backgroundImage: `url(${item.src})`, backgroundSize: "cover", backgroundPosition: "center",
+            }} />
+          ))}
         </div>
         {canLoadMore && (
           <div style={{ display: "flex", justifyContent: "center", marginTop: 24 }}>

@@ -20,7 +20,7 @@ export function BookingModal() {
     <div
       onClick={closeModal}
       style={{
-        position: "fixed", inset: 0, zIndex: 100, background: "rgba(2,47,58,0.55)",
+        position: "fixed", inset: 0, zIndex: 1000, background: "rgba(2,47,58,0.55)",
         display: "flex", alignItems: "center", justifyContent: "center", padding: 20, backdropFilter: "blur(2px)",
       }}
     >
