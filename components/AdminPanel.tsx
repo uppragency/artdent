@@ -118,14 +118,17 @@ export function AdminPanel() {
   const stats = useMemo(() => {
     const now = new Date();
     const todayStr = now.toDateString();
-    let today = 0, thisMonth = 0, stale = 0;
+    let today = 0, thisMonth = 0, stale = 0, lastMonth = 0;
+    const lastMonthDate = new Date(now.getFullYear(), now.getMonth() - 1, 1);
     for (const s of submissions) {
       const d = new Date(s.created_at);
       if (d.toDateString() === todayStr) today++;
       if (d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear()) thisMonth++;
+      if (d.getMonth() === lastMonthDate.getMonth() && d.getFullYear() === lastMonthDate.getFullYear()) lastMonth++;
       if (s.status === "noua" && now.getTime() - d.getTime() > DAY_MS) stale++;
     }
-    return { today, thisMonth, stale };
+    const monthOverMonth = lastMonth > 0 ? Math.round(((thisMonth - lastMonth) / lastMonth) * 100) : null;
+    return { today, thisMonth, stale, lastMonth, monthOverMonth };
   }, [submissions]);
 
   const filtered = useMemo(() => {
@@ -212,8 +215,18 @@ export function AdminPanel() {
           <div style={{ fontSize: 13, color: "var(--muted)" }}>Total programări</div>
         </div>
         <div style={{ border: "1px solid var(--line)", borderRadius: 8, padding: "16px 18px", background: "var(--card)" }}>
-          <div style={{ fontSize: 26, fontWeight: 700, color: "var(--teal-deep)" }}>{stats.thisMonth}</div>
-          <div style={{ fontSize: 13, color: "var(--muted)" }}>Luna aceasta</div>
+          <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
+            <span style={{ fontSize: 26, fontWeight: 700, color: "var(--teal-deep)" }}>{stats.thisMonth}</span>
+            {stats.monthOverMonth !== null && (
+              <span style={{
+                fontSize: 12.5, fontWeight: 600,
+                color: stats.monthOverMonth >= 0 ? "oklch(0.5 0.12 155)" : "oklch(0.55 0.19 27)",
+              }}>
+                {stats.monthOverMonth >= 0 ? "+" : ""}{stats.monthOverMonth}% față de luna trecută
+              </span>
+            )}
+          </div>
+          <div style={{ fontSize: 13, color: "var(--muted)" }}>Luna aceasta {stats.lastMonth > 0 ? `(${stats.lastMonth} luna trecută)` : ""}</div>
         </div>
         <div style={{ border: "1px solid var(--line)", borderRadius: 8, padding: "16px 18px", background: "var(--card)" }}>
           <div style={{ fontSize: 26, fontWeight: 700, color: "var(--teal-deep)" }}>{stats.today}</div>

@@ -37,7 +37,7 @@ export function PageHero({ eyebrow, title, crumbs, accent, currentPath }: { eyeb
       className="dot-grid-teal noise-overlay"
       style={{
         position: "relative",
-        marginTop: "calc(-68px - clamp(10px, 1.4vw, 18px))",
+        marginTop: "-86px",
         background: "radial-gradient(circle at 22% 8%, oklch(0.34 0.05 195) 0%, #024B5C 55%)",
         color: "oklch(0.97 0.012 90)",
         overflow: "hidden",
@@ -50,7 +50,7 @@ export function PageHero({ eyebrow, title, crumbs, accent, currentPath }: { eyeb
       <ToothMotif style={{ bottom: -30, left: -20, transform: "rotate(-12deg)" }} />
       <div style={{
         maxWidth: 1100, margin: "0 auto",
-        padding: "calc(68px + clamp(10px, 1.4vw, 18px) + clamp(40px, 6vw, 72px)) clamp(16px, 3vw, 40px) clamp(40px, 6vw, 64px)",
+        padding: "calc(86px + clamp(40px, 6vw, 72px)) clamp(16px, 3vw, 40px) clamp(40px, 6vw, 64px)",
         position: "relative",
       }}>
         <nav aria-label="breadcrumb" style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 8, marginBottom: 18, fontSize: 13 }}>

@@ -1,4 +1,4 @@
-import { usp, site, values } from "@/lib/data";
+import { usp, site, values, doctor, teamMembers } from "@/lib/data";
 import { BookingSection } from "@/components/BookingSection";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
@@ -20,7 +20,7 @@ export default function DesprePage() {
     <section style={{ background: "linear-gradient(180deg, #fff 0%, var(--white-to-blue) 100%)" }}>
       <div style={{ maxWidth: 1100, margin: "0 auto", padding: "clamp(56px, 7vw, 88px) clamp(16px, 3vw, 40px) clamp(48px, 6vw, 80px)" }}>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "clamp(28px, 4vw, 48px)", alignItems: "center" }}>
-          <div style={{
+          <div role="img" aria-label="Pacient în cabinetul ArtDent Slobozia, în timpul unei consultații" style={{
             borderRadius: 10, overflow: "hidden", minHeight: 320,
             backgroundImage: "url(/images/portret-pacient-medic.jpg)", backgroundSize: "cover", backgroundPosition: "center",
           }} />
@@ -53,6 +53,31 @@ export default function DesprePage() {
           <p style={{ margin: "8px 0 0" }}>{site.address}</p>
           <p style={{ margin: 0 }}>{site.hours}</p>
           <a href={site.phoneHref} className="font-mono-label" style={{ display: "inline-block", marginTop: 4 }}>{site.phone}</a>
+        </div>
+      </div>
+    </section>
+
+    <section style={{ background: "linear-gradient(180deg, var(--white-to-blue) 0%, #fff 100%)" }}>
+      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "clamp(48px, 6vw, 80px) clamp(16px, 3vw, 40px) clamp(56px, 7vw, 96px)" }}>
+        <span style={{ fontSize: 11, fontWeight: 500, letterSpacing: "0.22em", textTransform: "uppercase", color: "var(--gold-label)" }}>Formare și competențe</span>
+        <h2 className="font-display" style={{ margin: "10px 0 28px", fontWeight: 400, fontSize: "clamp(26px, 3.4vw, 38px)", color: "var(--teal-deep)" }}>
+          Experiență și specializare medicală verificabilă
+        </h2>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 16 }}>
+          {[doctor, ...teamMembers].filter((m) => m.role.toLowerCase().includes("specialist") || m.slug === doctor.slug || m.role.toLowerCase().includes("medic dentist")).map((m, i) => (
+            <Reveal key={m.slug} delay={i * 70}>
+              <a href={`/echipa/${m.slug}`} style={{ display: "grid", gap: 8, border: "1px solid var(--line)", borderRadius: 8, background: "var(--card)", padding: 22, height: "100%", color: "inherit" }}>
+                <span style={{ fontSize: 15.5, fontWeight: 600, color: "var(--teal-deep)" }}>{m.name}</span>
+                <span className="font-mono-label" style={{ fontSize: 11, color: "var(--gold-label-2)" }}>{m.role}</span>
+                <span style={{ fontSize: 14, lineHeight: 1.6, color: "var(--muted)" }}>{m.bio}</span>
+              </a>
+            </Reveal>
+          ))}
+        </div>
+        <div style={{ display: "flex", justifyContent: "center", marginTop: 32 }}>
+          <a href="/echipa" className="btn-outline-dark" style={{ fontSize: 15, fontWeight: 600, padding: "14px 26px", borderRadius: 4, minHeight: 48, display: "flex", alignItems: "center" }}>
+            Vezi întreaga echipă
+          </a>
         </div>
       </div>
     </section>

@@ -43,6 +43,25 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
         </div>
       </div>
 
+      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 clamp(16px, 3vw, 40px) clamp(40px, 5vw, 56px)" }}>
+        <p style={{ margin: "0 0 12px", fontSize: 13, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--gold-label)" }}>
+          Vii din altă localitate?
+        </p>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 12 }}>
+          {[
+            { city: "Fetești", distance: "≈ 30 km", time: "≈ 30 min" },
+            { city: "Urziceni", distance: "≈ 35 km", time: "≈ 35 min" },
+            { city: "Călărași", distance: "≈ 65 km", time: "≈ 60 min" },
+          ].map((r) => (
+            <div key={r.city} style={{ border: "1px solid var(--line)", borderRadius: 8, padding: "14px 18px", background: "var(--card)" }}>
+              <p style={{ margin: 0, fontSize: 15, fontWeight: 600, color: "var(--teal-deep)" }}>{r.city}</p>
+              <p style={{ margin: "4px 0 0", fontSize: 13, color: "var(--muted)" }}>{r.distance} · {r.time} cu mașina</p>
+            </div>
+          ))}
+        </div>
+        <p style={{ margin: "10px 0 0", fontSize: 12, color: "var(--muted)" }}>Distanțe și timpi aproximativi, cu variații în funcție de trafic.</p>
+      </div>
+
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 clamp(16px, 3vw, 40px) clamp(56px, 7vw, 88px)" }}>
         <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "center", gap: 12, marginBottom: 16 }}>
           <h2 className="font-display" style={{ margin: 0, fontSize: "clamp(22px, 2.8vw, 30px)", color: "var(--teal-deep)" }}>

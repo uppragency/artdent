@@ -26,7 +26,7 @@ export function Team() {
         display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 0,
         border: "1px solid var(--line)", borderRadius: 10, overflow: "hidden", background: "var(--card)",
       }}>
-        <div style={{ position: "relative", overflow: "hidden", minHeight: 460, backgroundImage: `url(${doctor.image})`, backgroundSize: "cover", backgroundPosition: "center" }} />
+        <div role="img" aria-label={`Portret ${doctor.name}, ${doctor.role}`} style={{ position: "relative", overflow: "hidden", minHeight: 460, backgroundImage: `url(${doctor.image})`, backgroundSize: "cover", backgroundPosition: "center" }} />
         <div style={{ padding: "clamp(28px, 4vw, 56px)", display: "grid", gap: 22, alignContent: "center", justifyItems: "start" }}>
           <span style={{ fontSize: 11, fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold-label)" }}>{doctor.role}</span>
           <h3 className="font-display" style={{ margin: 0, fontWeight: 400, fontSize: "clamp(30px, 3.6vw, 44px)", lineHeight: 1.05, letterSpacing: "-0.015em" }}>{doctor.name}</h3>
@@ -51,7 +51,7 @@ export function Team() {
         {featuredTeamMembers.map((t) => (
           <a key={t.slug} href={`/echipa/${t.slug}`} className="team-card" style={{ display: "grid", border: "1px solid var(--line)", borderRadius: 8, overflow: "hidden", background: "var(--card)", color: "inherit" }}>
             {mediaLoaded ? (
-              <div style={{ aspectRatio: "4/3", backgroundImage: `url(${t.image})`, backgroundSize: "cover", backgroundPosition: "center" }} />
+              <div role="img" aria-label={`Portret ${t.name}, ${t.role}`} style={{ aspectRatio: "4/3", backgroundImage: `url(${t.image})`, backgroundSize: "cover", backgroundPosition: "center" }} />
             ) : (
               <div style={{ aspectRatio: "4/3", background: "oklch(0.93 0.008 190)", animation: "artdentSkeleton 1.4s ease-in-out infinite" }} />
             )}

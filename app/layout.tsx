@@ -9,20 +9,59 @@ import { MobileStickyBar } from "@/components/MobileStickyBar";
 import { CookieConsent } from "@/components/CookieConsent";
 import { ExitIntentPopup } from "@/components/ExitIntentPopup";
 import { Analytics } from "@vercel/analytics/next";
+import { site } from "@/lib/data";
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://artdentslobozia.ro";
+const ogTitle = "ArtDent Slobozia — Clinică stomatologică: implantologie, ortodonție, estetică dentară";
+const ogDescription =
+  "Clinică stomatologică în Slobozia, coordonată de Dr. Mihaela Zupcu. Implantologie, ortodonție, estetică dentară și profilaxie, cu plan de tratament clar de la prima consultație.";
 
 export const metadata: Metadata = {
-  title: "ArtDent Slobozia — Clinică stomatologică: implantologie, ortodonție, estetică dentară",
-  description:
-    "Clinică stomatologică în Slobozia, coordonată de Dr. Mihaela Zupcu. Implantologie, ortodonție, estetică dentară și profilaxie, cu plan de tratament clar de la prima consultație.",
+  title: ogTitle,
+  description: ogDescription,
+  metadataBase: new URL(siteUrl),
+  openGraph: {
+    title: ogTitle,
+    description: ogDescription,
+    url: siteUrl,
+    siteName: "ArtDent Slobozia",
+    locale: "ro_RO",
+    type: "website",
+    images: [{ url: "/images/og-image.jpg", width: 1200, height: 630, alt: "ArtDent Slobozia — clinică stomatologică" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: ogTitle,
+    description: ogDescription,
+    images: ["/images/og-image.jpg"],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
   const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID;
 
+  const organizationJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "ArtDent Slobozia",
+    legalName: site.legalName,
+    url: site.siteUrl,
+    logo: `${site.siteUrl}/images/og-image.jpg`,
+    sameAs: [site.facebookUrl, site.instagramUrl],
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: site.phoneHref.replace("tel:", ""),
+      contactType: "customer service",
+      areaServed: "RO",
+      availableLanguage: "Romanian",
+    },
+  };
+
   return (
     <html lang="ro">
       <head>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }} />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link

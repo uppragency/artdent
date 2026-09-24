@@ -20,11 +20,11 @@ export function Concept() {
             <span style={{ fontSize: 10.5, fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)" }}>Dental boutique</span>
             <span className="font-display" style={{ fontSize: 25, lineHeight: 1.12, color: "oklch(0.97 0.012 90)" }}>Implantologie avansată în Slobozia</span>
           </div>
-          <div style={{
+          <div role="img" aria-label="Unit dentar modern la clinica ArtDent Slobozia" style={{
             borderRadius: 6, minHeight: 190, overflow: "hidden",
             backgroundImage: "url(/images/unit-dentar-vertical.jpg)", backgroundSize: "cover", backgroundPosition: "center",
           }} />
-          <div style={{
+          <div role="img" aria-label="Sală de tratament la clinica ArtDent Slobozia, cadru larg cu lumină naturală" style={{
             gridColumn: "span 2", borderRadius: 6, minHeight: 200, overflow: "hidden",
             backgroundImage: "url(/images/sala-tratament-larg.jpg)", backgroundSize: "cover", backgroundPosition: "center",
           }} />

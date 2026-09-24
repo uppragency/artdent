@@ -24,8 +24,25 @@ export default async function TeamMemberPage({ params }: { params: Promise<{ slu
 
   const others = allMembers.filter((m) => m.slug !== slug);
 
+  const personJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: member.name,
+    jobTitle: member.role,
+    image: `${site.siteUrl}${member.image}`,
+    description: member.bio,
+    knowsAbout: member.specializations,
+    worksFor: {
+      "@type": "Dentist",
+      name: "ArtDent Slobozia",
+      url: site.siteUrl,
+    },
+    url: `${site.siteUrl}/echipa/${slug}`,
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }} />
       <PageHero
         eyebrow="Echipa medicală"
         title={member.name}
@@ -35,7 +52,7 @@ export default async function TeamMemberPage({ params }: { params: Promise<{ slu
 
       <section style={{ background: "linear-gradient(180deg, #fff 0%, var(--white-to-blue) 100%)" }}>
         <div style={{ maxWidth: 760, margin: "0 auto", padding: "clamp(56px, 7vw, 88px) clamp(16px, 3vw, 40px)" }}>
-          <div style={{ aspectRatio: "16/9", borderRadius: 10, marginBottom: 32, backgroundImage: `url(${member.image})`, backgroundSize: "cover", backgroundPosition: "center" }} />
+          <div role="img" aria-label={`Portret ${member.name}, ${member.role} la ArtDent Slobozia`} style={{ aspectRatio: "16/9", borderRadius: 10, marginBottom: 32, backgroundImage: `url(${member.image})`, backgroundSize: "cover", backgroundPosition: "center" }} />
 
           <span style={{ fontSize: 11, fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold-label)" }}>{member.role}</span>
           <p style={{ marginTop: 16, fontSize: 16, lineHeight: 1.75, color: "var(--muted-2)", maxWidth: "60ch" }}>{member.bio}</p>

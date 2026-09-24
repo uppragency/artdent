@@ -4,10 +4,12 @@ import { useBooking } from "@/lib/booking-context";
 import { site } from "@/lib/data";
 import { TrustBadges } from "@/components/TrustBadges";
 import { useCtaVariant } from "@/lib/use-cta-variant";
+import { useBusinessHours } from "@/lib/use-business-hours";
 
 export function Hero() {
   const { openModal } = useBooking();
   const cta = useCtaVariant();
+  const hours = useBusinessHours();
 
   return (
     <section
@@ -50,11 +52,19 @@ export function Hero() {
             }}>
               {cta.label}
             </a>
-            <a href={site.phoneHref} className="btn-outline-light" style={{
-              fontSize: 16, fontWeight: 600, padding: "17px 30px", borderRadius: 4, minHeight: 54, display: "flex", alignItems: "center",
-            }}>
-              Sună acum
-            </a>
+            {hours.checked && !hours.isOpen ? (
+              <a href="#programare" onClick={(e) => { e.preventDefault(); openModal(); }} className="btn-outline-light" style={{
+                fontSize: 16, fontWeight: 600, padding: "17px 30px", borderRadius: 4, minHeight: 54, display: "flex", alignItems: "center",
+              }}>
+                Lasă-ne un mesaj, te sunăm {hours.nextOpening}
+              </a>
+            ) : (
+              <a href={site.phoneHref} className="btn-outline-light" style={{
+                fontSize: 16, fontWeight: 600, padding: "17px 30px", borderRadius: 4, minHeight: 54, display: "flex", alignItems: "center",
+              }}>
+                Sună acum
+              </a>
+            )}
           </div>
           <TrustBadges light />
           <div style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 13, color: "oklch(0.8 0.015 190)" }}>
@@ -68,7 +78,7 @@ export function Hero() {
           gridTemplateColumns: "1fr 1fr", gridTemplateRows: "1.35fr 1fr", gap: 10,
           padding: "clamp(24px, 4vw, 56px) 0", minHeight: 420,
         }}>
-          <div style={{
+          <div role="img" aria-label="Pacient tratat de un medic la clinica ArtDent Slobozia" style={{
             gridColumn: "span 2", position: "relative", borderRadius: 6, overflow: "hidden",
             backgroundImage: "url(/images/portret-pacient-medic.jpg)", backgroundSize: "cover", backgroundPosition: "center",
           }}>
@@ -81,11 +91,11 @@ export function Hero() {
               <span style={{ fontSize: 13.5, fontWeight: 700, color: "var(--teal-deeper)" }}>4,9 Google</span>
             </div>
           </div>
-          <div style={{
+          <div role="img" aria-label="Cabinetul stomatologic ArtDent Slobozia" style={{
             borderRadius: 6, overflow: "hidden",
             backgroundImage: "url(/images/cabinet.jpeg)", backgroundSize: "cover", backgroundPosition: "center",
           }} />
-          <div style={{
+          <div role="img" aria-label="Detaliu al unui tratament stomatologic la ArtDent Slobozia" style={{
             borderRadius: 6, overflow: "hidden",
             backgroundImage: "url(/images/detaliu-tratament.jpg)", backgroundSize: "cover", backgroundPosition: "center",
           }} />
