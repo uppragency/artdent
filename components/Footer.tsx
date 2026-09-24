@@ -59,6 +59,7 @@ export function Footer() {
             <a href="/termeni-si-conditii" style={{ color: "var(--muted)" }}>Termeni și condiții</a>
             <a href="/politica-de-confidentialitate" style={{ color: "var(--muted)" }}>Politica de confidențialitate</a>
             <a href="/politica-cookie-uri" style={{ color: "var(--muted)" }}>Politica de cookie-uri</a>
+            <a href="/harta-site" style={{ color: "var(--muted)" }}>Harta site</a>
           </span>
         </div>
       </div>

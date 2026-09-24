@@ -14,6 +14,7 @@ export function Header() {
   const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(href + "/"));
   const navCls = (href: string) => `nav-link${isActive(href) ? " nav-link-active" : ""}`;
   const mobCls = (href: string) => `mobile-nav-link${isActive(href) ? " nav-link-active" : ""}`;
+  const megaItemCls = (href: string) => `mega-menu-item${isActive(href) ? " mega-menu-item-active" : ""}`;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
@@ -80,11 +81,11 @@ export function Header() {
                         display: "grid", gridTemplateColumns: "auto 1fr", gap: 12, alignItems: "start",
                         padding: "12px 10px", borderRadius: 8, color: "#fff",
                       }}
-                      className="mega-menu-item"
+                      className={megaItemCls(`/servicii/${s.slug}`)}
                     >
                       <span className="font-mono-label" style={{ fontSize: 11, color: "var(--gold)", paddingTop: 2 }}>{s.num}</span>
                       <span style={{ display: "grid", gap: 3 }}>
-                        <span style={{ fontSize: 15, fontWeight: 600 }}>{s.title}</span>
+                        <span className="mega-item-title" style={{ fontSize: 15, fontWeight: 600 }}>{s.title}</span>
                         <span style={{ fontSize: 12.5, lineHeight: 1.5, color: "rgba(255,255,255,0.68)" }}>{s.text}</span>
                       </span>
                     </a>
@@ -93,8 +94,37 @@ export function Header() {
               </div>
             </div>
           </div>
-          <a href="/despre" className={navCls("/despre")} style={{ fontSize: 14.5, fontWeight: 500, padding: "4px 0" }}>Despre noi</a>
-          <a href="/echipa" className={navCls("/echipa")} style={{ fontSize: 14.5, fontWeight: 500, padding: "4px 0" }}>Echipă</a>
+          <div className="about-mega" style={{ alignSelf: "stretch", display: "flex", alignItems: "center" }}>
+            <a href="/despre" className={navCls("/despre")} style={{ fontSize: 14.5, fontWeight: 500, display: "inline-flex", alignItems: "center", gap: 5 }}>
+              Despre noi
+              <svg className="mega-arrow" width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path d="M6 9l6 6 6-6" />
+              </svg>
+            </a>
+
+            <div className="mega-panel" data-desk style={{ position: "absolute", top: "100%", left: 0, right: 0, zIndex: 60, padding: "0 clamp(12px, 3vw, 32px)" }}>
+              <div style={{
+                maxWidth: 640, margin: "10px auto 0", background: "rgba(3, 104, 126, 0.96)",
+                backdropFilter: "blur(18px)", WebkitBackdropFilter: "blur(18px)", borderRadius: 20,
+                padding: "clamp(20px, 3vw, 28px)", boxShadow: "0 24px 50px -24px rgba(2, 47, 58, 0.6)",
+                display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 6,
+              }}>
+                {[
+                  { href: "/despre", title: "Despre noi", text: "Conceptul clinicii și valorile noastre" },
+                  { href: "/echipa", title: "Echipă", text: "Medicii și echipa ArtDent" },
+                  { href: "/despre#valori", title: "Valorile ArtDent", text: "Ce ne definește munca" },
+                  { href: "/testimoniale", title: "Testimoniale", text: "Ce spun pacienții noștri" },
+                ].map((item) => (
+                  <a key={item.href} href={item.href} className={megaItemCls(item.href)} style={{
+                    display: "grid", gap: 3, padding: "12px 10px", borderRadius: 8, color: "#fff",
+                  }}>
+                    <span className="mega-item-title" style={{ fontSize: 15, fontWeight: 600 }}>{item.title}</span>
+                    <span style={{ fontSize: 12.5, lineHeight: 1.5, color: "rgba(255,255,255,0.68)" }}>{item.text}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
           <a href="/preturi" className={navCls("/preturi")} style={{ fontSize: 14.5, fontWeight: 500, padding: "4px 0" }}>Prețuri</a>
           <a href="/contact" className={navCls("/contact")} style={{ fontSize: 14.5, fontWeight: 500, padding: "4px 0" }}>Contact</a>
         </nav>

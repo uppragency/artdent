@@ -119,11 +119,21 @@ a:hover { color: var(--gold-label); }
 .mega-menu-item { transition: background .15s ease; }
 .mega-menu-item:hover { background: rgba(255,255,255,0.08); }
 
-.mega-panel { display: none; }
+.mega-panel {
+  opacity: 0; visibility: hidden; transform: translateY(-8px); pointer-events: none;
+  transition: opacity .15s ease, transform .15s ease, visibility .15s;
+}
 .services-mega:hover .mega-panel,
-.services-mega:focus-within .mega-panel { display: block; }
+.services-mega:focus-within .mega-panel,
+.about-mega:hover .mega-panel,
+.about-mega:focus-within .mega-panel {
+  opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto;
+}
 .mega-arrow { transition: transform .2s ease; }
-.services-mega:hover .mega-arrow { transform: rotate(180deg); }
+.services-mega:hover .mega-arrow, .about-mega:hover .mega-arrow { transform: rotate(180deg); }
+
+.mega-menu-item-active { background: rgba(255,255,255,0.1); }
+.mega-menu-item-active .mega-item-title { color: var(--gold) !important; }
 
 .team-card { transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
 .team-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px -24px rgba(2,47,58,0.35); border-color: oklch(0.72 0.07 88); }

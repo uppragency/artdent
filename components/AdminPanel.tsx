@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 type Submission = {
   id: string;
@@ -9,8 +9,20 @@ type Submission = {
   email: string | null;
   message: string | null;
   source_page: string | null;
+  status: string;
   created_at: string;
 };
+
+const STATUS_OPTIONS: { value: string; label: string; bg: string; text: string }[] = [
+  { value: "noua", label: "Nouă", bg: "oklch(0.93 0.03 230)", text: "oklch(0.4 0.1 230)" },
+  { value: "sunata", label: "Sunată", bg: "oklch(0.94 0.05 88)", text: "oklch(0.45 0.08 88)" },
+  { value: "confirmata", label: "Confirmată", bg: "oklch(0.93 0.06 155)", text: "oklch(0.4 0.1 155)" },
+  { value: "anulata", label: "Anulată", bg: "oklch(0.93 0.04 27)", text: "oklch(0.45 0.15 27)" },
+];
+
+function statusMeta(value: string) {
+  return STATUS_OPTIONS.find((s) => s.value === value) || STATUS_OPTIONS[0];
+}
 
 export function AdminPanel() {
   const [status, setStatus] = useState<"checking" | "locked" | "unlocked" | "server_error">("checking");
@@ -19,6 +31,10 @@ export function AdminPanel() {
   const [error, setError] = useState("");
   const [serverError, setServerError] = useState("");
   const [submitting, setSubmitting] = useState(false);
+
+  const [search, setSearch] = useState("");
+  const [dateFrom, setDateFrom] = useState("");
+  const [dateTo, setDateTo] = useState("");
 
   async function loadSubmissions() {
     const res = await fetch("/api/admin/submissions");
@@ -62,6 +78,38 @@ export function AdminPanel() {
     setStatus("locked");
     setSubmissions([]);
   }
+
+  async function updateStatus(id: string, newStatus: string) {
+    setSubmissions((prev) => prev.map((s) => (s.id === id ? { ...s, status: newStatus } : s)));
+    await fetch(`/api/admin/submissions/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ status: newStatus }),
+    });
+  }
+
+  const stats = useMemo(() => {
+    const now = new Date();
+    const todayStr = now.toDateString();
+    let today = 0, thisMonth = 0;
+    for (const s of submissions) {
+      const d = new Date(s.created_at);
+      if (d.toDateString() === todayStr) today++;
+      if (d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear()) thisMonth++;
+    }
+    return { today, thisMonth };
+  }, [submissions]);
+
+  const filtered = useMemo(() => {
+    const q = search.trim().toLowerCase();
+    return submissions.filter((s) => {
+      if (q && !(s.name?.toLowerCase().includes(q) || s.phone?.toLowerCase().includes(q))) return false;
+      const d = new Date(s.created_at);
+      if (dateFrom && d < new Date(dateFrom)) return false;
+      if (dateTo && d > new Date(dateTo + "T23:59:59")) return false;
+      return true;
+    });
+  }, [submissions, search, dateFrom, dateTo]);
 
   if (status === "checking") {
     return <p style={{ padding: 40, fontSize: 14, color: "var(--muted)" }}>Se încarcă…</p>;
@@ -114,10 +162,10 @@ export function AdminPanel() {
   }
 
   return (
-    <div style={{ maxWidth: 1100, margin: "0 auto", padding: "40px clamp(16px, 3vw, 40px)" }}>
-      <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "center", gap: 12, marginBottom: 24 }}>
+    <div style={{ maxWidth: 1200, margin: "0 auto", padding: "40px clamp(16px, 3vw, 40px)" }}>
+      <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "center", gap: 12, marginBottom: 20 }}>
         <h1 className="font-display" style={{ margin: 0, fontSize: 28, color: "var(--teal-deep)" }}>
-          Programări primite ({submissions.length})
+          Programări primite
         </h1>
         <div style={{ display: "flex", gap: 10 }}>
           <button onClick={loadSubmissions} className="btn-outline-dark" style={{ fontFamily: "inherit", fontSize: 13.5, fontWeight: 600, padding: "10px 16px", borderRadius: 4, background: "none", cursor: "pointer" }}>
@@ -129,8 +177,50 @@ export function AdminPanel() {
         </div>
       </div>
 
-      {submissions.length === 0 ? (
-        <p style={{ fontSize: 14.5, color: "var(--muted)" }}>Nu există programări încă.</p>
+      {/* Statistici */}
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 12, marginBottom: 24 }}>
+        <div style={{ border: "1px solid var(--line)", borderRadius: 8, padding: "16px 18px", background: "var(--card)" }}>
+          <div style={{ fontSize: 26, fontWeight: 700, color: "var(--teal-deep)" }}>{submissions.length}</div>
+          <div style={{ fontSize: 13, color: "var(--muted)" }}>Total programări</div>
+        </div>
+        <div style={{ border: "1px solid var(--line)", borderRadius: 8, padding: "16px 18px", background: "var(--card)" }}>
+          <div style={{ fontSize: 26, fontWeight: 700, color: "var(--teal-deep)" }}>{stats.thisMonth}</div>
+          <div style={{ fontSize: 13, color: "var(--muted)" }}>Luna aceasta</div>
+        </div>
+        <div style={{ border: "1px solid var(--line)", borderRadius: 8, padding: "16px 18px", background: "var(--card)" }}>
+          <div style={{ fontSize: 26, fontWeight: 700, color: "var(--teal-deep)" }}>{stats.today}</div>
+          <div style={{ fontSize: 13, color: "var(--muted)" }}>Astăzi</div>
+        </div>
+      </div>
+
+      {/* Filtre */}
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginBottom: 18 }}>
+        <input
+          type="text" value={search} onChange={(e) => setSearch(e.target.value)}
+          placeholder="Caută după nume sau telefon…"
+          style={{ fontFamily: "inherit", fontSize: 14, padding: "10px 14px", borderRadius: 4, border: "1px solid var(--line)", minWidth: 220, flex: "1 1 220px" }}
+        />
+        <input
+          type="date" value={dateFrom} onChange={(e) => setDateFrom(e.target.value)}
+          style={{ fontFamily: "inherit", fontSize: 14, padding: "10px 14px", borderRadius: 4, border: "1px solid var(--line)" }}
+        />
+        <input
+          type="date" value={dateTo} onChange={(e) => setDateTo(e.target.value)}
+          style={{ fontFamily: "inherit", fontSize: 14, padding: "10px 14px", borderRadius: 4, border: "1px solid var(--line)" }}
+        />
+        {(search || dateFrom || dateTo) && (
+          <button
+            onClick={() => { setSearch(""); setDateFrom(""); setDateTo(""); }}
+            className="btn-outline-dark"
+            style={{ fontFamily: "inherit", fontSize: 13.5, fontWeight: 600, padding: "10px 16px", borderRadius: 4, background: "none", cursor: "pointer" }}
+          >
+            Șterge filtrele
+          </button>
+        )}
+      </div>
+
+      {filtered.length === 0 ? (
+        <p style={{ fontSize: 14.5, color: "var(--muted)" }}>Nicio programare găsită.</p>
       ) : (
         <div style={{ border: "1px solid var(--line)", borderRadius: 8, overflow: "auto", background: "var(--card)" }}>
           <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
@@ -141,24 +231,42 @@ export function AdminPanel() {
                 <th style={{ textAlign: "left", padding: "12px 16px" }}>Telefon</th>
                 <th style={{ textAlign: "left", padding: "12px 16px" }}>Email</th>
                 <th style={{ textAlign: "left", padding: "12px 16px" }}>Pagină</th>
+                <th style={{ textAlign: "left", padding: "12px 16px" }}>Status</th>
               </tr>
             </thead>
             <tbody>
-              {submissions.map((s) => (
-                <tr key={s.id} style={{ borderTop: "1px solid var(--line)" }}>
-                  <td style={{ padding: "12px 16px", whiteSpace: "nowrap", color: "var(--muted)" }}>
-                    {new Date(s.created_at).toLocaleString("ro-RO")}
-                  </td>
-                  <td style={{ padding: "12px 16px", fontWeight: 600 }}>{s.name}</td>
-                  <td style={{ padding: "12px 16px" }}>
-                    {s.phone ? <a href={`tel:${s.phone}`} style={{ color: "var(--teal-600)" }}>{s.phone}</a> : "—"}
-                  </td>
-                  <td style={{ padding: "12px 16px" }}>
-                    {s.email ? <a href={`mailto:${s.email}`} style={{ color: "var(--teal-600)" }}>{s.email}</a> : "—"}
-                  </td>
-                  <td style={{ padding: "12px 16px", color: "var(--muted)" }}>{s.source_page || "—"}</td>
-                </tr>
-              ))}
+              {filtered.map((s) => {
+                const meta = statusMeta(s.status);
+                return (
+                  <tr key={s.id} style={{ borderTop: "1px solid var(--line)" }}>
+                    <td style={{ padding: "12px 16px", whiteSpace: "nowrap", color: "var(--muted)" }}>
+                      {new Date(s.created_at).toLocaleString("ro-RO")}
+                    </td>
+                    <td style={{ padding: "12px 16px", fontWeight: 600 }}>{s.name}</td>
+                    <td style={{ padding: "12px 16px" }}>
+                      {s.phone ? <a href={`tel:${s.phone}`} style={{ color: "var(--teal-600)" }}>{s.phone}</a> : "—"}
+                    </td>
+                    <td style={{ padding: "12px 16px" }}>
+                      {s.email ? <a href={`mailto:${s.email}`} style={{ color: "var(--teal-600)" }}>{s.email}</a> : "—"}
+                    </td>
+                    <td style={{ padding: "12px 16px", color: "var(--muted)" }}>{s.source_page || "—"}</td>
+                    <td style={{ padding: "12px 16px" }}>
+                      <select
+                        value={s.status}
+                        onChange={(e) => updateStatus(s.id, e.target.value)}
+                        style={{
+                          fontFamily: "inherit", fontSize: 13, fontWeight: 600, padding: "7px 10px", borderRadius: 999,
+                          border: "none", background: meta.bg, color: meta.text, cursor: "pointer",
+                        }}
+                      >
+                        {STATUS_OPTIONS.map((opt) => (
+                          <option key={opt.value} value={opt.value}>{opt.label}</option>
+                        ))}
+                      </select>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>

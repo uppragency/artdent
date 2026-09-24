@@ -5,7 +5,9 @@ import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import { useBooking } from "@/lib/booking-context";
 
-export function BookingFormFields({ dark = false, autoFocusName = false }: { dark?: boolean; autoFocusName?: boolean }) {
+export function BookingFormFields({
+  dark = false, autoFocusName = false, defaultName = "", defaultPhone = "",
+}: { dark?: boolean; autoFocusName?: boolean; defaultName?: string; defaultPhone?: string }) {
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
   const router = useRouter();
@@ -17,18 +19,23 @@ export function BookingFormFields({ dark = false, autoFocusName = false }: { dar
     e.preventDefault();
     setSending(true);
     const form = new FormData(e.currentTarget);
+    const name = String(form.get("name") || "");
+    const phone = String(form.get("phone") || "");
+    const sourcePage = typeof window !== "undefined" ? window.location.pathname : null;
     await supabase.from("contact_submissions").insert({
-      name: String(form.get("name") || ""),
-      phone: String(form.get("phone") || ""),
+      name,
+      phone,
       email: String(form.get("email") || ""),
       message: null,
-      source_page: typeof window !== "undefined" ? window.location.pathname : null,
+      source_page: sourcePage,
     });
     setSending(false);
     setSent(true);
+    const params = new URLSearchParams({ name, phone });
+    if (sourcePage) params.set("from", sourcePage);
     setTimeout(() => {
       closeModal();
-      router.push("/multumim");
+      router.push(`/multumim?${params.toString()}`);
     }, 900);
   }
 
@@ -41,10 +48,10 @@ export function BookingFormFields({ dark = false, autoFocusName = false }: { dar
   return (
     <form onSubmit={handleSubmit} style={{ display: "grid", gap: 14 }}>
       <label style={labelStyle}>Nume
-        <input name="name" type="text" required placeholder="Numele tău" style={inputStyle} autoFocus={autoFocusName} />
+        <input name="name" type="text" required placeholder="Numele tău" defaultValue={defaultName} style={inputStyle} autoFocus={autoFocusName} />
       </label>
       <label style={labelStyle}>Telefon
-        <input name="phone" type="tel" required placeholder="07xx xxx xxx" style={inputStyle} />
+        <input name="phone" type="tel" required placeholder="07xx xxx xxx" defaultValue={defaultPhone} style={inputStyle} />
       </label>
       <label style={labelStyle}>Email
         <input name="email" type="email" placeholder="nume@exemplu.ro" style={inputStyle} />

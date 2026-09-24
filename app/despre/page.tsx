@@ -56,7 +56,7 @@ export default function DesprePage() {
       </div>
     </section>
 
-    <section className="dot-grid-gold" style={{ background: "var(--cream-section)", borderRadius: "48px 48px 0 0", marginTop: -48, position: "relative", zIndex: 1 }}>
+    <section id="valori" className="dot-grid-gold" style={{ background: "var(--cream-section)", borderRadius: "48px 48px 0 0", marginTop: -48, position: "relative", zIndex: 1, scrollMarginTop: 100 }}>
       <SectionSeam />
       <div style={{
         maxWidth: 1100, margin: "0 auto",

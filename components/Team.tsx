@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useBooking } from "@/lib/booking-context";
-import { doctor, teamMembers } from "@/lib/data";
+import { doctor, featuredTeamMembers } from "@/lib/data";
 
 export function Team() {
   const { openModal } = useBooking();
@@ -54,8 +54,8 @@ export function Team() {
       </div>
 
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16, marginTop: 20 }}>
-        {teamMembers.map((t) => (
-          <div key={t.name} className="team-card" style={{ display: "grid", border: "1px solid var(--line)", borderRadius: 8, overflow: "hidden", background: "var(--card)" }}>
+        {featuredTeamMembers.map((t) => (
+          <a key={t.slug} href={`/echipa/${t.slug}`} className="team-card" style={{ display: "grid", border: "1px solid var(--line)", borderRadius: 8, overflow: "hidden", background: "var(--card)", color: "inherit" }}>
             {mediaLoaded ? (
               <div className="diagonal-stripes" style={{ aspectRatio: "4/3", display: "grid", placeItems: "center" }}>
                 <span className="font-mono-label" style={{ fontSize: 10.5, color: "var(--muted)", textAlign: "center", padding: 8 }}>portret · {t.name}</span>
@@ -67,8 +67,14 @@ export function Team() {
               <span style={{ fontSize: 16, fontWeight: 600, letterSpacing: "-0.01em" }}>{t.name}</span>
               <span style={{ fontSize: 13, color: "var(--gold-label)", fontWeight: 500 }}>{t.role}</span>
             </div>
-          </div>
+          </a>
         ))}
+      </div>
+
+      <div style={{ display: "flex", justifyContent: "center", marginTop: 28 }}>
+        <a href="/echipa" className="btn-outline-dark" style={{ fontSize: 15, fontWeight: 600, padding: "14px 26px", borderRadius: 4, minHeight: 48, display: "flex", alignItems: "center" }}>
+          Vezi toți medicii
+        </a>
       </div>
     </section>
   );

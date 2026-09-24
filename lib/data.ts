@@ -13,10 +13,22 @@ export const site = {
   legalName: "C.M.I ARTDENT - DR. ZUPCU M. MIHAELA",
   cui: "20785382",
   mapsEmbed: "https://maps.google.com/maps?q=Al.+Feroviarului+1,+Slobozia&z=15&output=embed",
+  directionsUrl: "https://www.google.com/maps/dir/?api=1&destination=Al.+Feroviarului+1,+Slobozia,+Ialomi%C8%9Ba",
   googleReviewsUrl: "https://www.google.com/maps/place//data=!4m2!3m1!1s0x40b05184c7cadd09:0xced901ca02200d7b?sa=X&ved=1t:8290&ictx=111",
   instagramUrl: "https://www.instagram.com/artdent_dr_zupcu/",
   facebookUrl: "https://www.facebook.com/profile.php?id=100057326415385",
 };
+
+// index 0 = Duminică ... 6 = Sâmbătă, ca să corespundă cu Date.getDay()
+export const weeklyHours = [
+  { day: "Duminică", hours: "Închis" },
+  { day: "Luni", hours: "09:00 – 19:00" },
+  { day: "Marți", hours: "09:00 – 19:00" },
+  { day: "Miercuri", hours: "09:00 – 19:00" },
+  { day: "Joi", hours: "09:00 – 19:00" },
+  { day: "Vineri", hours: "09:00 – 19:00" },
+  { day: "Sâmbătă", hours: "Închis" },
+];
 
 export const nav = [
   { label: "Acasă", href: "/" },
@@ -444,18 +456,60 @@ export const heroStats = [
 ];
 
 export const doctor = {
-  name: "Dr. Mihaela Zupcu",
-  role: "Medic coordonator",
+  slug: "dr-mihaela-zupcu",
+  name: "Dr. Zupcu Mihaela",
+  role: "Medic coordonator · Medic Dentist",
   specializations: ["Implantologie orală", "Ortodonție", "Estetică dentară", "Stomatologie generală"],
   bio: "Peste 20 de ani de experiență clinică și competență în implantologie orală. A participat la 11 ediții ale congresului Implanto Days de la Poiana Brașov, unde se discută protocoalele actuale în implantologie.",
 };
 
-// De completat / de confirmat cu clinica — nume neconfirmate din designul aprobat.
 export const teamMembers = [
-  { name: "Dr. Andrei Pop", role: "Ortodonție" },
-  { name: "Dr. Ioana Marin", role: "Estetică dentară" },
-  { name: "Dr. Cristian Toma", role: "Chirurgie buco-dentară" },
+  {
+    slug: "dr-ghenadie-tibuleac",
+    name: "Dr. Ghenadie Țîbuleac",
+    role: "Medic Dentist",
+    specializations: ["Endodonție"],
+    bio: "Competență în endodonție, cu experiență în tratamente de canal realizate cu tehnici moderne, pentru salvarea dintelui natural ori de câte ori este posibil.",
+  },
+  {
+    slug: "dr-afif-al-jaboobi",
+    name: "Dr. Afif Al Jaboobi",
+    role: "Medic Specialist Chirurgie OMF",
+    specializations: ["Chirurgie oro-maxilo-facială"],
+    bio: "Medic specialist în chirurgie oro-maxilo-facială, cu experiență în extracții complexe, chirurgie parodontală și intervenții chirurgicale buco-dentare.",
+  },
+  {
+    slug: "dr-maxim-tulbure",
+    name: "Dr. Maxim Tulbure",
+    role: "Medic Specialist în Ortodonție și Ortopedie dento-facială",
+    specializations: ["Ortodonție", "Ortopedie dento-facială"],
+    bio: "Medic specialist în ortodonție și ortopedie dento-facială, cu preocupare pentru tratamente ortodontice adaptate atât copiilor, cât și adulților.",
+  },
+  {
+    slug: "maria-voicu",
+    name: "Maria Voicu",
+    role: "Asistentă Medicală",
+    specializations: ["Asistență medicală"],
+    bio: "Asistentă medicală în cadrul echipei ArtDent, implicată în pregătirea și buna desfășurare a fiecărei proceduri.",
+  },
+  {
+    slug: "alina-cojocaru",
+    name: "Alina Cojocaru",
+    role: "Asistentă Medicală",
+    specializations: ["Asistență medicală"],
+    bio: "Asistentă medicală în cadrul echipei ArtDent, dedicată confortului și siguranței pacienților pe parcursul tratamentelor.",
+  },
+  {
+    slug: "mela-moraru",
+    name: "Mela Moraru",
+    role: "Tehnician dentar",
+    specializations: ["Tehnică dentară"],
+    bio: "Tehnician dentar cu experiență îndelungată, responsabil de execuția lucrărilor protetice ale clinicii.",
+  },
 ];
+
+// Cele 3 afișate pe homepage, sub medicul coordonator — restul echipei e listat integral pe /echipa.
+export const featuredTeamMembers = [teamMembers[0], teamMembers[1], teamMembers[2]];
 
 export const faqs = [
   { q: "Cât durează un tratament cu implant dentar?", a: "De la inserarea implantului până la coroana finală trec în general 3–6 luni, timp necesar integrării osoase. În cazurile favorabile se poate atașa o coroană provizorie chiar în ziua intervenției, astfel încât să nu rămâi fără dinte." },

@@ -2,7 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { ADMIN_COOKIE_NAME, getExpectedAdminToken } from "@/lib/admin-auth";
 import { getSupabaseAdmin } from "@/lib/supabase-admin";
 
-export async function GET(req: NextRequest) {
+const VALID_STATUSES = ["noua", "sunata", "confirmata", "anulata"];
+
+export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const expectedToken = getExpectedAdminToken();
   if (!expectedToken) {
     return NextResponse.json({ error: "server_not_configured" }, { status: 500 });
@@ -13,20 +15,28 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   }
 
-  if (!process.env.SUPABASE_SERVICE_ROLE_KEY) {
-    return NextResponse.json({ error: "missing_service_role_key" }, { status: 500 });
+  const { id } = await params;
+  let status = "";
+  try {
+    const body = await req.json();
+    status = String(body?.status || "");
+  } catch {
+    return NextResponse.json({ error: "invalid_request" }, { status: 400 });
+  }
+
+  if (!VALID_STATUSES.includes(status)) {
+    return NextResponse.json({ error: "invalid_status" }, { status: 400 });
   }
 
   const supabaseAdmin = getSupabaseAdmin();
-  const { data, error } = await supabaseAdmin
+  const { error } = await supabaseAdmin
     .from("contact_submissions")
-    .select("id, name, phone, email, message, source_page, status, created_at")
-    .order("created_at", { ascending: false });
+    .update({ status })
+    .eq("id", id);
 
   if (error) {
-    console.error("admin/submissions supabase error:", error.message, error);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
-  return NextResponse.json({ submissions: data });
+  return NextResponse.json({ ok: true });
 }
