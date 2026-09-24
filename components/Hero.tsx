@@ -9,7 +9,7 @@ export function Hero() {
 
   return (
     <section
-      className="dot-grid-teal"
+      className="dot-grid-teal noise-overlay"
       style={{
         position: "relative",
         marginTop: "-86px",
@@ -37,7 +37,7 @@ export function Hero() {
           <h1 className="font-display" style={{
             margin: 0, fontWeight: 400, fontSize: "clamp(44px, 7vw, 84px)", lineHeight: 0.98, letterSpacing: "-0.02em",
           }}>
-            Te ajutăm să-ți recapeți zâmbetul
+            Te ajutăm să-ți recapeți <span className="accent-gradient">zâmbetul</span>
           </h1>
           <p style={{ margin: 0, fontSize: "clamp(16.5px, 1.7vw, 19px)", lineHeight: 1.6, color: "oklch(0.88 0.015 190)", maxWidth: "44ch" }}>
             Implantologie, ortodonție și estetică dentară într-o clinică unde fiecare plan de tratament pornește de la un diagnostic riguros și o discuție onestă.

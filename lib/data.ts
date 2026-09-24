@@ -61,6 +61,15 @@ export const services = [
   { num: "06", slug: "radiografii", title: "Radiografii Retroalveolare", text: "Imagistică digitală realizată în clinică, pentru diagnostic rapid și precis.", items: ["Radiografie digitală", "Interpretare imediată", "Arhivă digitală"] },
 ];
 
+export const relatedServices: Record<string, string[]> = {
+  "cosmetica-dentara": ["tratament-ortodontic", "profilaxie"],
+  "tratament-ortodontic": ["cosmetica-dentara", "profilaxie"],
+  "tratamente-generale": ["radiografii", "profilaxie"],
+  "chirurgie-buco-dentara": ["radiografii", "tratamente-generale"],
+  profilaxie: ["cosmetica-dentara", "tratamente-generale"],
+  radiografii: ["tratamente-generale", "chirurgie-buco-dentara"],
+};
+
 export const serviceDetails: Record<string, {
   metaTitle: string;
   metaDescription: string;

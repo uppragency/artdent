@@ -1,10 +1,19 @@
 "use client";
 
+import { useEffect } from "react";
 import { useBooking } from "@/lib/booking-context";
 import { BookingFormFields } from "@/components/BookingFormFields";
 
 export function BookingModal() {
   const { open, closeModal } = useBooking();
+
+  useEffect(() => {
+    if (!open) return;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = prevOverflow; };
+  }, [open]);
+
   if (!open) return null;
 
   return (
@@ -41,7 +50,7 @@ export function BookingModal() {
         <h3 className="font-display" style={{ margin: "8px 0 20px", fontWeight: 400, fontSize: 30, color: "var(--teal-deep)" }}>
           Programează-te
         </h3>
-        <BookingFormFields dark={false} />
+        <BookingFormFields dark={false} autoFocusName />
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ import { TrustBadges } from "@/components/TrustBadges";
 
 export function BookingSection() {
   return (
-    <section id="programare" className="dot-grid-teal" style={{
+    <section id="programare" className="dot-grid-teal noise-overlay" style={{
       background: "radial-gradient(circle at 15% 100%, oklch(0.34 0.05 195) 0%, #024B5C 55%)",
       color: "oklch(0.97 0.012 90)", borderRadius: "48px 48px 0 0", marginTop: -48,
       position: "relative", zIndex: 1, overflow: "hidden",

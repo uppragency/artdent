@@ -3,11 +3,13 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
+import { useBooking } from "@/lib/booking-context";
 
-export function BookingFormFields({ dark = false }: { dark?: boolean }) {
+export function BookingFormFields({ dark = false, autoFocusName = false }: { dark?: boolean; autoFocusName?: boolean }) {
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
   const router = useRouter();
+  const { closeModal } = useBooking();
 
   const inputBg = dark ? "oklch(0.995 0.003 190)" : "#fff";
 
@@ -24,7 +26,10 @@ export function BookingFormFields({ dark = false }: { dark?: boolean }) {
     });
     setSending(false);
     setSent(true);
-    setTimeout(() => router.push("/multumim"), 900);
+    setTimeout(() => {
+      closeModal();
+      router.push("/multumim");
+    }, 900);
   }
 
   const labelStyle: React.CSSProperties = { display: "grid", gap: 7, fontSize: 13, fontWeight: 600, color: "var(--ink-soft)" };
@@ -36,7 +41,7 @@ export function BookingFormFields({ dark = false }: { dark?: boolean }) {
   return (
     <form onSubmit={handleSubmit} style={{ display: "grid", gap: 14 }}>
       <label style={labelStyle}>Nume
-        <input name="name" type="text" required placeholder="Numele tău" style={inputStyle} />
+        <input name="name" type="text" required placeholder="Numele tău" style={inputStyle} autoFocus={autoFocusName} />
       </label>
       <label style={labelStyle}>Telefon
         <input name="phone" type="tel" required placeholder="07xx xxx xxx" style={inputStyle} />

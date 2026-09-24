@@ -12,6 +12,7 @@ export default function DesprePage() {
     <PageHero
       eyebrow="Despre noi"
       title="Te ajutăm să-ți recapeți zâmbetul"
+      accent="zâmbetul"
       crumbs={[{ label: "Acasă", href: "/" }, { label: "Despre noi" }]}
     />
 

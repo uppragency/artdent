@@ -1,9 +1,24 @@
+import { ToothMotif } from "@/components/ToothMotif";
+
 type Crumb = { label: string; href?: string };
 
-export function PageHero({ eyebrow, title, crumbs }: { eyebrow?: string; title: string; crumbs: Crumb[] }) {
+function renderTitle(title: string, accent?: string) {
+  if (!accent) return title;
+  const idx = title.toLowerCase().indexOf(accent.toLowerCase());
+  if (idx === -1) return title;
+  return (
+    <>
+      {title.slice(0, idx)}
+      <span className="accent-gradient">{title.slice(idx, idx + accent.length)}</span>
+      {title.slice(idx + accent.length)}
+    </>
+  );
+}
+
+export function PageHero({ eyebrow, title, crumbs, accent }: { eyebrow?: string; title: string; crumbs: Crumb[]; accent?: string }) {
   return (
     <section
-      className="dot-grid-teal"
+      className="dot-grid-teal noise-overlay"
       style={{
         position: "relative",
         marginTop: "calc(-68px - clamp(10px, 1.4vw, 18px))",
@@ -16,6 +31,7 @@ export function PageHero({ eyebrow, title, crumbs }: { eyebrow?: string; title: 
         position: "absolute", width: 320, height: 320, borderRadius: "50%",
         background: "oklch(0.83 0.1 88 / 0.13)", filter: "blur(70px)", top: -100, right: -80, pointerEvents: "none",
       }} />
+      <ToothMotif style={{ bottom: -30, left: -20, transform: "rotate(-12deg)" }} />
       <div style={{
         maxWidth: 1100, margin: "0 auto",
         padding: "calc(68px + clamp(10px, 1.4vw, 18px) + clamp(40px, 6vw, 72px)) clamp(16px, 3vw, 40px) clamp(40px, 6vw, 64px)",
@@ -39,7 +55,7 @@ export function PageHero({ eyebrow, title, crumbs }: { eyebrow?: string; title: 
           </span>
         )}
         <h1 className="font-display" style={{ margin: 0, fontWeight: 400, fontSize: "clamp(32px, 4.6vw, 54px)", lineHeight: 1.05, letterSpacing: "-0.015em", maxWidth: "22ch" }}>
-          {title}
+          {renderTitle(title, accent)}
         </h1>
       </div>
     </section>

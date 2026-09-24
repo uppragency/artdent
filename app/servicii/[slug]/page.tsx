@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { services, serviceDetails, site } from "@/lib/data";
+import { services, serviceDetails, relatedServices, site } from "@/lib/data";
 import { OpenBookingButton } from "@/components/OpenBookingButton";
 import { BookingSection } from "@/components/BookingSection";
 import { ServiceFaq } from "@/components/ServiceFaq";
@@ -27,6 +27,9 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
   if (!service || !detail) notFound();
 
   const otherServices = services.filter((s) => s.slug !== slug);
+  const crossSell = (relatedServices[slug] || [])
+    .map((s) => services.find((sv) => sv.slug === s))
+    .filter((s): s is (typeof services)[number] => Boolean(s));
 
   const faqJsonLd = {
     "@context": "https://schema.org",
@@ -109,6 +112,20 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         <p style={{ marginTop: 28, fontSize: 14, color: "var(--muted)" }}>
           Nu ai găsit răspunsul căutat? Sună-ne la <a href={site.phoneHref} className="font-mono-label">{site.phone}</a> sau scrie-ne pe WhatsApp.
         </p>
+
+        {crossSell.length > 0 && (
+          <div style={{ marginTop: 28, paddingTop: 24, borderTop: "1px solid var(--line)", display: "flex", flexWrap: "wrap", alignItems: "center", gap: 10 }}>
+            <span style={{ fontSize: 13.5, color: "var(--muted)" }}>Pacienții interesați de acest tratament au căutat și:</span>
+            {crossSell.map((s) => (
+              <a key={s.slug} href={`/servicii/${s.slug}`} style={{
+                fontSize: 13, fontWeight: 600, padding: "7px 14px", borderRadius: 999,
+                background: "var(--gold-tint-bg)", color: "var(--gold-tint-text)",
+              }}>
+                {s.title}
+              </a>
+            ))}
+          </div>
+        )}
       </section>
 
       <section style={{ background: "linear-gradient(180deg, var(--white-to-blue) 0%, #fff 100%)", borderRadius: "48px 48px 0 0", position: "relative", zIndex: 1 }}>

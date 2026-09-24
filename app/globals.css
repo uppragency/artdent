@@ -132,6 +132,25 @@ a:hover { color: var(--gold-label); }
 .logo-mark:hover .logo-text { color: var(--gold); }
 .logo-text { transition: color .2s ease; }
 
+h2.font-display { position: relative; padding-bottom: 16px; }
+h2.font-display::after {
+  content: ""; position: absolute; left: 0; bottom: 0; width: 48px; height: 2.5px;
+  background: var(--gold); border-radius: 2px;
+}
+[style*="text-align: center"] h2.font-display::after,
+[style*="text-align:center"] h2.font-display::after,
+[style*="justify-items: center"] h2.font-display::after,
+[style*="justify-items:center"] h2.font-display::after {
+  left: 50%; transform: translateX(-50%);
+}
+
+.accent-gradient {
+  background: linear-gradient(90deg, var(--gold) 0%, #8fd4c9 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+.tooth-motif { position: absolute; opacity: 0.05; pointer-events: none; }
+
 .nav-link-active { color: #fff !important; position: relative; }
 .nav-link-active::after {
   content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px; background: #83D3E4; border-radius: 2px;
