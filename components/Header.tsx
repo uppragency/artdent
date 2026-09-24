@@ -38,9 +38,9 @@ export function Header() {
           </span>
         </a>
 
-        <nav data-desk style={{ display: "flex", alignItems: "center", gap: "clamp(18px, 2vw, 32px)" }}>
+        <nav data-desk style={{ display: "flex", alignItems: "center", alignSelf: "stretch", gap: "clamp(18px, 2vw, 32px)" }}>
           <a href="/" style={{ fontSize: 14.5, fontWeight: 600, color: "#fff", padding: "4px 0", borderBottom: "2px solid #83D3E4" }}>Acasă</a>
-          <div className="services-mega" style={{ padding: "4px 0" }}>
+          <div className="services-mega" style={{ alignSelf: "stretch", display: "flex", alignItems: "center" }}>
             <a href="/servicii" className="nav-link" style={{ fontSize: 14.5, fontWeight: 500, display: "inline-flex", alignItems: "center", gap: 5 }}>
               Servicii
               <svg className="mega-arrow" width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
