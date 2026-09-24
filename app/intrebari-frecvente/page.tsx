@@ -8,6 +8,7 @@ export const metadata = {
   title: "Întrebări frecvente — ArtDent Slobozia",
   description:
     "Răspunsuri la cele mai frecvente întrebări despre tratamentele stomatologice de la ArtDent Slobozia: implantologie, ortodonție, estetică dentară, chirurgie și profilaxie.",
+  alternates: { canonical: "/intrebari-frecvente" },
 };
 
 export default function IntrebariFrecventePage() {

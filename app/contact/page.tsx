@@ -4,7 +4,7 @@ import { BookingSection } from "@/components/BookingSection";
 import { PageHero } from "@/components/PageHero";
 import { WeeklySchedule } from "@/components/WeeklySchedule";
 
-export const metadata = { title: "Contact — ArtDent Slobozia" };
+export const metadata = { title: "Contact — ArtDent Slobozia", alternates: { canonical: "/contact" } };
 
 export default async function ContactPage({ searchParams }: { searchParams: Promise<{ name?: string; phone?: string }> }) {
   const params = await searchParams;

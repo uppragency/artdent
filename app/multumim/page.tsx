@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import { PageHero } from "@/components/PageHero";
 import { ThankYouContent } from "@/components/ThankYouContent";
 
-export const metadata = { title: "Mulțumim — ArtDent Slobozia" };
+export const metadata = { title: "Mulțumim — ArtDent Slobozia", alternates: { canonical: "/multumim" } };
 
 export default function MultumimPage() {
   return (

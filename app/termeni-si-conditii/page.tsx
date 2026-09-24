@@ -1,7 +1,7 @@
 import { site } from "@/lib/data";
 import { PageHero } from "@/components/PageHero";
 
-export const metadata = { title: "Termeni și condiții — ArtDent Slobozia" };
+export const metadata = { title: "Termeni și condiții — ArtDent Slobozia", alternates: { canonical: "/termeni-si-conditii" } };
 
 export default function TermeniPage() {
   return (

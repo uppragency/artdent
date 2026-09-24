@@ -20,6 +20,7 @@ export const metadata: Metadata = {
   title: ogTitle,
   description: ogDescription,
   metadataBase: new URL(siteUrl),
+  alternates: { canonical: "/" },
   openGraph: {
     title: ogTitle,
     description: ogDescription,
@@ -38,7 +39,7 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const gaId = process.env.NEXT_PUBLIC_GA_ID;
+  const gaId = process.env.NEXT_PUBLIC_GA_ID || "G-QBR9D8WFZS";
   const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID;
 
   const organizationJsonLd = {

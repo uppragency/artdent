@@ -1,7 +1,7 @@
 import { site } from "@/lib/data";
 import { PageHero } from "@/components/PageHero";
 
-export const metadata = { title: "Politica de confidențialitate — ArtDent Slobozia" };
+export const metadata = { title: "Politica de confidențialitate — ArtDent Slobozia", alternates: { canonical: "/politica-de-confidentialitate" } };
 
 export default function PoliticaConfidentialitatePage() {
   return (

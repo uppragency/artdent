@@ -14,7 +14,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const member = allMembers.find((m) => m.slug === slug);
   if (!member) return {};
-  return { title: `${member.name} — ArtDent Slobozia`, description: `${member.name}, ${member.role} la ArtDent Slobozia. ${member.bio}` };
+  return {
+    title: `${member.name} — ArtDent Slobozia`,
+    description: `${member.name}, ${member.role} la ArtDent Slobozia. ${member.bio}`,
+    alternates: { canonical: `/echipa/${slug}` },
+  };
 }
 
 export default async function TeamMemberPage({ params }: { params: Promise<{ slug: string }> }) {

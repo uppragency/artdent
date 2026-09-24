@@ -3,7 +3,7 @@ import { GalleryAndBeforeAfter } from "@/components/GalleryAndBeforeAfter";
 import { BookingSection } from "@/components/BookingSection";
 import { PageHero } from "@/components/PageHero";
 
-export const metadata = { title: "Testimoniale & Rezultate — ArtDent Slobozia" };
+export const metadata = { title: "Testimoniale & Rezultate — ArtDent Slobozia", alternates: { canonical: "/testimoniale" } };
 
 export default function TestimonialePage() {
   return (

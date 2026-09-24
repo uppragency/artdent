@@ -1,7 +1,7 @@
 import { services, teamMembers, doctor } from "@/lib/data";
 import { PageHero } from "@/components/PageHero";
 
-export const metadata = { title: "Harta site — ArtDent Slobozia" };
+export const metadata = { title: "Harta site — ArtDent Slobozia", alternates: { canonical: "/harta-site" } };
 
 const groups: { title: string; links: { label: string; href: string }[] }[] = [
   {

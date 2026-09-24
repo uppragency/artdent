@@ -4,7 +4,7 @@ import { BookingSection } from "@/components/BookingSection";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
 
-export const metadata = { title: "Servicii și prețuri — ArtDent Slobozia" };
+export const metadata = { title: "Servicii și prețuri — ArtDent Slobozia", alternates: { canonical: "/servicii" } };
 
 export default function ServiciiPage() {
   return (

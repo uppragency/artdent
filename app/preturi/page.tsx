@@ -2,7 +2,7 @@ import { PriceList } from "@/components/PriceList";
 import { BookingSection } from "@/components/BookingSection";
 import { PageHero } from "@/components/PageHero";
 
-export const metadata = { title: "Prețuri — ArtDent Slobozia" };
+export const metadata = { title: "Prețuri — ArtDent Slobozia", alternates: { canonical: "/preturi" } };
 
 export default function PreturiPage() {
   return (

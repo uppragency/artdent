@@ -4,7 +4,7 @@ import { BookingSection } from "@/components/BookingSection";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
 
-export const metadata = { title: "Echipă — ArtDent Slobozia" };
+export const metadata = { title: "Echipă — ArtDent Slobozia", alternates: { canonical: "/echipa" } };
 
 export default function EchipaPage() {
   const all = [doctor, ...teamMembers];

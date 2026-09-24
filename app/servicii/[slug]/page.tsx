@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { services, serviceDetails, relatedServices, site } from "@/lib/data";
+import { services, serviceDetails, relatedServices, site, processSteps } from "@/lib/data";
 import { OpenBookingButton } from "@/components/OpenBookingButton";
 import { BookingSection } from "@/components/BookingSection";
 import { ServiceFaq } from "@/components/ServiceFaq";
@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const detail = serviceDetails[slug];
   if (!detail) return {};
-  return { title: detail.metaTitle, description: detail.metaDescription };
+  return { title: detail.metaTitle, description: detail.metaDescription, alternates: { canonical: `/servicii/${slug}` } };
 }
 
 export default async function ServiceDetailPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -41,9 +41,23 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
     })),
   };
 
+  const howToJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: `Cum se desfășoară tratamentul: ${service.title}`,
+    description: detail.intro,
+    step: processSteps.map((s) => ({
+      "@type": "HowToStep",
+      position: Number(s.n),
+      name: s.title,
+      text: s.text,
+    })),
+  };
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }} />
 
       <PageHero
         eyebrow="Servicii"

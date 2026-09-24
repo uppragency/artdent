@@ -4,7 +4,7 @@ import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
 import { SectionSeam } from "@/components/SectionSeam";
 
-export const metadata = { title: "Despre noi — ArtDent Slobozia" };
+export const metadata = { title: "Despre noi — ArtDent Slobozia", alternates: { canonical: "/despre" } };
 
 export default function DesprePage() {
   return (

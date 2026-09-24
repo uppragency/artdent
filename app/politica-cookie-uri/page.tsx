@@ -1,7 +1,7 @@
 import { site } from "@/lib/data";
 import { PageHero } from "@/components/PageHero";
 
-export const metadata = { title: "Politica de cookie-uri — ArtDent Slobozia" };
+export const metadata = { title: "Politica de cookie-uri — ArtDent Slobozia", alternates: { canonical: "/politica-cookie-uri" } };
 
 export default function PoliticaCookiePage() {
   return (
