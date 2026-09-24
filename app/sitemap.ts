@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { site, services, doctor, teamMembers, galleryItems, beforeAfterCases } from "@/lib/data";
+import { site, services, doctor, teamMembers, galleryItems, beforeAfterCases, guides } from "@/lib/data";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = site.siteUrl;
@@ -25,6 +25,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/testimoniale`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
     { url: `${base}/intrebari-frecvente`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     { url: `${base}/contact`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${base}/ghiduri`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${base}/frica-de-dentist`, lastModified: now, changeFrequency: "yearly", priority: 0.5 },
+    { url: `${base}/prima-vizita-copil-la-dentist`, lastModified: now, changeFrequency: "yearly", priority: 0.5 },
+    { url: `${base}/ingrijire-dentara-varstnici`, lastModified: now, changeFrequency: "yearly", priority: 0.5 },
     { url: `${base}/harta-site`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
     { url: `${base}/termeni-si-conditii`, lastModified: now, changeFrequency: "yearly", priority: 0.2 },
     { url: `${base}/politica-de-confidentialitate`, lastModified: now, changeFrequency: "yearly", priority: 0.2 },
@@ -46,5 +50,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     images: [`${base}${m.image}`],
   }));
 
-  return [...staticPages, ...servicePages, ...teamPages];
+  const guidePages: MetadataRoute.Sitemap = guides.map((g) => ({
+    url: `${base}/ghiduri/${g.slug}`,
+    lastModified: now,
+    changeFrequency: "yearly",
+    priority: 0.55,
+  }));
+
+  return [...staticPages, ...servicePages, ...teamPages, ...guidePages];
 }

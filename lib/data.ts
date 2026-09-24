@@ -50,9 +50,9 @@ export const serviceOptions = [
 ];
 
 export const featuredSolutions = [
-  { num: "01", title: "Implantologie și Protetică Avansată", text: "Reabilitări funcționale complete, planificate digital înainte de intervenție. Implant, bont și coroană într-un flux controlat, cu un rezultat care se integrează natural în zâmbet." },
-  { num: "02", title: "Ortodonție Modernă", text: "Aparate fixe și gutiere transparente pentru copii și adulți. Alinierea dinților se face pe baza unui plan clar, cu etape și durată comunicate de la început." },
-  { num: "03", title: "Estetică și Cosmetică Dentară", text: "Albire profesională, fațete și coroane ceramice. Forma și culoarea se stabilesc împreună cu tine, cu simulare înainte de orice lucrare definitivă." },
+  { num: "01", title: "Implantologie și Protetică Avansată", text: "Reabilitări funcționale complete, planificate digital înainte de intervenție. Implant, bont și coroană într-un flux controlat, cu un rezultat care se integrează natural în zâmbet.", href: "/servicii/implant-dentar-all-on-4-6" },
+  { num: "02", title: "Ortodonție Modernă", text: "Aparate fixe și gutiere transparente pentru copii și adulți. Alinierea dinților se face pe baza unui plan clar, cu etape și durată comunicate de la început.", href: "/servicii/tratament-ortodontic" },
+  { num: "03", title: "Estetică și Cosmetică Dentară", text: "Albire profesională, fațete și coroane ceramice. Forma și culoarea se stabilesc împreună cu tine, cu simulare înainte de orice lucrare definitivă.", href: "/servicii/cosmetica-dentara" },
 ];
 
 export const processSteps = [
@@ -75,15 +75,21 @@ export const services = [
   { num: "04", slug: "chirurgie-buco-dentara", title: "Chirurgie Buco-Dentară", text: "Extracții simple și complexe, inclusiv molari de minte, în condiții de siguranță.", items: ["Extracții simple", "Extracții molari de minte", "Chirurgie parodontală"] },
   { num: "05", slug: "profilaxie", title: "Profilaxie", text: "Detartraj, periaj profesional și air-flow, plus recomandări de igienă adaptate ție.", items: ["Detartraj", "Periaj profesional", "Air-flow"] },
   { num: "06", slug: "radiografii", title: "Radiografii Retroalveolare", text: "Imagistică digitală realizată în clinică, pentru diagnostic rapid și precis.", items: ["Radiografie digitală", "Interpretare imediată", "Arhivă digitală"] },
+  { num: "07", slug: "implant-dentar-all-on-4-6", title: "Implant Dentar & Reabilitare pe Implanturi", text: "Implant unic sau reabilitare completă pe implanturi (proteză pe bară), planificate digital.", items: ["Implant unic", "Proteză pe bară cu implant", "Plan digital de tratament"] },
+  { num: "08", slug: "proteze-dentare", title: "Proteze Dentare", text: "Proteze acrilice, elastice sau pe implant, adaptate individual pentru confort și funcționalitate.", items: ["Proteză acrilică", "Proteză elastică", "Proteză pe implant"] },
+  { num: "09", slug: "coroane-dentare", title: "Coroane Dentare", text: "Coroane ceramice, metalo-ceramice sau pe implant, pentru refacerea formei și funcției dintelui.", items: ["Coroană ceramică", "Coroană metalo-ceramică", "Coroană pe implant"] },
 ];
 
 export const relatedServices: Record<string, string[]> = {
   "cosmetica-dentara": ["tratament-ortodontic", "profilaxie"],
   "tratament-ortodontic": ["cosmetica-dentara", "profilaxie"],
   "tratamente-generale": ["radiografii", "profilaxie"],
-  "chirurgie-buco-dentara": ["radiografii", "tratamente-generale"],
+  "chirurgie-buco-dentara": ["radiografii", "implant-dentar-all-on-4-6"],
   profilaxie: ["cosmetica-dentara", "tratamente-generale"],
   radiografii: ["tratamente-generale", "chirurgie-buco-dentara"],
+  "implant-dentar-all-on-4-6": ["proteze-dentare", "coroane-dentare"],
+  "proteze-dentare": ["coroane-dentare", "implant-dentar-all-on-4-6"],
+  "coroane-dentare": ["proteze-dentare", "implant-dentar-all-on-4-6"],
 };
 
 export const serviceDetails: Record<string, {
@@ -245,6 +251,81 @@ export const serviceDetails: Record<string, {
       { q: "Cât durează o radiografie retroalveolară?", a: "Procedura durează câteva minute, iar imaginea este disponibilă instant, digital." },
       { q: "Care este diferența dintre radiografia retroalveolară și cea panoramică?", a: "Radiografia retroalveolară surprinde detaliat 1–3 dinți, fiind utilă pentru diagnostic țintit, în timp ce radiografia panoramică oferă o imagine de ansamblu a întregii arcade dentare." },
       { q: "Este nevoie de radiografie la fiecare control?", a: "Nu neapărat — frecvența este stabilită individual, în funcție de istoricul dentar și de riscul de apariție a cariilor sau a altor probleme." },
+    ],
+  },
+  "implant-dentar-all-on-4-6": {
+    metaTitle: "Implant Dentar All-on-4 / All-on-6 — Reabilitare pe Implanturi | ArtDent Slobozia",
+    metaDescription: "Implant dentar unic sau reabilitare completă pe implanturi (proteză pe bară cu 2 sau 4 implanturi) la ArtDent Slobozia, planificate digital, cu plan de tratament clar.",
+    intro: "Pentru un dinte lipsă sau pentru o arcadă complet edentată, implantul dentar oferă o soluție stabilă și de lungă durată. La ArtDent Slobozia, fiecare tratament pornește de la o evaluare radiologică amănunțită și un plan digital, astfel încât numărul de implanturi și tipul de lucrare finală să fie potrivite situației tale.",
+    paragraphs: [
+      "Implantul unic înlocuiește o rădăcină lipsă cu un șurub din titan, integrat în os, peste care se atașează un bont și o coroană finală — soluția cea mai apropiată de un dinte natural, fără a afecta dinții vecini sănătoși.",
+      "Pentru pacienții fără mulți dinți proprii pe o arcadă, o proteză pe bară susținută de 2 sau 4 implanturi (conceptul cunoscut popular drept „All-on-4” sau „All-on-6”) oferă stabilitate mult superioară unei proteze mobile clasice, fără să fie nevoie de un implant pentru fiecare dinte lipsă.",
+      "Fiecare caz este evaluat individual prin radiografie și, acolo unde e necesar, un plan 3D al osului disponibil, pentru a stabili exact câte implanturi sunt necesare și ce tip de lucrare finală se potrivește.",
+      "Perioada de integrare osoasă durează, în general, 3-6 luni, timp în care poți purta o lucrare provizorie, astfel încât să nu rămâi fără dinți pe parcursul tratamentului.",
+    ],
+    benefits: [
+      "Soluție stabilă, fără afectarea dinților vecini sănătoși",
+      "Plan de tratament digital, adaptat structurii osoase individuale",
+      "Proteză pe bară — stabilitate net superioară unei proteze mobile clasice",
+      "Lucrare provizorie pe perioada integrării osoase, acolo unde e indicat clinic",
+      "Rezultat cu aspect și funcție apropiate de dantura naturală",
+      "Monitorizare post-tratament și control periodic al implanturilor",
+    ],
+    faq: [
+      { q: "Care este diferența dintre un implant unic și o proteză pe bară cu implanturi?", a: "Implantul unic înlocuiește un singur dinte lipsă. Proteza pe bară este susținută de 2 sau 4 implanturi și înlocuiește o arcadă întreagă sau mai mulți dinți lipsă, oferind stabilitate mult mai bună decât o proteză mobilă clasică." },
+      { q: "Cât durează tratamentul complet cu implant?", a: "De la inserarea implantului până la lucrarea finală trec, în medie, 3-6 luni — timpul necesar integrării osoase. Durata exactă depinde de calitatea osului și de tipul de lucrare aleasă." },
+      { q: "Sunt candidat pentru implant dacă am pierdut mai mulți dinți?", a: "În multe cazuri, da — o proteză pe bară cu 2 sau 4 implanturi este exact soluția gândită pentru această situație. Candidatura se confirmă însă doar după o evaluare radiologică a osului disponibil." },
+      { q: "Implantul dentar doare?", a: "Intervenția se realizează sub anestezie locală, deci nu simți durere în timpul ei. Disconfortul post-operator este gestionabil cu medicația recomandată." },
+    ],
+  },
+  "proteze-dentare": {
+    metaTitle: "Proteze Dentare — Acrilice, Elastice, Pe Implant | ArtDent Slobozia",
+    metaDescription: "Proteze dentare acrilice, elastice sau susținute pe implant la ArtDent Slobozia, adaptate individual pentru confort și stabilitate în vorbire și masticație.",
+    intro: "Când mai mulți dinți lipsesc, o proteză dentară bine adaptată redă funcția de masticație, vorbirea clară și aspectul natural al zâmbetului. La ArtDent Slobozia, tipul de proteză se alege împreună cu tine, în funcție de situația clinică și de preferințe.",
+    paragraphs: [
+      "Proteza acrilică, parțială sau totală, rămâne o soluție accesibilă și eficientă pentru înlocuirea dinților lipsă, confecționată după amprenta exactă a arcadei tale pentru un fit confortabil.",
+      "Proteza elastică oferă un plus de flexibilitate și confort, fiind potrivită pentru pacienți cu sensibilitate la materialele rigide sau cu forme neregulate ale arcadei.",
+      "Pentru stabilitate superioară, o proteză poate fi susținută pe implanturi dentare (proteză pe bară), eliminând mișcarea sau alunecarea specifică protezelor mobile clasice.",
+      "Indiferent de tipul ales, o proteză necesită ajustări periodice — gingia și osul se remodelează în timp, iar controalele regulate mențin un fit corect și confortabil.",
+    ],
+    benefits: [
+      "Restabilirea masticației și a vorbirii clare",
+      "Confecționare individuală, după amprenta exactă a arcadei",
+      "Opțiune elastică pentru confort sporit și sensibilitate redusă",
+      "Stabilitate superioară cu proteza susținută pe implant",
+      "Aspect natural, adaptat trăsăturilor feței",
+      "Reparații și ajustări disponibile în clinică",
+    ],
+    faq: [
+      { q: "Cât durează adaptarea la o proteză dentară nouă?", a: "Perioada de acomodare durează, în general, câteva săptămâni. Pot apărea ajustări necesare în această perioadă, complet normale, pe măsură ce gingia se adaptează." },
+      { q: "Care este diferența dintre proteza acrilică și cea elastică?", a: "Proteza acrilică este rigidă și foarte accesibilă ca preț. Proteza elastică e mai flexibilă, mai confortabilă pentru gingii sensibile, dar are un cost ceva mai ridicat." },
+      { q: "O proteză pe implant este mai stabilă decât una clasică?", a: "Da — fiind ancorată pe implanturi, proteza pe bară nu alunecă și nu se mișcă în timpul vorbirii sau al mesei, spre deosebire de o proteză mobilă clasică." },
+      { q: "Protezele dentare necesită întreținere specială?", a: "Da — igienizare zilnică riguroasă și controale periodice, pentru a verifica fitul și starea gingiei de dedesubt." },
+    ],
+  },
+  "coroane-dentare": {
+    metaTitle: "Coroane Dentare — Ceramică, Metalo-Ceramică, Pe Implant | ArtDent Slobozia",
+    metaDescription: "Coroane dentare ceramice, metalo-ceramice sau pe implant la ArtDent Slobozia, pentru refacerea formei, culorii și funcției dintelui afectat.",
+    intro: "O coroană dentară acoperă și protejează un dinte grav afectat de carie, fracturat sau tratat endodontic, redându-i forma, rezistența și aspectul natural. Alegerea materialului potrivit depinde de poziția dintelui și de cerințele estetice.",
+    paragraphs: [
+      "Coroana ceramică integrală oferă cel mai natural aspect, translucența și culoarea imitând fidel smalțul natural — alegerea preferată pentru dinții frontali, vizibili la zâmbet.",
+      "Coroana metalo-ceramică combină rezistența unei structuri metalice cu un strat estetic de ceramică, fiind o soluție durabilă pentru dinții laterali, supuși unei forțe masticatorii mai mari.",
+      "Pentru dinții trataţi prin implant, coroana pe implant se atașează pe bontul protetic, finalizând tratamentul implantar cu un rezultat stabil și cu aspect natural.",
+      "Înainte de coroana definitivă, poți purta o coroană temporară, care protejează dintele pregătit și menține aspectul estetic pe parcursul confecționării lucrării finale.",
+    ],
+    benefits: [
+      "Refacerea formei și rezistenței dintelui afectat",
+      "Aspect natural, la culoarea și translucența dinților învecinați",
+      "Opțiune metalo-ceramică pentru rezistență sporită pe dinții laterali",
+      "Coroană provizorie pentru protecție și estetică imediată",
+      "Finalizare stabilă a tratamentului implantar",
+      "Durabilitate de mulți ani cu îngrijire corectă",
+    ],
+    faq: [
+      { q: "Când este necesară o coroană dentară?", a: "Atunci când un dinte este grav afectat de carie, fracturat sau a fost tratat endodontic și structura rămasă e prea slăbită pentru o simplă obturație." },
+      { q: "Cât durează confecționarea unei coroane?", a: "De obicei sunt necesare 2 ședințe — una pentru pregătirea dintelui și amprentare, cu o coroană provizorie între timp, și una pentru montarea coroanei finale." },
+      { q: "Cât timp ține o coroană dentară?", a: "Cu îngrijire corectă și controale periodice, o coroană poate dura 10-15 ani sau mai mult, în funcție de material și de forțele masticatorii la care e supusă." },
+      { q: "Coroana ceramică sau cea metalo-ceramică — care e mai potrivită?", a: "Pentru dinții frontali, vizibili, ceramica integrală oferă aspectul cel mai natural. Pentru dinții laterali, supuși unor forțe mai mari, metalo-ceramica oferă un plus de rezistență." },
     ],
   },
 };
@@ -518,6 +599,117 @@ export const teamMembers = [
 
 // Cele 3 afișate pe homepage, sub medicul coordonator — restul echipei e listat integral pe /echipa.
 export const featuredTeamMembers = [teamMembers[0], teamMembers[1], teamMembers[2]];
+
+export type Guide = {
+  slug: string;
+  title: string;
+  metaDescription: string;
+  excerpt: string;
+  paragraphs: string[];
+  relatedServiceSlug?: string;
+  relatedServiceLabel?: string;
+};
+
+export const guides: Guide[] = [
+  {
+    slug: "sensibilitate-dentara-cauze-si-solutii",
+    title: "Sensibilitate dentară: cauze și soluții",
+    metaDescription: "De ce apare sensibilitatea dentară la rece, cald sau dulce și ce soluții există. Ghid ArtDent Slobozia.",
+    excerpt: "De ce simți usturime la rece, cald sau dulce și ce poți face în privința asta.",
+    paragraphs: [
+      "Sensibilitatea dentară apare atunci când dentina — stratul de sub smalț — rămâne expusă și transmite mai ușor stimulii termici sau chimici către nervul dintelui. Cel mai frecvent, resimți acest disconfort la alimente sau băuturi reci, calde, dulci sau acide.",
+      "Cauzele variază: retracție gingivală, eroziunea smalțului dintr-un periaj prea agresiv, bruxism (scrâșnitul dinților), carii incipiente sau chiar o obturație recentă care necesită timp de acomodare.",
+      "În funcție de cauză, soluțiile pot include o pastă de dinți desensibilizantă, aplicarea unui lac fluorurat în cabinet, tratarea unei carii dacă aceasta e sursa reală a disconfortului, sau o gutieră de protecție dacă sensibilitatea vine din bruxism.",
+      "Dacă sensibilitatea persistă mai mult de câteva zile sau se agravează, cel mai sigur pas este o consultație — o durere care pare „doar sensibilitate” poate ascunde uneori o carie sau o problemă care necesită tratament.",
+    ],
+    relatedServiceSlug: "profilaxie",
+    relatedServiceLabel: "Profilaxie",
+  },
+  {
+    slug: "bruxism-ce-este-si-cum-se-trateaza",
+    title: "Ce este bruxismul și cum se tratează",
+    metaDescription: "Bruxismul (scrâșnitul dinților) — cauze, semne de recunoscut și soluții de protecție, inclusiv gutiere de noapte. Ghid ArtDent Slobozia.",
+    excerpt: "Scrâșnitul dinților în somn — cum îl recunoști și ce soluții de protecție există.",
+    paragraphs: [
+      "Bruxismul este scrâșnitul sau încleștarea involuntară a dinților, cel mai adesea în timpul somnului. Mulți oameni nici nu știu că au bruxism până când un dentist observă uzura caracteristică a smalțului sau până apar dureri de maxilar și cap la trezire.",
+      "Printre semnele frecvente se numără: dinți tociți sau ciobiți fără o cauză aparentă, sensibilitate dentară crescută, dureri ale mușchilor maxilarului, sau chiar dureri de cap matinale resimțite în zona tâmplelor.",
+      "Cauzele sunt adesea legate de stres sau anxietate, dar și de o ocluzie (mușcătură) neuniformă. Netratat pe termen lung, bruxismul poate duce la uzura accelerată a dinților și, în timp, la probleme ale articulației temporo-mandibulare.",
+      "Soluția cea mai des recomandată este o gutieră de protecție de noapte, confecționată individual, care absoarbe forța scrâșnitului și protejează smalțul dinților. La ArtDent Slobozia, gutierele pentru bruxism sunt confecționate pe baza unei amprente personalizate.",
+    ],
+    relatedServiceSlug: "tratamente-generale",
+    relatedServiceLabel: "Tratamente Generale",
+  },
+  {
+    slug: "alimente-care-pateaza-dintii",
+    title: "Alimente care pătează dinții",
+    metaDescription: "Care sunt alimentele și băuturile care pătează smalțul dentar în timp și cum reduci efectul lor. Ghid ArtDent Slobozia.",
+    excerpt: "Ce mănânci și bei zilnic poate păta smalțul în timp — iată la ce să fii atent.",
+    paragraphs: [
+      "Culoarea naturală a dinților se poate schimba treptat sub acțiunea repetată a unor alimente și băuturi cu pigmenți puternici sau aciditate ridicată. Cafeaua, ceaiul negru și vinul roșu sunt printre cei mai cunoscuți „vinovați”, dar lista e mai lungă.",
+      "Sosurile intens colorate (soia, roșii, curry), fructele de pădure și băuturile acidulate contribuie de asemenea la îngălbenirea treptată a smalțului, mai ales combinate cu o igienă orală neregulată.",
+      "Fumatul rămâne una dintre cele mai frecvente cauze ale petelor dentare persistente, adesea mai greu de îndepărtat doar prin periaj obișnuit.",
+      "Câteva obiceiuri simple ajută: clătirea gurii cu apă după consumul acestor alimente, folosirea unui pai pentru băuturile colorate și un periaj corect, de două ori pe zi. Pentru petele deja instalate, o igienizare profesională (detartraj și air-flow) sau o albire în cabinet redau luminozitatea naturală a smalțului.",
+    ],
+    relatedServiceSlug: "cosmetica-dentara",
+    relatedServiceLabel: "Cosmetică Dentară",
+  },
+  {
+    slug: "sarcina-si-sanatatea-orala",
+    title: "Sarcina și sănătatea orală",
+    metaDescription: "De ce sănătatea orală merită atenție specială în timpul sarcinii și ce tratamente sunt sigure. Ghid ArtDent Slobozia.",
+    excerpt: "De ce merită atenție specială sănătatea gingiilor și a dinților în timpul sarcinii.",
+    paragraphs: [
+      "Modificările hormonale din sarcină cresc sensibilitatea gingiilor, care pot deveni mai predispuse la inflamație și sângerare — o afecțiune cunoscută drept „gingivita de sarcină”. Igiena orală riguroasă capătă și mai multă importanță în această perioadă.",
+      "Contrar unei temeri răspândite, controalele stomatologice de rutină și tratamentele necesare (obturații, detartraj) sunt sigure în timpul sarcinii, mai ales dacă sunt programate în trimestrul al doilea. Comunicarea deschisă cu medicul despre stadiul sarcinii permite adaptarea corectă a oricărei proceduri.",
+      "Grețurile matinale frecvente pot expune smalțul la aciditate crescută — clătirea gurii cu apă (nu periajul imediat) după un episod de vărsături reduce riscul de eroziune a smalțului.",
+      "Un control stomatologic încă din primele luni de sarcină ajută la depistarea din timp a oricărei probleme și la stabilirea unui plan de îngrijire adaptat acestei perioade.",
+    ],
+    relatedServiceSlug: "profilaxie",
+    relatedServiceLabel: "Profilaxie",
+  },
+  {
+    slug: "diabet-si-sanatatea-orala",
+    title: "Diabetul și sănătatea orală",
+    metaDescription: "Legătura dintre diabet și sănătatea gingiilor, și de ce controalele stomatologice regulate contează mai mult pentru pacienții diabetici. Ghid ArtDent Slobozia.",
+    excerpt: "Legătura, bine documentată medical, dintre diabet și sănătatea gingiilor.",
+    paragraphs: [
+      "Diabetul și sănătatea orală sunt strâns legate: un nivel de glicemie prost controlat crește riscul de boală parodontală (afectarea gingiei și a osului de susținere a dinților), iar, la rândul ei, o infecție gingivală netratată poate face mai dificil controlul glicemiei.",
+      "Pacienții cu diabet au un risc mai mare de gingivită, infecții orale cu vindecare mai lentă și gură uscată — toate acestea cresc șansele de apariție a cariilor și a bolii parodontale dacă nu sunt monitorizate atent.",
+      "Controalele stomatologice mai frecvente (la 3-4 luni, în loc de 6) sunt adesea recomandate pacienților diabetici, tocmai pentru depistarea din timp a oricărui semn de inflamație gingivală.",
+      "Este important să comunici medicului dentist dacă ai diabet și cum este controlată boala — această informație influențează planificarea corectă a oricărei intervenții, mai ales a celor chirurgicale.",
+    ],
+    relatedServiceSlug: "profilaxie",
+    relatedServiceLabel: "Profilaxie",
+  },
+  {
+    slug: "boli-cardiovasculare-si-sanatatea-orala",
+    title: "Boli cardiovasculare și sănătatea orală",
+    metaDescription: "Ce legătură există între boala parodontală și sănătatea cardiovasculară și de ce contează îngrijirea gingiilor. Ghid ArtDent Slobozia.",
+    excerpt: "Ce legătură există între sănătatea gingiilor și sănătatea inimii.",
+    paragraphs: [
+      "Cercetările medicale au identificat o asociere între boala parodontală (inflamația cronică a gingiei și osului de susținere) și un risc crescut de afecțiuni cardiovasculare, deși mecanismul exact este încă studiat.",
+      "O explicație plauzibilă este că inflamația cronică din gură poate contribui la inflamația generală din organism, un factor implicat și în bolile cardiovasculare.",
+      "Pentru pacienții care au deja o afecțiune cardiacă diagnosticată, este important să comunice acest lucru medicului dentist înainte de orice intervenție, mai ales una chirurgicală, pentru o planificare corectă și în siguranță.",
+      "Menținerea unei sănătăți gingivale bune, prin igienă zilnică riguroasă și controale periodice, rămâne un pas simplu și accesibil, cu beneficii care merg dincolo de sănătatea orală.",
+    ],
+    relatedServiceSlug: "profilaxie",
+    relatedServiceLabel: "Profilaxie",
+  },
+  {
+    slug: "cum-alegi-periuta-si-pasta-de-dinti",
+    title: "Cum alegi periuța și pasta de dinți potrivită",
+    metaDescription: "Ghid practic pentru alegerea periuței de dinți și a pastei potrivite nevoilor tale. Sfaturi ArtDent Slobozia.",
+    excerpt: "Ghid practic: ce periuță și ce pastă de dinți se potrivesc nevoilor tale.",
+    paragraphs: [
+      "O periuță cu peri moi (soft) este recomandată pentru majoritatea adulților — perii duri pot eroda smalțul și irita gingia în timp, mai ales dacă periajul e făcut cu presiune mare.",
+      "Periuța electrică poate ajuta la o curățare mai uniformă, mai ales pentru cei care tind să perieze prea repede sau prea agresiv, dar o periuță manuală folosită corect (mișcări circulare, blânde, minimum 2 minute) este la fel de eficientă.",
+      "Pentru pasta de dinți, fluorul rămâne ingredientul cel mai important în prevenirea cariilor. Pastele desensibilizante ajută dacă ai dinți sensibili, iar cele cu formulă de albire pot ajuta cu pete de suprafață, dar nu înlocuiesc o albire profesională pentru rezultate vizibile.",
+      "Periuța se schimbă la 3 luni sau mai devreme dacă perii sunt vizibil răsfirați — o periuță uzată curăță mult mai puțin eficient, chiar dacă arată aparent „bine”.",
+    ],
+    relatedServiceSlug: "profilaxie",
+    relatedServiceLabel: "Profilaxie",
+  },
+];
 
 export const faqs = [
   { q: "Cât durează un tratament cu implant dentar?", a: "De la inserarea implantului până la coroana finală trec în general 3–6 luni, timp necesar integrării osoase. În cazurile favorabile se poate atașa o coroană provizorie chiar în ziua intervenției, astfel încât să nu rămâi fără dinte." },

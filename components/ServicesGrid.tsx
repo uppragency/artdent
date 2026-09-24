@@ -10,6 +10,9 @@ const icons: Record<number, React.ReactNode> = {
   3: <path d="M5 19L15 9M15 9c1-1 4-3.5 5-4.5M15 9l2 2M9 13l2 2" />,
   4: <path d="M12 3c3 4 6 7.5 6 11a6 6 0 0 1-12 0c0-3.5 3-7 6-11z" />,
   5: <path d="M4 8V4h4M20 8V4h-4M4 16v4h4M20 16v4h-4M9 12h6" />,
+  6: <path d="M12 2v6M12 8c-3 0-5 2-5 5s2 7 5 7 5-4 5-7-2-5-5-5z" />,
+  7: <path d="M6 8c0-2.2 2.7-4 6-4s6 1.8 6 4-1 3-1 5 .5 6-2 6-2-3-3-3-.5 3-3 3-2-4-2-6-1-2.8-1-5z" />,
+  8: <path d="M5 10h14M6 10c0 5 1.5 9 3 9h6c1.5 0 3-4 3-9M9 6h6l1 4H8l1-4z" />,
 };
 
 export function ServicesGrid() {

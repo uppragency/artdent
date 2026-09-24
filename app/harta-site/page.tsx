@@ -1,4 +1,4 @@
-import { services, teamMembers, doctor } from "@/lib/data";
+import { services, teamMembers, doctor, guides } from "@/lib/data";
 import { PageHero } from "@/components/PageHero";
 
 export const metadata = { title: "Harta site — ArtDent Slobozia", alternates: { canonical: "/harta-site" } };
@@ -24,6 +24,16 @@ const groups: { title: string; links: { label: string; href: string }[] }[] = [
   {
     title: "Echipă",
     links: [doctor, ...teamMembers].map((m) => ({ label: m.name, href: `/echipa/${m.slug}` })),
+  },
+  {
+    title: "Ghiduri",
+    links: [
+      { label: "Toate ghidurile", href: "/ghiduri" },
+      ...guides.map((g) => ({ label: g.title, href: `/ghiduri/${g.slug}` })),
+      { label: "Frica de dentist", href: "/frica-de-dentist" },
+      { label: "Prima vizită a copilului la dentist", href: "/prima-vizita-copil-la-dentist" },
+      { label: "Îngrijire dentară pentru vârstnici", href: "/ingrijire-dentara-varstnici" },
+    ],
   },
   {
     title: "Informații legale",
