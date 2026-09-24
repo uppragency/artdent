@@ -21,7 +21,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
   const detail = serviceDetails[slug];
   if (!service || !detail) notFound();
 
-  const otherServices = services.filter((s) => s.slug !== params.slug);
+  const otherServices = services.filter((s) => s.slug !== slug);
 
   const faqJsonLd = {
     "@context": "https://schema.org",
