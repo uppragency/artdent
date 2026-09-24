@@ -10,9 +10,12 @@ export const site = {
   email: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "programari@artdentslobozia.ro", // de completat
   address: "Al. Feroviarului 1, Slobozia, Ialomița, 920030",
   hours: "Luni – Vineri, 09:00 – 19:00",
-  cui: "RO00000000", // de completat
+  legalName: "C.M.I ARTDENT - DR. ZUPCU M. MIHAELA",
+  cui: "20785382",
   mapsEmbed: "https://maps.google.com/maps?q=Al.+Feroviarului+1,+Slobozia&z=15&output=embed",
   googleReviewsUrl: "https://www.google.com/search?q=artdent+slobozia+recenzii",
+  instagramUrl: "https://www.instagram.com/artdent_dr_zupcu/",
+  facebookUrl: "https://www.facebook.com/profile.php?id=100057326415385",
 };
 
 export const nav = [

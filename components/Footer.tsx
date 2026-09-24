@@ -16,9 +16,8 @@ export function Footer() {
             Clinică stomatologică cu servicii complete: implantologie, ortodonție, estetică dentară și profilaxie.
           </p>
           <div style={{ display: "flex", gap: 10, paddingTop: 4 }}>
-            {["FB", "IG", "TT"].map((s) => (
-              <a key={s} href="#" className="social-circle" style={{ width: 38, height: 38, borderRadius: "50%", display: "grid", placeItems: "center", fontSize: 12, fontWeight: 600 }}>{s}</a>
-            ))}
+            <a href={site.facebookUrl} target="_blank" rel="noreferrer" aria-label="Facebook" className="social-circle" style={{ width: 38, height: 38, borderRadius: "50%", display: "grid", placeItems: "center", fontSize: 12, fontWeight: 600 }}>FB</a>
+            <a href={site.instagramUrl} target="_blank" rel="noreferrer" aria-label="Instagram" className="social-circle" style={{ width: 38, height: 38, borderRadius: "50%", display: "grid", placeItems: "center", fontSize: 12, fontWeight: 600 }}>IG</a>
           </div>
         </div>
 
@@ -55,11 +54,11 @@ export function Footer() {
 
       <div style={{ maxWidth: 1280, margin: "0 auto", padding: "clamp(24px, 3vw, 36px) clamp(16px, 3vw, 40px) 0" }}>
         <div style={{ borderTop: "1px solid var(--line)", paddingTop: 20, display: "flex", flexWrap: "wrap", gap: "10px 24px", justifyContent: "space-between", fontSize: 12.5, color: "var(--muted)" }}>
-          <span>© 2026 ArtDent Slobozia. Toate drepturile rezervate.</span>
+          <span>© 2026 {site.legalName}. CUI: {site.cui}. Toate drepturile rezervate.</span>
           <span style={{ display: "flex", flexWrap: "wrap", gap: "10px 20px" }}>
-            <span>CUI: {site.cui}</span>
-            <a href="/contact" style={{ color: "var(--muted)" }}>Termeni și condiții</a>
-            <a href="/contact" style={{ color: "var(--muted)" }}>Politica de confidențialitate</a>
+            <a href="/termeni-si-conditii" style={{ color: "var(--muted)" }}>Termeni și condiții</a>
+            <a href="/politica-de-confidentialitate" style={{ color: "var(--muted)" }}>Politica de confidențialitate</a>
+            <a href="/politica-cookie-uri" style={{ color: "var(--muted)" }}>Politica de cookie-uri</a>
           </span>
         </div>
       </div>

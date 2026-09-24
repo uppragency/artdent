@@ -6,6 +6,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import { MobileStickyBar } from "@/components/MobileStickyBar";
+import { CookieConsent } from "@/components/CookieConsent";
 
 export const metadata: Metadata = {
   title: "ArtDent Slobozia — Clinică stomatologică: implantologie, ortodonție, estetică dentară",
@@ -52,6 +53,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <BookingModal />
           <WhatsAppFloat />
           <MobileStickyBar />
+          <CookieConsent />
         </BookingProvider>
       </body>
     </html>

@@ -151,6 +151,17 @@ h2.font-display::after {
 
 .tooth-motif { position: absolute; opacity: 0.05; pointer-events: none; }
 
+.cookie-bar {
+  position: fixed; left: 20px; bottom: 20px; z-index: 90;
+  width: calc(100% - 40px); max-width: 340px;
+}
+@media (max-width: 900px) {
+  .cookie-bar {
+    left: 50%; bottom: calc(74px + env(safe-area-inset-bottom, 0px) + 90px);
+    transform: translateX(-50%); width: calc(100% - 32px); max-width: 380px;
+  }
+}
+
 .nav-link-active { color: #fff !important; position: relative; }
 .nav-link-active::after {
   content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px; background: #83D3E4; border-radius: 2px;
