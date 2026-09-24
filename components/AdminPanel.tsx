@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { getPushStatus, subscribeToPush } from "@/lib/push-client";
 
 type Submission = {
   id: string;
@@ -11,6 +12,7 @@ type Submission = {
   source_page: string | null;
   status: string;
   note: string | null;
+  archived: boolean | null;
   created_at: string;
 };
 
@@ -46,6 +48,26 @@ export function AdminPanel() {
   const [search, setSearch] = useState("");
   const [dateFrom, setDateFrom] = useState("");
   const [dateTo, setDateTo] = useState("");
+  const [statusFilter, setStatusFilter] = useState("toate");
+  const [sortBy, setSortBy] = useState<"data_desc" | "data_asc" | "status">("data_desc");
+  const [showArchived, setShowArchived] = useState(false);
+  const [pushStatus, setPushStatus] = useState<"granted" | "denied" | "default" | "unsupported">("default");
+  const [pushBusy, setPushBusy] = useState(false);
+
+  useEffect(() => {
+    getPushStatus().then(setPushStatus);
+  }, []);
+
+  async function handleEnablePush() {
+    setPushBusy(true);
+    const res = await subscribeToPush();
+    setPushBusy(false);
+    const next = await getPushStatus();
+    setPushStatus(next);
+    if (!res.ok && res.reason === "not_configured") {
+      alert("Notificările push nu sunt configurate încă pe server (lipsesc cheile VAPID).");
+    }
+  }
 
   async function loadSubmissions() {
     const res = await fetch("/api/admin/submissions");
@@ -99,6 +121,15 @@ export function AdminPanel() {
     });
   }
 
+  async function toggleArchived(id: string, archived: boolean) {
+    setSubmissions((prev) => prev.map((s) => (s.id === id ? { ...s, archived } : s)));
+    await fetch(`/api/admin/submissions/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ archived }),
+    });
+  }
+
   const noteTimers = useState(() => new Map<string, ReturnType<typeof setTimeout>>())[0];
 
   function updateNoteLocal(id: string, note: string) {
@@ -131,16 +162,39 @@ export function AdminPanel() {
     return { today, thisMonth, stale, lastMonth, monthOverMonth };
   }, [submissions]);
 
+  const monthlyChart = useMemo(() => {
+    const now = new Date();
+    const months: { label: string; count: number }[] = [];
+    for (let i = 5; i >= 0; i--) {
+      const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+      const count = submissions.filter((s) => {
+        const sd = new Date(s.created_at);
+        return sd.getMonth() === d.getMonth() && sd.getFullYear() === d.getFullYear();
+      }).length;
+      months.push({ label: d.toLocaleDateString("ro-RO", { month: "short" }), count });
+    }
+    const max = Math.max(1, ...months.map((m) => m.count));
+    return { months, max };
+  }, [submissions]);
+
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
-    return submissions.filter((s) => {
+    const list = submissions.filter((s) => {
+      if (!showArchived && s.archived) return false;
       if (q && !(s.name?.toLowerCase().includes(q) || s.phone?.toLowerCase().includes(q))) return false;
+      if (statusFilter !== "toate" && s.status !== statusFilter) return false;
       const d = new Date(s.created_at);
       if (dateFrom && d < new Date(dateFrom)) return false;
       if (dateTo && d > new Date(dateTo + "T23:59:59")) return false;
       return true;
     });
-  }, [submissions, search, dateFrom, dateTo]);
+    const sorted = [...list].sort((a, b) => {
+      if (sortBy === "data_asc") return new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
+      if (sortBy === "status") return a.status.localeCompare(b.status);
+      return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+    });
+    return sorted;
+  }, [submissions, search, dateFrom, dateTo, statusFilter, sortBy, showArchived]);
 
   if (status === "checking") {
     return <p style={{ padding: 40, fontSize: 14, color: "var(--muted)" }}>Se încarcă…</p>;
@@ -198,7 +252,17 @@ export function AdminPanel() {
         <h1 className="font-display" style={{ margin: 0, fontSize: 28, color: "var(--teal-deep)" }}>
           Programări primite
         </h1>
-        <div style={{ display: "flex", gap: 10 }}>
+        <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+          {pushStatus !== "unsupported" && pushStatus !== "granted" && (
+            <button onClick={handleEnablePush} disabled={pushBusy} className="btn-outline-dark" style={{ fontFamily: "inherit", fontSize: 13.5, fontWeight: 600, padding: "10px 16px", borderRadius: 4, background: "none", cursor: "pointer" }}>
+              {pushBusy ? "Se activează…" : "Activează notificări push"}
+            </button>
+          )}
+          {pushStatus === "granted" && (
+            <span style={{ fontSize: 12.5, fontWeight: 600, color: "oklch(0.5 0.12 155)", alignSelf: "center", padding: "0 4px" }}>
+              ✓ Notificări push active
+            </span>
+          )}
           <button onClick={loadSubmissions} className="btn-outline-dark" style={{ fontFamily: "inherit", fontSize: 13.5, fontWeight: 600, padding: "10px 16px", borderRadius: 4, background: "none", cursor: "pointer" }}>
             Reîmprospătează
           </button>
@@ -241,13 +305,47 @@ export function AdminPanel() {
         </div>
       </div>
 
+      {/* Grafic lunar */}
+      <div style={{ border: "1px solid var(--line)", borderRadius: 8, padding: "18px 20px", background: "var(--card)", marginBottom: 24 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: "var(--muted)", marginBottom: 14 }}>Evoluție lunară (ultimele 6 luni)</div>
+        <div style={{ display: "flex", alignItems: "flex-end", gap: 14, height: 100 }}>
+          {monthlyChart.months.map((m) => (
+            <div key={m.label} style={{ display: "grid", justifyItems: "center", gap: 6, flex: 1 }}>
+              <div style={{ fontSize: 12, fontWeight: 700, color: "var(--teal-deep)" }}>{m.count}</div>
+              <div style={{
+                width: "100%", maxWidth: 36, borderRadius: "3px 3px 0 0", background: "var(--teal-600)",
+                height: `${Math.max(4, (m.count / monthlyChart.max) * 70)}px`,
+              }} />
+              <div style={{ fontSize: 11, color: "var(--muted)", textTransform: "capitalize" }}>{m.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* Filtre */}
-      <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginBottom: 18 }}>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginBottom: 18, alignItems: "center" }}>
         <input
           type="text" value={search} onChange={(e) => setSearch(e.target.value)}
           placeholder="Caută după nume sau telefon…"
           style={{ fontFamily: "inherit", fontSize: 14, padding: "10px 14px", borderRadius: 4, border: "1px solid var(--line)", minWidth: 220, flex: "1 1 220px" }}
         />
+        <select
+          value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}
+          style={{ fontFamily: "inherit", fontSize: 14, padding: "10px 14px", borderRadius: 4, border: "1px solid var(--line)" }}
+        >
+          <option value="toate">Toate statusurile</option>
+          {STATUS_OPTIONS.map((opt) => (
+            <option key={opt.value} value={opt.value}>{opt.label}</option>
+          ))}
+        </select>
+        <select
+          value={sortBy} onChange={(e) => setSortBy(e.target.value as typeof sortBy)}
+          style={{ fontFamily: "inherit", fontSize: 14, padding: "10px 14px", borderRadius: 4, border: "1px solid var(--line)" }}
+        >
+          <option value="data_desc">Cele mai recente</option>
+          <option value="data_asc">Cele mai vechi</option>
+          <option value="status">După status</option>
+        </select>
         <input
           type="date" value={dateFrom} onChange={(e) => setDateFrom(e.target.value)}
           style={{ fontFamily: "inherit", fontSize: 14, padding: "10px 14px", borderRadius: 4, border: "1px solid var(--line)" }}
@@ -256,9 +354,13 @@ export function AdminPanel() {
           type="date" value={dateTo} onChange={(e) => setDateTo(e.target.value)}
           style={{ fontFamily: "inherit", fontSize: 14, padding: "10px 14px", borderRadius: 4, border: "1px solid var(--line)" }}
         />
-        {(search || dateFrom || dateTo) && (
+        <label style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 13, color: "var(--muted)" }}>
+          <input type="checkbox" checked={showArchived} onChange={(e) => setShowArchived(e.target.checked)} />
+          Arată arhivate
+        </label>
+        {(search || dateFrom || dateTo || statusFilter !== "toate") && (
           <button
-            onClick={() => { setSearch(""); setDateFrom(""); setDateTo(""); }}
+            onClick={() => { setSearch(""); setDateFrom(""); setDateTo(""); setStatusFilter("toate"); }}
             className="btn-outline-dark"
             style={{ fontFamily: "inherit", fontSize: 13.5, fontWeight: 600, padding: "10px 16px", borderRadius: 4, background: "none", cursor: "pointer" }}
           >
@@ -280,6 +382,7 @@ export function AdminPanel() {
                 <th style={{ textAlign: "left", padding: "12px 16px" }}>Pagină</th>
                 <th style={{ textAlign: "left", padding: "12px 16px" }}>Status</th>
                 <th style={{ textAlign: "left", padding: "12px 16px" }}>Notă internă</th>
+                <th style={{ textAlign: "left", padding: "12px 16px" }}></th>
               </tr>
             </thead>
             <tbody>
@@ -346,6 +449,15 @@ export function AdminPanel() {
                           border: "1px solid var(--line)", width: "100%", resize: "vertical", color: "var(--ink)",
                         }}
                       />
+                    </td>
+                    <td style={{ padding: "12px 16px", whiteSpace: "nowrap" }}>
+                      <button
+                        onClick={() => toggleArchived(s.id, !s.archived)}
+                        className="btn-outline-dark"
+                        style={{ fontFamily: "inherit", fontSize: 12, fontWeight: 600, padding: "6px 12px", borderRadius: 4, background: "none", cursor: "pointer" }}
+                      >
+                        {s.archived ? "Dezarhivează" : "Arhivează"}
+                      </button>
                     </td>
                   </tr>
                 );

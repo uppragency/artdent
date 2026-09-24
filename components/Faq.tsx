@@ -20,9 +20,14 @@ export function Faq() {
           <p style={{ margin: 0, fontSize: 15.5, lineHeight: 1.65, color: "var(--muted-2)", maxWidth: "40ch" }}>
             Dacă nu găsești răspunsul aici, sună-ne. Prima discuție este gratuită și fără obligații.
           </p>
-          <a href={site.phoneHref} className="btn-outline-gold" style={{ fontSize: 15.5, fontWeight: 600, padding: "15px 26px", borderRadius: 4, minHeight: 52, display: "flex", alignItems: "center" }}>
-            Sună acum · {site.phone}
-          </a>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
+            <a href={site.phoneHref} className="btn-outline-gold" style={{ fontSize: 15.5, fontWeight: 600, padding: "15px 26px", borderRadius: 4, minHeight: 52, display: "flex", alignItems: "center" }}>
+              Sună acum · {site.phone}
+            </a>
+            <a href="/intrebari-frecvente" className="btn-outline-dark" style={{ fontSize: 15.5, fontWeight: 600, padding: "15px 26px", borderRadius: 4, minHeight: 52, display: "flex", alignItems: "center" }}>
+              Toate întrebările frecvente →
+            </a>
+          </div>
         </div>
         <div style={{ display: "grid", width: "100%" }}>
           {faqs.map((f, i) => {

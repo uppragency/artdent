@@ -16,14 +16,14 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
   }
 
   const { id } = await params;
-  let body: { status?: string; note?: string };
+  let body: { status?: string; note?: string; archived?: boolean };
   try {
     body = await req.json();
   } catch {
     return NextResponse.json({ error: "invalid_request" }, { status: 400 });
   }
 
-  const update: { status?: string; note?: string } = {};
+  const update: { status?: string; note?: string; archived?: boolean } = {};
 
   if (body.status !== undefined) {
     if (!VALID_STATUSES.includes(body.status)) {
@@ -34,6 +34,10 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
 
   if (body.note !== undefined) {
     update.note = String(body.note).slice(0, 2000);
+  }
+
+  if (body.archived !== undefined) {
+    update.archived = Boolean(body.archived);
   }
 
   if (Object.keys(update).length === 0) {

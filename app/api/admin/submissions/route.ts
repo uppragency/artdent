@@ -20,7 +20,7 @@ export async function GET(req: NextRequest) {
   const supabaseAdmin = getSupabaseAdmin();
   const { data, error } = await supabaseAdmin
     .from("contact_submissions")
-    .select("id, name, phone, email, message, source_page, status, note, created_at")
+    .select("id, name, phone, email, message, source_page, status, note, archived, created_at")
     .order("created_at", { ascending: false });
 
   if (error) {

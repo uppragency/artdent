@@ -28,10 +28,7 @@ export function Footer() {
             { label: "Despre noi", href: "/despre" },
             { label: "Prețuri", href: "/preturi" },
             { label: "Întrebări frecvente", href: "/intrebari-frecvente" },
-            { label: "Ghiduri", href: "/ghiduri" },
-            { label: "Frica de dentist", href: "/frica-de-dentist" },
-            { label: "Prima vizită a copilului la dentist", href: "/prima-vizita-copil-la-dentist" },
-            { label: "Îngrijire dentară pentru vârstnici", href: "/ingrijire-dentara-varstnici" },
+            { label: "Verifică programarea", href: "/verifica-programare" },
           ].map((l, i, arr) => (
             <a key={l.label} href={l.href} className="footer-link" style={{
               fontSize: 15, fontWeight: 500, padding: "13px 0", borderTop: "1px solid var(--line)",

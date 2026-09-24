@@ -15,6 +15,8 @@ const groups: { title: string; links: { label: string; href: string }[] }[] = [
       { label: "Testimoniale & rezultate", href: "/testimoniale" },
       { label: "Întrebări frecvente", href: "/intrebari-frecvente" },
       { label: "Contact", href: "/contact" },
+      { label: "Dentist Slobozia", href: "/dentist-slobozia" },
+      { label: "Urgențe dentare", href: "/urgente-dentare" },
     ],
   },
   {
@@ -33,6 +35,8 @@ const groups: { title: string; links: { label: string; href: string }[] }[] = [
       { label: "Frica de dentist", href: "/frica-de-dentist" },
       { label: "Prima vizită a copilului la dentist", href: "/prima-vizita-copil-la-dentist" },
       { label: "Îngrijire dentară pentru vârstnici", href: "/ingrijire-dentara-varstnici" },
+      { label: "Prima consultație (adulți)", href: "/prima-consultatie-adulti" },
+      { label: "Traumatism dentar", href: "/traumatism-dentar" },
     ],
   },
   {

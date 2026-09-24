@@ -79,6 +79,12 @@ export default function DesprePage() {
             Vezi întreaga echipă
           </a>
         </div>
+
+        <div style={{ marginTop: 32, borderTop: "1px solid var(--line)", paddingTop: 24, textAlign: "center" }}>
+          <p style={{ margin: 0, fontSize: 13.5, lineHeight: 1.65, color: "var(--muted)", maxWidth: "56ch", marginLeft: "auto", marginRight: "auto" }}>
+            Toți medicii din echipa ArtDent sunt membri activi ai Colegiului Medicilor Dentiști din România (CMDR) și practică în conformitate cu normele profesionale în vigoare.
+          </p>
+        </div>
       </div>
     </section>
 

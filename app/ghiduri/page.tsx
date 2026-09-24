@@ -1,4 +1,4 @@
-import { guides, site } from "@/lib/data";
+import { guides } from "@/lib/data";
 import { PageHero } from "@/components/PageHero";
 import { BookingSection } from "@/components/BookingSection";
 import { Reveal } from "@/components/Reveal";
@@ -8,6 +8,34 @@ export const metadata = {
   description: "Ghiduri utile despre sănătatea orală: sensibilitate dentară, bruxism, alimentație, sarcină, diabet și afecțiuni cardiovasculare.",
   alternates: { canonical: "/ghiduri" },
 };
+
+const extraGuides = [
+  {
+    slug: "frica-de-dentist",
+    title: "Frica de dentist",
+    excerpt: "Cum abordăm anxietatea legată de vizitele la dentist, pas cu pas, în ritmul tău.",
+  },
+  {
+    slug: "prima-vizita-copil-la-dentist",
+    title: "Prima vizită a copilului la dentist",
+    excerpt: "Cum pregătești copilul pentru prima vizită și ce se întâmplă efectiv în cabinet.",
+  },
+  {
+    slug: "ingrijire-dentara-varstnici",
+    title: "Îngrijire dentară pentru vârstnici",
+    excerpt: "Particularitățile sănătății orale la vârsta a treia: uscăciune bucală, proteze, recesii gingivale.",
+  },
+  {
+    slug: "prima-consultatie-adulti",
+    title: "Prima consultație (adulți)",
+    excerpt: "Ce se întâmplă pas cu pas la prima ta vizită la ArtDent Slobozia.",
+  },
+  {
+    slug: "urgente-dentare",
+    title: "Urgențe dentare",
+    excerpt: "Ce faci și pe cine suni în caz de durere, dinte spart sau umflătură.",
+  },
+];
 
 export default function GhiduriPage() {
   return (
@@ -28,6 +56,15 @@ export default function GhiduriPage() {
             {guides.map((g, i) => (
               <Reveal key={g.slug} delay={i * 60}>
                 <a href={`/ghiduri/${g.slug}`} className="service-card" style={{ display: "grid", gap: 12, padding: 24, borderRadius: 8, height: "100%" }}>
+                  <h2 style={{ margin: 0, fontSize: 19, fontWeight: 600, letterSpacing: "-0.01em", color: "var(--teal-deep)" }}>{g.title}</h2>
+                  <p style={{ margin: 0, fontSize: 14, lineHeight: 1.6, color: "var(--muted)" }}>{g.excerpt}</p>
+                  <span style={{ fontSize: 13.5, fontWeight: 600, color: "var(--teal-600)" }}>Citește ghidul →</span>
+                </a>
+              </Reveal>
+            ))}
+            {extraGuides.map((g, i) => (
+              <Reveal key={g.slug} delay={(guides.length + i) * 60}>
+                <a href={`/${g.slug}`} className="service-card" style={{ display: "grid", gap: 12, padding: 24, borderRadius: 8, height: "100%" }}>
                   <h2 style={{ margin: 0, fontSize: 19, fontWeight: 600, letterSpacing: "-0.01em", color: "var(--teal-deep)" }}>{g.title}</h2>
                   <p style={{ margin: 0, fontSize: 14, lineHeight: 1.6, color: "var(--muted)" }}>{g.excerpt}</p>
                   <span style={{ fontSize: 13.5, fontWeight: 600, color: "var(--teal-600)" }}>Citește ghidul →</span>

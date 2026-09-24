@@ -32,7 +32,7 @@ export function ServicesGrid() {
   }, []);
 
   return (
-    <div ref={ref} style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 16 }}>
+    <div ref={ref} className="services-grid-3col">
       {services.map((s, i) => (
         <a
           key={s.slug}

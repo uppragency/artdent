@@ -38,6 +38,12 @@ export function BookingFormFields({
     //   headers: { "Content-Type": "application/json" },
     //   body: JSON.stringify({ name, phone, email: submittedEmail, sourcePage }),
     // }).catch(() => {});
+    // Notificare push către panoul de admin (fire-and-forget, eșuează silențios dacă push nu e configurat).
+    fetch("/api/push/notify-new-submission", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, phone, sourcePage }),
+    }).catch(() => {});
     setSending(false);
     setSent(true);
     const params = new URLSearchParams({ name, phone });
