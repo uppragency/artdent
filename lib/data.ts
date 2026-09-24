@@ -13,7 +13,7 @@ export const site = {
   legalName: "C.M.I ARTDENT - DR. ZUPCU M. MIHAELA",
   cui: "20785382",
   mapsEmbed: "https://maps.google.com/maps?q=Al.+Feroviarului+1,+Slobozia&z=15&output=embed",
-  googleReviewsUrl: "https://www.google.com/search?q=artdent+slobozia+recenzii",
+  googleReviewsUrl: "https://www.google.com/maps/place//data=!4m2!3m1!1s0x40b05184c7cadd09:0xced901ca02200d7b?sa=X&ved=1t:8290&ictx=111",
   instagramUrl: "https://www.instagram.com/artdent_dr_zupcu/",
   facebookUrl: "https://www.facebook.com/profile.php?id=100057326415385",
 };
@@ -472,9 +472,14 @@ export const articles = [
 ];
 
 export const fallbackReviews = [
-  { text: "Text recenzie preluat live din profilul Google al clinicii.", name: "nume pacient", initial: "N", meta: "Google · acum 2 săptămâni" },
-  { text: "Text recenzie preluat live din profilul Google al clinicii.", name: "nume pacient", initial: "N", meta: "Google · acum 1 lună" },
-  { text: "Text recenzie preluat live din profilul Google al clinicii.", name: "nume pacient", initial: "N", meta: "Google · acum 2 luni" },
+  { text: "Am fost foarte mulțumită de serviciile oferite, doctori nemaipomeniți, răbdători cu pacienții si specialiști. Recomand cu încredere!", name: "Georgi Dragomir", initial: "G", meta: "Google" },
+  { text: "Am vizitat de mai multe ori acest cabinet stomatologic, fiind tratat de domnul doctor Țibuleac Ghenadie, și pot să spun că sunt mulțumit de serviciile oferite.", name: "Gigi Popirlan", initial: "G", meta: "Google" },
+  { text: "Un personal foarte pregătit și foarte ospitalieri, vă mulțumesc pentru ajutor 🙏", name: "Tamas Ovidiu Cezar", initial: "T", meta: "Google" },
+  { text: "Oameni de calitate, servicii foarte bune, recomand.", name: "Titel Axinte", initial: "T", meta: "Google" },
+  { text: "Am fost tratată cu respect și profesionalism! Aprecieri și mulțumiri personalului și în special domnului Ghenadie T! Mi-a plăcut că mi-a explicat mereu ce face, m-a înțeles când durea și a fost f. înțelegător.", name: "Cristina Ostriceanu", initial: "C", meta: "Google" },
+  { text: "Membrii familiei noastră suntem clienții clinicii Artdent de mai bine de 20 de ani. Mihaela Zupcu este un profesionist, dornică să fie in pas cu ultimele tehnologii. Și-a format o echipă care lucrează excelent împreună. Recomand cu căldură tuturor, mai ales celor cu copii mici.", name: "Alice Sneatinschi", initial: "A", meta: "Google" },
+  { text: "Profesionalism desăvârșit.", name: "Alexandru Constantinescu", initial: "A", meta: "Google" },
+  { text: "Datorită dumneavoastră, frica băiețelului meu de stomatolog a dispărut! Mulțumim Artdent Slobozia, în special domnișoarei Zupcu Mihaela, pentru profesionalismul și răbdarea de care a dat dovadă! Vă mulțumim din suflet pentru noul dințișor! Recomand cu încredere!", name: "Cristina Constantin", initial: "C", meta: "Google" },
 ];
 
 export const calendarLink =

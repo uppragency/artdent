@@ -71,11 +71,8 @@ export function Testimonials() {
         </div>
       </div>
 
-      <div style={{ border: "1px dashed oklch(0.82 0.03 190)", borderRadius: 10, padding: "clamp(18px, 2.5vw, 28px)", background: "var(--card)" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 10, marginBottom: 18 }}>
-          <span className="font-mono-label" style={{ fontSize: 11, letterSpacing: "0.04em", color: "var(--muted)" }}>
-            slot widget — Google Business Profile reviews (auto-avansare la 5s)
-          </span>
+      <div style={{ border: "1px solid var(--line)", borderRadius: 10, padding: "clamp(18px, 2.5vw, 28px)", background: "var(--card)" }}>
+        <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center", flexWrap: "wrap", gap: 10, marginBottom: 18 }}>
           <div style={{ display: "flex", gap: 8 }}>
             <span onClick={() => setIndex((i) => (i - 1 + reviews.length) % reviews.length)} className="review-arrow" style={{ width: 32, height: 32, borderRadius: "50%", display: "grid", placeItems: "center", fontSize: 13, cursor: "pointer" }}>‹</span>
             <span onClick={() => setIndex((i) => (i + 1) % reviews.length)} className="review-arrow" style={{ width: 32, height: 32, borderRadius: "50%", display: "grid", placeItems: "center", fontSize: 13, cursor: "pointer" }}>›</span>

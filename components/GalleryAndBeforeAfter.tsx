@@ -52,7 +52,6 @@ function BeforeAfterCard({ label, before, after }: { label: string; before: stri
           style={{ position: "absolute", inset: 0, width: "100%", height: "100%", margin: 0, opacity: 0, cursor: "ew-resize" }}
         />
       </div>
-      <span style={{ fontSize: 13.5, fontWeight: 600, color: "var(--teal-deep)" }}>{label}</span>
     </div>
   );
 }
