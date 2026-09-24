@@ -428,8 +428,12 @@ export const galleryItems = [
 ];
 
 export const beforeAfterCases = [
-  "Albire dentară profesională", "Fațete ceramice", "Corectare aliniere",
-  "Implant dentar unic", "Reconstrucție protetică", "Estetică gingivală",
+  { label: "Caz 1", before: "/images/cases/caz1-before.jpg", after: "/images/cases/caz1-after.jpg" },
+  { label: "Caz 2", before: "/images/cases/caz2-before.jpg", after: "/images/cases/caz2-after.jpg" },
+  { label: "Caz 3", before: "/images/cases/caz3-before.jpg", after: "/images/cases/caz3-after.jpg" },
+  { label: "Caz 4", before: "/images/cases/caz4-before.jpg", after: "/images/cases/caz4-after.jpg" },
+  { label: "Caz 5", before: "/images/cases/caz5-before.jpg", after: "/images/cases/caz5-after.jpg" },
+  { label: "Caz 6", before: "/images/cases/caz6-before.jpg", after: "/images/cases/caz6-after.jpg" },
 ];
 
 export const heroStats = [

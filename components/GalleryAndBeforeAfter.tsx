@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import { beforeAfterCases, galleryItems } from "@/lib/data";
 
-const INITIAL_MOBILE_COUNT = 6;
+const GALLERY_INITIAL_MOBILE_COUNT = 2;
+const CASES_INITIAL_MOBILE_COUNT = 2;
 const LOAD_STEP = 2;
 
 function useIsMobile() {
@@ -18,18 +19,24 @@ function useIsMobile() {
   return isMobile;
 }
 
-function BeforeAfterCard({ label }: { label: string }) {
+function BeforeAfterCard({ label, before, after }: { label: string; before: string; after: string }) {
   const [value, setValue] = useState(50);
   const clip = `inset(0 ${100 - value}% 0 0)`;
 
   return (
     <div style={{ display: "grid", gap: 10 }}>
       <div style={{ position: "relative", borderRadius: 10, overflow: "hidden", aspectRatio: "4 / 3", userSelect: "none" }}>
-        <div className="diagonal-stripes" style={{ position: "absolute", inset: 0, display: "flex", alignItems: "flex-start", justifyContent: "flex-end", padding: "14px 18px 0 0" }}>
-          <span className="font-mono-label" style={{ fontSize: 11, color: "var(--muted)" }}>DUPĂ</span>
+        <div style={{
+          position: "absolute", inset: 0, backgroundImage: `url(${after})`, backgroundSize: "cover", backgroundPosition: "center",
+          display: "flex", alignItems: "flex-start", justifyContent: "flex-end", padding: "14px 18px 0 0",
+        }}>
+          <span className="font-mono-label" style={{ fontSize: 11, color: "#fff", background: "rgba(2,47,58,0.55)", padding: "4px 9px", borderRadius: 4 }}>DUPĂ</span>
         </div>
-        <div className="diagonal-stripes-tan" style={{ position: "absolute", inset: 0, clipPath: clip, display: "flex", alignItems: "flex-start", justifyContent: "flex-start", padding: "14px 0 0 18px" }}>
-          <span className="font-mono-label" style={{ fontSize: 11, color: "oklch(0.4 0.02 30)" }}>ÎNAINTE</span>
+        <div style={{
+          position: "absolute", inset: 0, clipPath: clip, backgroundImage: `url(${before})`, backgroundSize: "cover", backgroundPosition: "center",
+          display: "flex", alignItems: "flex-start", justifyContent: "flex-start", padding: "14px 0 0 18px",
+        }}>
+          <span className="font-mono-label" style={{ fontSize: 11, color: "#fff", background: "rgba(2,47,58,0.55)", padding: "4px 9px", borderRadius: 4 }}>ÎNAINTE</span>
         </div>
         <div style={{ position: "absolute", top: 0, bottom: 0, left: `${value}%`, width: 3, background: "#fff", boxShadow: "0 0 0 1px rgba(0,0,0,0.15)", pointerEvents: "none" }}>
           <span style={{
@@ -52,9 +59,14 @@ function BeforeAfterCard({ label }: { label: string }) {
 
 export function GalleryAndBeforeAfter() {
   const isMobile = useIsMobile();
-  const [visibleCount, setVisibleCount] = useState(INITIAL_MOBILE_COUNT);
-  const visibleItems = isMobile ? galleryItems.slice(0, visibleCount) : galleryItems;
-  const canLoadMore = isMobile && visibleCount < galleryItems.length;
+
+  const [galleryCount, setGalleryCount] = useState(GALLERY_INITIAL_MOBILE_COUNT);
+  const visibleGalleryItems = isMobile ? galleryItems.slice(0, galleryCount) : galleryItems;
+  const canLoadMoreGallery = isMobile && galleryCount < galleryItems.length;
+
+  const [casesCount, setCasesCount] = useState(CASES_INITIAL_MOBILE_COUNT);
+  const visibleCases = isMobile ? beforeAfterCases.slice(0, casesCount) : beforeAfterCases;
+  const canLoadMoreCases = isMobile && casesCount < beforeAfterCases.length;
 
   return (
     <section className="noise-overlay" style={{
@@ -66,18 +78,18 @@ export function GalleryAndBeforeAfter() {
           <h2 className="font-display" style={{ margin: 0, fontWeight: 400, fontSize: "clamp(30px, 4.4vw, 50px)", lineHeight: 1.05, letterSpacing: "-0.015em" }}>Galerie foto</h2>
         </div>
         <div className="gallery-grid">
-          {visibleItems.map((item) => (
+          {visibleGalleryItems.map((item) => (
             <div key={item.src} role="img" aria-label={item.label} style={{
               aspectRatio: "4/3", borderRadius: 6, overflow: "hidden",
               backgroundImage: `url(${item.src})`, backgroundSize: "cover", backgroundPosition: "center",
             }} />
           ))}
         </div>
-        {canLoadMore && (
+        {canLoadMoreGallery && (
           <div style={{ display: "flex", justifyContent: "center", marginTop: 24 }}>
             <button
               type="button"
-              onClick={() => setVisibleCount((c) => Math.min(c + LOAD_STEP, galleryItems.length))}
+              onClick={() => setGalleryCount((c) => Math.min(c + LOAD_STEP, galleryItems.length))}
               className="btn-outline-dark"
               style={{
                 fontFamily: "inherit", fontSize: 14.5, fontWeight: 600, padding: "13px 24px",
@@ -98,9 +110,24 @@ export function GalleryAndBeforeAfter() {
             Trage cursorul pentru a compara starea inițială cu rezultatul unui tratament de estetică dentară.
           </p>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>
-          {beforeAfterCases.map((c) => <BeforeAfterCard key={c} label={c} />)}
+        <div className="before-after-grid">
+          {visibleCases.map((c) => <BeforeAfterCard key={c.label} label={c.label} before={c.before} after={c.after} />)}
         </div>
+        {canLoadMoreCases && (
+          <div style={{ display: "flex", justifyContent: "center", marginTop: 24 }}>
+            <button
+              type="button"
+              onClick={() => setCasesCount((c) => Math.min(c + LOAD_STEP, beforeAfterCases.length))}
+              className="btn-outline-dark"
+              style={{
+                fontFamily: "inherit", fontSize: 14.5, fontWeight: 600, padding: "13px 24px",
+                borderRadius: 4, minHeight: 48, background: "none", cursor: "pointer",
+              }}
+            >
+              Încarcă mai multe cazuri
+            </button>
+          </div>
+        )}
       </section>
     </section>
   );
