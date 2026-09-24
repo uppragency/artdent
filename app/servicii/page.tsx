@@ -15,14 +15,14 @@ export default function ServiciiPage() {
 
       <div style={{ marginTop: 40, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 16 }}>
         {services.map((s) => (
-          <div key={s.slug} id={s.slug} style={{ border: "1px solid var(--line)", borderRadius: 8, background: "var(--card)", padding: 26 }}>
+          <a key={s.slug} id={s.slug} href={`/servicii/${s.slug}`} style={{ display: "block", border: "1px solid var(--line)", borderRadius: 8, background: "var(--card)", padding: 26, color: "inherit" }}>
             <span className="font-mono-label" style={{ fontSize: 11.5, color: "var(--gold-label-2)" }}>{s.num}</span>
             <h2 className="font-display" style={{ margin: "8px 0 0", fontSize: 20, color: "var(--teal-deep)" }}>{s.title}</h2>
             <p style={{ margin: "8px 0 0", fontSize: 14.5, color: "var(--muted)" }}>{s.text}</p>
             <ul style={{ margin: "12px 0 0", padding: 0, listStyle: "none", display: "grid", gap: 4 }}>
               {s.items.map((it) => <li key={it} style={{ fontSize: 13, color: "var(--muted)" }}>· {it}</li>)}
             </ul>
-          </div>
+          </a>
         ))}
       </div>
 

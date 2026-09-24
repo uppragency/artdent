@@ -116,6 +116,9 @@ a:hover { color: var(--gold-label); }
 
 .mobile-nav-link:hover { color: #83D3E4 !important; }
 
+.mega-menu-item { transition: background .15s ease; }
+.mega-menu-item:hover { background: rgba(255,255,255,0.08); }
+
 .service-card { border: 1px solid var(--line); background: var(--card); color: var(--ink); transition: opacity .5s ease, transform .5s ease, border-color .2s ease, box-shadow .2s ease; }
 .service-card:hover { border-color: oklch(0.72 0.07 88); box-shadow: 0 20px 40px -28px rgba(2,47,58,0.35); }
 .service-card:hover .service-card-list { grid-template-rows: 1fr !important; }

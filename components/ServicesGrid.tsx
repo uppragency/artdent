@@ -33,7 +33,7 @@ export function ServicesGrid() {
       {services.map((s, i) => (
         <a
           key={s.slug}
-          href="/servicii"
+          href={`/servicii/${s.slug}`}
           onMouseEnter={() => setHovered(i)}
           onMouseLeave={() => setHovered(-1)}
           className="service-card"

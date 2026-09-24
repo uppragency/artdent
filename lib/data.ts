@@ -61,6 +61,169 @@ export const services = [
   { num: "06", slug: "radiografii", title: "Radiografii Retroalveolare", text: "Imagistică digitală realizată în clinică, pentru diagnostic rapid și precis.", items: ["Radiografie digitală", "Interpretare imediată", "Arhivă digitală"] },
 ];
 
+export const serviceDetails: Record<string, {
+  metaTitle: string;
+  metaDescription: string;
+  intro: string;
+  paragraphs: string[];
+  benefits: string[];
+  faq: { q: string; a: string }[];
+}> = {
+  "cosmetica-dentara": {
+    metaTitle: "Cosmetică Dentară în Slobozia — Albire, Fațete Ceramice | ArtDent",
+    metaDescription: "Albire profesională, fațete ceramice și reconturare estetică la ArtDent Slobozia. Zâmbet natural, planificat digital, cu simulare înainte de tratament.",
+    intro: "Estetica dentară modernă îmbină aspectul natural cu rezultate de durată. La ArtDent Slobozia, fiecare procedură de cosmetică dentară pornește de la o analiză atentă a formei feței, a culorii naturale a dinților și a proporțiilor zâmbetului, astfel încât rezultatul să arate firesc, nu artificial.",
+    paragraphs: [
+      "Albirea profesională realizată în cabinet folosește geluri concentrate activate controlat, cu rezultate vizibile încă din prima ședință și fără sensibilitate excesivă. Pentru cei care preferă un ritm propriu, oferim și albire cu gutiere personalizate, de purtat acasă, cu gel dozat corect pentru smalțul fiecărui pacient.",
+      "Fațetele ceramice corectează discret formă, culoare sau spații inegale între dinți, păstrând o structură dentară sănătoasă cu șlefuire minimă. Sunt confecționate individual, la culoarea și translucența dinților naturali învecinați, astfel încât diferența să nu se observe.",
+      "Pentru corecții mai simple — un dinte ciobit, o formă ușor asimetrică — reconturarea estetică cu material compozit oferă un rezultat rapid, într-o singură ședință, la un cost mai accesibil decât o fațetă ceramică.",
+      "Înainte de orice lucrare definitivă, discutăm împreună forma și culoarea dorite, astfel încât să știi exact la ce să te aștepți.",
+    ],
+    benefits: [
+      "Rezultat cu aspect natural, adaptat la trăsăturile feței",
+      "Șlefuire minimă a structurii dentare sănătoase",
+      "Simulare și discuție despre formă și culoare înainte de tratament",
+      "Proceduri rapide, cu recuperare imediată",
+      "Materiale certificate, rezistente la pată și uzură",
+      "Îmbunătățire vizibilă a încrederii în zâmbet",
+    ],
+    faq: [
+      { q: "Cât durează albirea profesională în cabinet?", a: "O ședință de albire în cabinet durează, în general, 45–60 de minute, iar rezultatul este vizibil imediat. Pentru un efect optim, poate fi recomandată o a doua ședință la interval de câteva săptămâni." },
+      { q: "Fațetele ceramice necesită șlefuirea dinților?", a: "Da, dar minimă — de regulă doar un strat foarte subțire de smalț, suficient cât fațeta să se integreze natural în arcadă, fără a afecta structura dintelui." },
+      { q: "Cât timp țin fațetele ceramice?", a: "Cu o igienă orală corectă și controale periodice, fațetele ceramice pot dura 10–15 ani sau mai mult." },
+      { q: "Albirea dentară dăunează smalțului?", a: "Nu, atunci când este realizată profesional, cu concentrații și timpi de expunere controlați. Recomandăm întotdeauna o evaluare înainte, pentru a exclude contraindicații precum cariile netratate." },
+      { q: "Care este diferența dintre reconturarea cu compozit și fațeta ceramică?", a: "Reconturarea cu compozit este mai rapidă și mai accesibilă, potrivită pentru corecții mici, dar are o durată de viață mai scurtă. Fațeta ceramică oferă un rezultat mai durabil și mai rezistent la pată, pentru corecții mai ample." },
+    ],
+  },
+  "tratament-ortodontic": {
+    metaTitle: "Tratament Ortodontic în Slobozia — Aparate Dentare, Gutiere | ArtDent",
+    metaDescription: "Aparate ortodontice fixe și gutiere transparente pentru copii și adulți, la ArtDent Slobozia. Plan de tratament clar, cu etape și durată comunicate de la început.",
+    intro: "Un zâmbet aliniat corect nu este doar o chestiune de estetică — dinții bine poziționați se curăță mai ușor, mestecă eficient și se uzează uniform. Tratamentul ortodontic la ArtDent este potrivit atât pentru copii, cât și pentru adulți care își doresc o corecție la orice vârstă.",
+    paragraphs: [
+      "Aparatele dentare fixe, metalice sau ceramice, rămân soluția cea mai eficientă pentru cazurile complexe de neregularitate dentară sau probleme de ocluzie. Bracket-urile ceramice, discrete la culoarea dintelui, sunt alese frecvent de pacienții adulți.",
+      "Pentru cei care preferă o soluție mai puțin vizibilă, gutierele transparente corectează treptat poziția dinților, sunt detașabile pentru masă și periaj, și sunt potrivite pentru cazuri de aliniere ușoară spre moderată.",
+      "Fiecare tratament ortodontic începe cu o evaluare clinică și radiografii, urmate de un plan cu etape clare: durata estimată, frecvența controalelor și costul total, comunicate integral înainte de a începe.",
+      "Monitorizarea periodică este esențială pentru progresul corect al tratamentului — ajustăm arcul sau trecem la o nouă gutieră la intervalele stabilite, urmărind evoluția aliniamentului.",
+    ],
+    benefits: [
+      "Corectarea aliniamentului dentar la copii și adulți",
+      "Îmbunătățirea masticației și a ocluziei",
+      "Igienă orală mai ușoară după aliniere",
+      "Opțiuni discrete: bracket-uri ceramice sau gutiere transparente",
+      "Plan de tratament cu etape și costuri clare de la început",
+      "Monitorizare periodică a progresului",
+    ],
+    faq: [
+      { q: "La ce vârstă poate începe un copil tratamentul ortodontic?", a: "O primă evaluare ortodontică este recomandată în jurul vârstei de 7 ani, pentru a depista din timp eventuale probleme de dezvoltare a arcadelor, chiar dacă tratamentul activ începe de obicei mai târziu." },
+      { q: "Cât durează, în medie, un tratament ortodontic?", a: "Durata variază în funcție de complexitatea cazului, de regulă între 12 și 24 de luni, uneori mai mult pentru corecții complexe de ocluzie." },
+      { q: "Aparat fix sau gutiere transparente — care este mai potrivit?", a: "Depinde de tipul și complexitatea problemei. Discutăm ambele opțiuni la consultație și recomandăm soluția care corespunde nevoilor tale, atât din punct de vedere clinic, cât și al stilului de viață." },
+      { q: "Montarea aparatului dentar doare?", a: "Montarea în sine este nedureroasă. Poate apărea un disconfort ușor în primele zile după fiecare ajustare, pe măsură ce dinții se adaptează la noua poziție." },
+      { q: "Este nevoie de extracții dentare pentru ortodonție?", a: "Nu întotdeauna. Extracția este recomandată doar în cazurile cu aglomerare dentară severă, unde nu există spațiu suficient pentru alinierea corectă a tuturor dinților." },
+    ],
+  },
+  "tratamente-generale": {
+    metaTitle: "Tratamente Stomatologice Generale — Obturații, Tratament de Canal | ArtDent",
+    metaDescription: "Consultații, obturații și tratamente de canal la ArtDent Slobozia, cu materiale certificate și diagnostic riguros la fiecare pas.",
+    intro: "Tratamentele stomatologice generale reprezintă baza unei sănătăți orale de durată. De la consultația de rutină până la un tratament de canal complex, fiecare etapă este explicată înainte de a fi începută, astfel încât să știi mereu ce urmează.",
+    paragraphs: [
+      "Consultația inițială include examinarea clinică completă, radiografii digitale acolo unde este necesar, și un diagnostic clar. Pe baza acestuia, primești un plan de tratament cu etape, durată și costuri, fără surprize ulterioare.",
+      "Obturațiile cu material compozit fotopolimerizabil tratează cariile la culoarea naturală a dintelui, redând forma și funcția fără compromisuri estetice — indiferent dacă este vorba de o carie superficială sau una mai extinsă.",
+      "Când afectarea ajunge la pulpa dentară, tratamentul endodontic (de canal) elimină țesutul infectat și sigilează canalele radiculare, salvând dintele natural în locul unei extracții. Folosim tehnici rotative moderne, iar pentru cazurile complexe, tratament sub microscop dentar, pentru precizie sporită.",
+      "Controalele periodice — recomandate la 6 luni — permit depistarea din timp a problemelor, înainte ca acestea să necesite intervenții extinse și costisitoare.",
+    ],
+    benefits: [
+      "Diagnostic riguros, bazat pe examinare clinică și radiografii digitale",
+      "Obturații la culoarea naturală a dintelui, fără compromis estetic",
+      "Tratament de canal cu tehnici rotative moderne sau microscop dentar",
+      "Salvarea dintelui natural, evitând extracția atunci când este posibil",
+      "Materiale certificate, cu rezultate durabile",
+      "Plan de tratament transparent, comunicat înainte de începere",
+    ],
+    faq: [
+      { q: "Cât durează o obturație?", a: "O obturație simplă durează, în medie, 30–45 de minute, în funcție de mărimea și localizarea cariei." },
+      { q: "Tratamentul de canal este dureros?", a: "Tratamentul se realizează sub anestezie locală, deci nu simți durere în timpul procedurii. Poate apărea un disconfort ușor, trecător, în zilele următoare." },
+      { q: "Cât de des este recomandat un control stomatologic?", a: "Un control la fiecare 6 luni permite depistarea precoce a cariilor și a altor probleme, înainte ca acestea să se agraveze." },
+      { q: "Ce se întâmplă dacă amân tratamentul unei carii?", a: "O carie netratată avansează spre pulpa dentară, putând necesita un tratament de canal sau, în stadii avansate, extracția dintelui. Tratamentul din timp este mereu mai simplu și mai puțin costisitor." },
+      { q: "Câte ședințe sunt necesare pentru un tratament de canal?", a: "De obicei 1–2 ședințe, în funcție de numărul de canale radiculare și de complexitatea cazului." },
+    ],
+  },
+  "chirurgie-buco-dentara": {
+    metaTitle: "Chirurgie Buco-Dentară — Extracții, Molari de Minte | ArtDent Slobozia",
+    metaDescription: "Extracții simple și complexe, extracția molarilor de minte și chirurgie parodontală la ArtDent Slobozia, în condiții de siguranță și cu recuperare monitorizată.",
+    intro: "Intervențiile chirurgicale buco-dentare sunt realizate la ArtDent cu protocoale stricte de sterilizare și anestezie eficientă, pentru un confort maxim pe parcursul procedurii și o recuperare cât mai rapidă.",
+    paragraphs: [
+      "Extracțiile simple sunt indicate pentru dinți afectați ireversibil de carii extinse, fracturi sau boală parodontală avansată. Fiecare extracție este precedată de o evaluare radiologică, pentru a alege abordarea potrivită.",
+      "Molarii de minte incluși sau parțial erupți necesită frecvent o extracție chirurgicală, mai ales atunci când poziția lor afectează dinții învecinați sau provoacă inflamații recurente. Evaluăm poziția exactă a molarului prin radiografie înainte de intervenție.",
+      "Chirurgia parodontală tratează afecțiunile avansate ale gingiei și osului de susținere, oprind progresul bolii parodontale și stabilizând dinții afectați.",
+      "După orice intervenție chirurgicală, primești indicații clare de îngrijire post-operatorie, iar echipa rămâne disponibilă pentru orice nelămurire în perioada de recuperare.",
+    ],
+    benefits: [
+      "Anestezie locală eficientă, pentru un confort real în timpul intervenției",
+      "Evaluare radiologică înainte de orice extracție sau intervenție",
+      "Protocoale stricte de sterilizare a instrumentarului",
+      "Indicații clare de îngrijire post-operatorie",
+      "Tratamentul complicațiilor post-extracționale, dacă apar",
+      "Echipă disponibilă pentru monitorizarea recuperării",
+    ],
+    faq: [
+      { q: "Extracția molarului de minte doare?", a: "Intervenția se realizează sub anestezie locală, deci nu simți durere în timpul ei. Disconfortul post-operator este normal și se controlează cu medicația recomandată." },
+      { q: "Cât durează recuperarea după o extracție?", a: "Recuperarea inițială durează 3–5 zile, cu respectarea indicațiilor primite. Vindecarea completă a osului poate dura câteva săptămâni." },
+      { q: "Ce trebuie să evit după o extracție dentară?", a: "Evită alimentele fierbinți sau tari, fumatul și clătirea puternică a gurii în primele 24 de ore, pentru a permite formarea corectă a cheagului de sânge." },
+      { q: "Când este necesară sutura după o extracție?", a: "Suturile sunt aplicate în cazul extracțiilor chirurgicale mai complexe, pentru a favoriza vindecarea corectă a plăgii." },
+      { q: "Cât de repede pot reveni la activitățile zilnice?", a: "În majoritatea cazurilor, activitățile zilnice normale pot fi reluate a doua zi, evitând efortul fizic intens timp de 2–3 zile." },
+    ],
+  },
+  profilaxie: {
+    metaTitle: "Profilaxie Dentară — Detartraj, Periaj Profesional, Air-Flow | ArtDent",
+    metaDescription: "Detartraj, periaj profesional și air-flow la ArtDent Slobozia. Igienizare completă și recomandări personalizate pentru prevenirea cariilor și a bolii parodontale.",
+    intro: "Prevenția este cea mai eficientă formă de îngrijire dentară. O igienizare profesională periodică previne apariția cariilor și a bolii parodontale, menținând gingiile sănătoase și respirația proaspătă.",
+    paragraphs: [
+      "Detartrajul îndepărtează tartrul acumulat supra și subgingival, depunere pe care periajul zilnic, oricât de riguros, nu o poate elimina complet. Folosim atât tehnica cu ultrasunete, cât și instrumentar manual, în funcție de zona tratată.",
+      "Periajul profesional finalizează igienizarea, curățând suprafața dinților de placa bacteriană rămasă și pregătind smalțul pentru tratamentul de lustruire.",
+      "Tehnologia air-flow folosește un jet controlat de apă, aer și pulbere fină pentru a îndepărta petele de pe suprafața dinților — cauzate de cafea, ceai, vin roșu sau fumat — fără a afecta smalțul.",
+      "La finalul fiecărei ședințe de profilaxie, primești recomandări personalizate de igienă orală, adaptate nevoilor tale specifice.",
+    ],
+    benefits: [
+      "Prevenirea cariilor și a bolii parodontale",
+      "Îndepărtarea tartrului inaccesibil periajului zilnic",
+      "Respirație proaspătă și gingii sănătoase",
+      "Îndepărtarea petelor de pe smalț, fără abraziune",
+      "Depistarea precoce a altor probleme dentare la control",
+      "Recomandări de igienă personalizate",
+    ],
+    faq: [
+      { q: "Cât de des este recomandat detartrajul?", a: "În general, o dată la 6 luni, sau mai des dacă ai tendință crescută de acumulare a tartrului sau probleme parodontale." },
+      { q: "Detartrajul afectează smalțul dinților?", a: "Nu, detartrajul profesional, realizat corect, elimină doar tartrul depus, fără a afecta structura sănătoasă a smalțului." },
+      { q: "Procedura air-flow este dureroasă?", a: "Nu, air-flow este o procedură confortabilă, fără durere, potrivită și pentru pacienții cu dinți sensibili." },
+      { q: "Detartrajul poate provoca sângerarea gingiilor?", a: "O ușoară sângerare este posibilă dacă gingiile sunt inflamate înainte de procedură, dar aceasta se reduce pe măsură ce gingia revine la o stare sănătoasă." },
+      { q: "Ce diferență este între detartraj și periaj profesional?", a: "Detartrajul elimină tartrul întărit, în timp ce periajul profesional curăță și lustruiește suprafața dinților, finalizând igienizarea completă." },
+    ],
+  },
+  radiografii: {
+    metaTitle: "Radiografii Dentare Digitale — Retroalveolare | ArtDent Slobozia",
+    metaDescription: "Radiografii retroalveolare digitale la ArtDent Slobozia, cu interpretare imediată, radiație redusă și arhivare digitală pentru un diagnostic precis.",
+    intro: "Un diagnostic corect începe adesea cu o imagine clară a structurilor dentare invizibile cu ochiul liber. Radiografiile digitale realizate direct în clinică oferă informația necesară pentru un plan de tratament precis, chiar din prima vizită.",
+    paragraphs: [
+      "Radiografia retroalveolară digitală surprinde detaliat un dinte sau un grup restrâns de dinți, fiind utilă pentru depistarea cariilor interdentare, evaluarea rădăcinilor înainte de tratamentul de canal sau verificarea osului din jurul implanturilor.",
+      "Tehnologia digitală reduce semnificativ doza de radiație comparativ cu radiografia clasică, iar imaginea este disponibilă instant pe ecran, permițând discutarea rezultatului chiar în cabinet, în aceeași vizită.",
+      "Fiecare radiografie este arhivată digital în dosarul tău, ceea ce permite compararea evoluției în timp la controalele ulterioare, fără a repeta investigații inutile.",
+    ],
+    benefits: [
+      "Diagnostic precis pentru carii, tratamente de canal sau evaluări pre-implant",
+      "Radiație semnificativ redusă față de radiografia clasică",
+      "Rezultat disponibil imediat, discutat în aceeași vizită",
+      "Arhivare digitală pentru comparații ulterioare",
+      "Investigație rapidă, fără disconfort",
+    ],
+    faq: [
+      { q: "Radiografia dentară este nocivă?", a: "Radiografiile digitale folosesc o doză de radiație foarte redusă, considerată sigură, inclusiv pentru investigații repetate atunci când sunt necesare din punct de vedere clinic." },
+      { q: "Cât durează o radiografie retroalveolară?", a: "Procedura durează câteva minute, iar imaginea este disponibilă instant, digital." },
+      { q: "Care este diferența dintre radiografia retroalveolară și cea panoramică?", a: "Radiografia retroalveolară surprinde detaliat 1–3 dinți, fiind utilă pentru diagnostic țintit, în timp ce radiografia panoramică oferă o imagine de ansamblu a întregii arcade dentare." },
+      { q: "Este nevoie de radiografie la fiecare control?", a: "Nu neapărat — frecvența este stabilită individual, în funcție de istoricul dentar și de riscul de apariție a cariilor sau a altor probleme." },
+    ],
+  },
+};
+
 export const pricing = [
   { title: "Consultație inițială", price: "de la 100 lei", text: "Examinare clinică, diagnostic și plan de tratament personalizat.", popular: false },
   { title: "Igienizare completă", price: "de la 250 lei", text: "Detartraj, periaj profesional și air-flow.", popular: false },
