@@ -13,31 +13,21 @@ export function Testimonials() {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    fetch("/api/google-reviews")
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.reviews && data.reviews.length > 0) {
-          setReviews(data.reviews);
-          return;
+    supabase
+      .from("testimonials")
+      .select("patient_name, text, source")
+      .order("display_order", { ascending: true })
+      .limit(6)
+      .then(({ data }) => {
+        if (data && data.length > 0) {
+          setReviews(data.map((d: { patient_name: string; text: string; source: string | null }) => ({
+            text: d.text,
+            name: d.patient_name,
+            initial: d.patient_name?.[0]?.toUpperCase() || "N",
+            meta: d.source || "Google",
+          })));
         }
-        // No live Google reviews configured — fall back to Supabase.
-        return supabase
-          .from("testimonials")
-          .select("patient_name, text, source")
-          .order("display_order", { ascending: true })
-          .limit(6)
-          .then(({ data: rows }) => {
-            if (rows && rows.length > 0) {
-              setReviews(rows.map((d: { patient_name: string; text: string; source: string | null }) => ({
-                text: d.text,
-                name: d.patient_name,
-                initial: d.patient_name?.[0]?.toUpperCase() || "N",
-                meta: d.source || "Google",
-              })));
-            }
-          });
-      })
-      .catch(() => {});
+      });
   }, []);
 
   useEffect(() => {
