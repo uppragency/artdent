@@ -28,6 +28,14 @@ export default async function TeamMemberPage({ params }: { params: Promise<{ slu
 
   const others = allMembers.filter((m) => m.slug !== slug);
 
+  // Câmpuri extinse, opționale — completate doar pentru unii membri ai echipei (ex. Dr. Maxim, Dr. Afif).
+  const memberExt = member as typeof member & {
+    experience?: { title: string; period: string; text: string }[];
+    education?: { period: string; title: string; place: string }[];
+    credentialGroups?: { heading: string; items: string[] }[];
+  };
+  const { experience, education, credentialGroups } = memberExt;
+
   const personJsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -66,6 +74,59 @@ export default async function TeamMemberPage({ params }: { params: Promise<{ slu
               <span key={s} style={{ fontSize: 13, fontWeight: 500, padding: "8px 14px", borderRadius: 999, background: "var(--gold-tint-bg)", color: "var(--gold-tint-text)" }}>{s}</span>
             ))}
           </div>
+
+          {experience && experience.length > 0 && (
+            <div style={{ marginTop: 40 }}>
+              <h2 className="font-display" style={{ margin: "0 0 18px", fontWeight: 400, fontSize: "clamp(20px, 2.4vw, 26px)", color: "var(--teal-deep)" }}>
+                Experiență profesională
+              </h2>
+              <div style={{ display: "grid", gap: 14 }}>
+                {experience.map((e) => (
+                  <div key={e.title} style={{ border: "1px solid var(--line)", borderRadius: 8, padding: "18px 20px", background: "var(--card)" }}>
+                    <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", gap: 8, marginBottom: 6 }}>
+                      <span style={{ fontSize: 15.5, fontWeight: 600, color: "var(--teal-deep)" }}>{e.title}</span>
+                      <span className="font-mono-label" style={{ fontSize: 11.5, color: "var(--gold-label-2)" }}>{e.period}</span>
+                    </div>
+                    <p style={{ margin: 0, fontSize: 14, lineHeight: 1.65, color: "var(--muted-2)" }}>{e.text}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {education && education.length > 0 && (
+            <div style={{ marginTop: 40 }}>
+              <h2 className="font-display" style={{ margin: "0 0 18px", fontWeight: 400, fontSize: "clamp(20px, 2.4vw, 26px)", color: "var(--teal-deep)" }}>
+                Educație și formare
+              </h2>
+              <div style={{ display: "grid", gap: 10 }}>
+                {education.map((e, i) => (
+                  <div key={i} style={{ display: "flex", gap: 16, borderTop: i === 0 ? "1px solid var(--line-2)" : undefined, borderBottom: "1px solid var(--line-2)", padding: "14px 0" }}>
+                    <span className="font-mono-label" style={{ fontSize: 12, color: "var(--gold-label-2)", flex: "0 0 auto", minWidth: 110 }}>{e.period}</span>
+                    <div>
+                      <div style={{ fontSize: 14.5, fontWeight: 600, color: "var(--ink)" }}>{e.title}</div>
+                      <div style={{ fontSize: 13, color: "var(--muted)" }}>{e.place}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {credentialGroups && credentialGroups.length > 0 && (
+            <div style={{ marginTop: 40, display: "grid", gap: 28 }}>
+              {credentialGroups.map((g) => (
+                <div key={g.heading}>
+                  <h3 style={{ margin: "0 0 12px", fontSize: 16.5, fontWeight: 600, color: "var(--teal-deep)" }}>{g.heading}</h3>
+                  <ul style={{ margin: 0, padding: "0 0 0 18px", display: "grid", gap: 8 }}>
+                    {g.items.map((it, i) => (
+                      <li key={i} style={{ fontSize: 14, lineHeight: 1.6, color: "var(--muted-2)" }}>{it}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          )}
 
           <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 32 }}>
             <OpenBookingButton className="btn-teal" style={{ fontSize: 15.5, fontWeight: 600, padding: "16px 28px", borderRadius: 4, display: "inline-flex", alignItems: "center" }}>

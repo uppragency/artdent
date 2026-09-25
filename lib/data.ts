@@ -542,7 +542,7 @@ export const doctor = {
   name: "Dr. Zupcu Mihaela",
   role: "Medic coordonator · Medic Dentist",
   specializations: ["Implantologie orală", "Ortodonție", "Estetică dentară", "Stomatologie generală"],
-  bio: "Peste 20 de ani de experiență clinică și competență în implantologie orală. A participat la 11 ediții ale congresului Implanto Days de la Poiana Brașov, unde se discută protocoalele actuale în implantologie.",
+  bio: "Este absolventă a Facultății de Medicină Dentară „Ovidius” din Constanța, promoția 2001. Și-a continuat formarea printr-un masterat în parodontologie, finalizat în 2003, iar în 2010 a obținut competența în implantologie dentară sub îndrumarea prof. univ. dr. Ioan Sârbu. De-a lungul celor peste 20 de ani de activitate clinică a participat constant la cursuri de perfecționare în domeniu, printre care 11 ediții ale congresului Implanto Days de la Poiana Brașov, unde se discută protocoalele actuale în implantologie.",
   image: "/images/team/dr-mihaela-zupcu.jpg",
 };
 
@@ -558,18 +558,84 @@ export const teamMembers = [
   {
     slug: "dr-afif-al-jaboobi",
     name: "Dr. Afif Al Jaboobi",
-    role: "Medic Specialist Chirurgie OMF",
-    specializations: ["Chirurgie oro-maxilo-facială"],
-    bio: "Medic specialist în chirurgie oro-maxilo-facială, cu experiență în extracții complexe, chirurgie parodontală și intervenții chirurgicale buco-dentare.",
+    role: "Medic Chirurg — Chirurgie Dento-Alveolară",
+    specializations: ["Chirurgie dento-alveolară", "Implantologie", "Stomatologie generală"],
+    bio: "Medic stomatolog cu experiență în stomatologie, implantologie și chirurgie orală, fondator și CEO al clinicilor AFIDENT din Medgidia și Constanța. Este specializat în chirurgia dento-alveolară (orală), subdiviziune a chirurgiei oro-maxilo-faciale dedicată intervențiilor la nivelul cavității bucale: implanturi dentare, extracții dentare simple și ale dinților incluși, rezecții apicale, chistectomii, replantări și transplantări dentare, regularizări de creastă osoasă și manopere chirurgicale cu scop protetic.",
     image: "/images/team/dr-afif-al-jaboobi.jpg",
+    experience: [
+      {
+        title: "Clinica Stomatologică AFIDENT — Medgidia",
+        period: "August 2008 – prezent",
+        text: "Fondator și CEO al clinicilor AFIDENT. Asigură efectuarea și notificarea controlului periodic al pacienților înscriși, consemnează în fișa personală actele profilactice și coordonează reinstruirea periodică a personalului privind sterilizarea instrumentarului, circuitele funcționale și protecția profesională individuală.",
+      },
+      {
+        title: "Clinica Stomatologică AFIDENT — Constanța",
+        period: "Iunie 2021 – prezent",
+        text: "A alcătuit o echipă profesionistă și bine instruită, formată din medici stomatologi cu experiență, capabilă să intervină pentru orice problemă dentară, inclusiv intervenții de chirurgie avansată — atât în chirurgie dentară, cât și în chirurgie plastică.",
+      },
+      {
+        title: "Medic chirurgie dento-alveolară",
+        period: "August 2008 – prezent",
+        text: "Specializat în chirurgia dento-alveolară (orală): implanturi dentare, extracții dentare simple și ale dinților incluși, rezecții apicale, chistectomii, replantări și transplantări dentare, regularizări de creastă osoasă, expunerea chirurgicală a unui dinte neerupt, repoziționarea și imobilizarea unui dinte luxat, precum și manopere chirurgicale cu scop protetic (alveotomie, alveoplastie, excizie și repoziționare de țesut, adâncire de șanțuri paralinguale și vestibulare, excizie de bride și frenectomii).",
+      },
+    ],
   },
   {
     slug: "dr-maxim-tulbure",
     name: "Dr. Maxim Tulbure",
-    role: "Medic Specialist în Ortodonție și Ortopedie dento-facială",
-    specializations: ["Ortodonție", "Ortopedie dento-facială"],
-    bio: "Medic specialist în ortodonție și ortopedie dento-facială, cu preocupare pentru tratamente ortodontice adaptate atât copiilor, cât și adulților.",
+    role: "Medic Specialist în Ortodonție și Ortopedie Dento-Facială",
+    specializations: ["Ortodonție (Invisalign, Spark)", "Implantologie digitală ghidată", "Chirurgie dento-alveolară", "Protetică digitală"],
+    bio: "Inserează implanturi ghidate digital din 2018 și coordonează partea de implantologie a cabinetului, de la cazuri simple până la reabilitări complete pe implanturi (All-on-4 și All-on-6), cu sinus lift și augmentări osoase atunci când e nevoie. Este medic specialist în ortodonție și ortopedie dento-facială, iar în cabinet se ocupă de alignerele transparente Invisalign și Spark. Face și protetică digitală.",
     image: "/images/team/dr-maxim-tulbure.jpg",
+    competencies: ["Ortodonție (Invisalign, Spark)", "Implantologie digitală ghidată (din 2018)", "Chirurgie dento-alveolară, sinus lift, augmentări osoase, All-on-4 / All-on-6", "Protetică digitală"],
+    education: [
+      { period: "2011–2014", title: "Facultatea de Medicină Dentară", place: "Universitatea de Medicină și Farmacie, Iași" },
+      { period: "2014–2017", title: "Facultatea de Medicină Dentară", place: "Universitatea Dunărea de Jos din Galați" },
+      { period: "2018", title: "Competență în Implantologie", place: "Direcția de Sănătate Publică București" },
+      { period: "2019–2022", title: "Rezidențiat în Ortodonție și Ortopedie Dento-Facială", place: "Universitatea de Medicină și Farmacie, Craiova" },
+      { period: "2024–2026 · în curs", title: "Rezidențiat în Chirurgie Dento-Alveolară", place: "Universitatea de Medicină și Farmacie" },
+    ],
+    credentialGroups: [
+      {
+        heading: "Formare continuă și certificări",
+        items: [
+          "Speaker la cursul „Hard and Soft Tissue Management” (București, 2025)",
+          "Formare internațională: Seoul (Coreea), Aarhus (Danemarca), Baku (Azerbaidjan), Chișinău (Moldova)",
+          "Credite EMC (Educație Medicală Continuă) acreditate CMSR",
+        ],
+      },
+      {
+        heading: "Implantologie și regenerare osoasă",
+        items: [
+          "Chirurgie ghidată digital și realizarea ghidurilor chirurgicale (Neo Biotech, 2024)",
+          "Regenerare osoasă ghidată (GBR) și tehnica Khoury de augmentare osoasă (Meisinger Bone Management Academy, 2024)",
+          "All-on-X: reabilitare orală completă pe implanturi (MegaGen MINEC, 2024)",
+          "Congrese internaționale de implantologie: ICX International Days, Baku (2023); Dentis World Implant Symposium, Seoul (2022)",
+          "Sinus lifting: teorie și hands-on (ImplantoDays, 2022)",
+        ],
+      },
+      {
+        heading: "Ortodonție și alignere transparente",
+        items: [
+          "ClearCorrect (Straumann Group, 2025)",
+          "Medic acreditat SPARK Clear Aligner System (Ormco, 2022)",
+          "Back to Basics: Orthodontics & Biomechanics (AREO, 2022)",
+          "Curs modular de ortodonție, 112 ore de pregătire teoretică și practică (2020–2021)",
+        ],
+      },
+      {
+        heading: "Chirurgie și tehnici complementare",
+        items: [
+          "Criterii de succes în chirurgia dento-alveolară, Colegiul Medicilor Stomatologi Iași, 8 credite EMC (2024)",
+          "Laser diodă în stomatologie (Woodpecker, 2024)",
+          "Chirurgie ortognatică: curs hands-on, Aarhus University Hospital, Danemarca (2023)",
+        ],
+      },
+      {
+        heading: "Membru în asociații profesionale",
+        items: ["Membru TEOS (din 2022)", "Membru AREO (Asociația Română de Excelență în Ortodonție)"],
+      },
+    ],
   },
   {
     slug: "maria-voicu",
