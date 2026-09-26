@@ -661,6 +661,22 @@ export const teamMembers = [
     bio: "Tehnician dentar cu experiență îndelungată, responsabil de execuția lucrărilor protetice ale clinicii.",
     image: "/images/team/mela-moraru.jpg",
   },
+  {
+    slug: "dr-andreea-culea",
+    name: "Dr. Andreea Culea",
+    role: "Medic Stomatolog Generalist",
+    specializations: ["Stomatologie generală"],
+    bio: "Medic stomatolog generalist în cadrul echipei ArtDent, implicată în tratamentele curente de zi cu zi: consultații, tratamente conservative și controale periodice, cu atenție la confortul fiecărui pacient.",
+    image: "/images/team/dr-andreea-culea.jpg",
+  },
+  {
+    slug: "lavinia-greu",
+    name: "Lavinia Greu",
+    role: "Recepționer",
+    specializations: ["Recepție și programări"],
+    bio: "Primul contact al pacienților cu clinica ArtDent, se ocupă de programări și de buna organizare a activității din recepție.",
+    image: "/images/team/lavinia-greu.jpg",
+  },
 ];
 
 // Cele 3 afișate pe homepage, sub medicul coordonator — restul echipei e listat integral pe /echipa.

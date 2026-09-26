@@ -16,8 +16,18 @@ export function Footer() {
             Clinică stomatologică cu servicii complete: implantologie, ortodonție, estetică dentară și profilaxie.
           </p>
           <div style={{ display: "flex", gap: 10, paddingTop: 4 }}>
-            <a href={site.facebookUrl} target="_blank" rel="noreferrer" aria-label="Facebook" className="social-circle" style={{ width: 38, height: 38, borderRadius: "50%", display: "grid", placeItems: "center", fontSize: 12, fontWeight: 600 }}>FB</a>
-            <a href={site.instagramUrl} target="_blank" rel="noreferrer" aria-label="Instagram" className="social-circle" style={{ width: 38, height: 38, borderRadius: "50%", display: "grid", placeItems: "center", fontSize: 12, fontWeight: 600 }}>IG</a>
+            <a href={site.facebookUrl} target="_blank" rel="noreferrer" aria-label="Facebook" className="social-circle" style={{ width: 38, height: 38, borderRadius: "50%", display: "grid", placeItems: "center" }}>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.54V9.86c0-2.52 1.49-3.92 3.77-3.92 1.09 0 2.24.2 2.24.2v2.48h-1.26c-1.24 0-1.63.78-1.63 1.58v1.9h2.78l-.44 2.91h-2.34V22c4.78-.76 8.44-4.92 8.44-9.94Z" />
+              </svg>
+            </a>
+            <a href={site.instagramUrl} target="_blank" rel="noreferrer" aria-label="Instagram" className="social-circle" style={{ width: 38, height: 38, borderRadius: "50%", display: "grid", placeItems: "center" }}>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+                <rect x="3" y="3" width="18" height="18" rx="5" />
+                <circle cx="12" cy="12" r="4" />
+                <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none" />
+              </svg>
+            </a>
           </div>
         </div>
 
