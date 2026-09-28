@@ -8,6 +8,7 @@ export function Footer() {
         display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "clamp(28px, 4vw, 56px)",
       }}>
         <div style={{ display: "grid", gap: 14, alignContent: "start" }}>
+          <img src="/images/mascota-artdent.svg" alt="Mascota ArtDent" width={40} height={50} style={{ display: "block" }} />
           <span style={{ display: "flex", alignItems: "baseline", gap: 9 }}>
             <span className="font-display" style={{ fontSize: 27, color: "var(--teal-deep)" }}>ArtDent</span>
             <span className="font-mono-label" style={{ fontSize: 10.5, fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold-label)" }}>{site.city}</span>
@@ -77,12 +78,9 @@ export function Footer() {
       </div>
 
       <div style={{ padding: "clamp(16px, 3vw, 32px) 0 clamp(4px, 1vw, 12px)", textAlign: "center", overflow: "visible" }}>
-        <img src="/images/mascota-artdent.svg" alt="Mascota ArtDent" width={56} height={70} style={{ display: "inline-block", marginBottom: 4 }} />
-        <div>
-          <span className="font-display" style={{ fontSize: "clamp(80px, 15vw, 220px)", lineHeight: 1.15, color: "var(--teal-deep)", letterSpacing: "-0.01em", whiteSpace: "nowrap" }}>
-            ArtDent Slobozia
-          </span>
-        </div>
+        <span className="font-display" style={{ fontSize: "clamp(80px, 15vw, 220px)", lineHeight: 1.15, color: "var(--teal-deep)", letterSpacing: "-0.01em", whiteSpace: "nowrap" }}>
+          ArtDent Slobozia
+        </span>
       </div>
     </footer>
   );

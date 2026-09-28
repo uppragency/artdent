@@ -39,7 +39,7 @@ export function Header() {
         display: "flex", alignItems: "center", justifyContent: "space-between", gap: 20, borderRadius: 999,
       }}>
         <a href="/" className="logo-mark" style={{ display: "flex", alignItems: "center", gap: 8, color: "#fff", flex: "0 0 auto" }}>
-          <img src="/images/mascota-artdent.svg" alt="Mascota ArtDent" width={30} height={38} style={{ display: "block" }} />
+          <img src="/images/mascota-artdent.svg" alt="Mascota ArtDent" width={45} height={57} style={{ display: "block" }} />
           <span className="font-display logo-text" style={{ fontSize: 26, letterSpacing: "-0.01em" }}>ArtDent</span>
         </a>
 
