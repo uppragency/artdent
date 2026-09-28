@@ -22,7 +22,7 @@ export function Team() {
         </h2>
       </div>
 
-      <div style={{
+      <div className="team-desktop-feature" style={{
         display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 0,
         border: "1px solid var(--line)", borderRadius: 10, overflow: "hidden", background: "var(--card)",
       }}>
@@ -47,7 +47,7 @@ export function Team() {
         </div>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16, marginTop: 20 }}>
+      <div className="team-desktop-feature" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16, marginTop: 20 }}>
         {featuredTeamMembers.map((t) => (
           <a key={t.slug} href={`/echipa/${t.slug}`} className="team-card" style={{ display: "grid", border: "1px solid var(--line)", borderRadius: 8, overflow: "hidden", background: "var(--card)", color: "inherit" }}>
             {mediaLoaded ? (
@@ -58,6 +58,22 @@ export function Team() {
             <div style={{ padding: 18, display: "grid", gap: 6 }}>
               <span style={{ fontSize: 16, fontWeight: 600, letterSpacing: "-0.01em" }}>{t.name}</span>
               <span style={{ fontSize: 13, color: "var(--gold-label)", fontWeight: 500 }}>{t.role}</span>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <div className="team-mobile-grid">
+        {[doctor, ...featuredTeamMembers].map((t) => (
+          <a key={t.slug} href={`/echipa/${t.slug}`} className="team-card" style={{ display: "grid", border: "1px solid var(--line)", borderRadius: 8, overflow: "hidden", background: "var(--card)", color: "inherit" }}>
+            {mediaLoaded ? (
+              <div role="img" aria-label={`Portret ${t.name}, ${t.role} la ArtDent Slobozia`} style={{ aspectRatio: "4/3", backgroundImage: `url(${t.image})`, backgroundSize: "cover", backgroundPosition: "center" }} />
+            ) : (
+              <div style={{ aspectRatio: "4/3", background: "oklch(0.93 0.008 190)", animation: "artdentSkeleton 1.4s ease-in-out infinite" }} />
+            )}
+            <div style={{ padding: 14, display: "grid", gap: 4 }}>
+              <span style={{ fontSize: 14.5, fontWeight: 600, letterSpacing: "-0.01em" }}>{t.name}</span>
+              <span style={{ fontSize: 12, color: "var(--gold-label)", fontWeight: 500 }}>{t.role}</span>
             </div>
           </a>
         ))}

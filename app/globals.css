@@ -201,6 +201,27 @@ h2.font-display::after {
 .services-carousel-track::-webkit-scrollbar { display: none; }
 .carousel-arrow:hover { border-color: oklch(0.72 0.07 88); color: var(--teal-600); }
 
+/* FirstVisit: desktop grid vs mobile carousel */
+.firstvisit-mobile-carousel { display: none; }
+@media (max-width: 640px) {
+  .firstvisit-desktop-grid { display: none !important; }
+  .firstvisit-mobile-carousel { display: block; }
+}
+
+/* Pricing: 2x2 grid on mobile */
+@media (max-width: 640px) {
+  .pricing-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
+  .pricing-card { padding: 16px !important; gap: 8px !important; }
+  .pricing-card span.font-display { font-size: 22px !important; }
+}
+
+/* Team: desktop feature vs mobile 2x2 grid */
+.team-mobile-grid { display: none; }
+@media (max-width: 640px) {
+  .team-desktop-feature { display: none !important; }
+  .team-mobile-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+}
+
 .social-circle { border: 1px solid var(--line); color: var(--teal-deep); transition: border-color .2s ease, color .2s ease; }
 .social-circle:hover { border-color: oklch(0.72 0.07 88); color: var(--gold-label); }
 

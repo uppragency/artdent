@@ -16,7 +16,7 @@ export function Concept() {
         gap: "clamp(32px, 5vw, 72px)", alignItems: "start",
       }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1.25fr", gap: 12, alignItems: "start" }}>
-          <div style={{ background: "var(--teal-deep)", borderRadius: 6, padding: 22, minHeight: 190, display: "grid", alignContent: "end", gap: 10 }}>
+          <div style={{ background: "var(--teal-deep)", borderRadius: 6, padding: 22, minHeight: 340, display: "grid", alignContent: "end", gap: 10 }}>
             <span style={{ fontSize: 10.5, fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)" }}>Dental boutique</span>
             <span className="font-display" style={{ fontSize: 25, lineHeight: 1.12, color: "oklch(0.97 0.012 90)" }}>Implantologie avansată în Slobozia</span>
           </div>

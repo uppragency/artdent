@@ -7,7 +7,7 @@ import { supabase } from "@/lib/supabase";
 
 type Review = { text: string; name: string; initial: string; meta: string };
 
-const PER_PAGE = 3;
+const PER_PAGE = 1;
 
 export function Testimonials() {
   const { openModal } = useBooking();
