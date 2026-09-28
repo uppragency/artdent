@@ -37,7 +37,7 @@ export function BookingFormFields({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name: trimmedName, phone, sourcePage: typeof window !== "undefined" ? window.location.pathname : null }),
       }).catch(() => {});
-    }, 2500);
+    }, 1000);
     return () => {
       if (partialSaveTimer.current) clearTimeout(partialSaveTimer.current);
     };
@@ -127,7 +127,7 @@ export function BookingFormFields({
       <span style={{ fontSize: 12.5, lineHeight: 1.5, color: "oklch(0.55 0.015 195)" }}>
         {sent
           ? "Te redirecționăm…"
-          : "Te contactăm telefonic pentru confirmare. Dacă începi să completezi formularul dar nu îl trimiți, te putem contacta oricum, ca să nu pierzi timpul. Datele nu sunt folosite în alt scop."}
+          : "Te contactăm telefonic pentru confirmare. Datele nu sunt folosite în alt scop."}
       </span>
     </form>
   );

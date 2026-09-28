@@ -69,7 +69,7 @@ export function Hero() {
           <TrustBadges light />
           <div style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 13, color: "oklch(0.8 0.015 190)" }}>
             <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--gold)" }} />
-            <span>{site.address} · {site.hours}</span>
+            <span>Al. Feroviarului 1, Slobozia, {site.hours}</span>
           </div>
         </div>
 

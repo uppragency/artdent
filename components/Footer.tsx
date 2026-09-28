@@ -51,7 +51,8 @@ export function Footer() {
 
         <div style={{ display: "grid", gap: 12, alignContent: "start" }}>
           <span className="font-display" style={{ fontSize: 18, color: "var(--teal-deep)" }}>Contact &amp; Program</span>
-          <p style={{ margin: 0, fontSize: 14.5, lineHeight: 1.7, color: "var(--muted)", maxWidth: "34ch" }}>{site.address}. {site.hours}.</p>
+          <p style={{ margin: 0, fontSize: 14.5, lineHeight: 1.6, color: "var(--muted)", maxWidth: "34ch" }}>{site.address}.</p>
+          <p style={{ margin: 0, fontSize: 12.5, lineHeight: 1.5, color: "var(--muted)" }}>{site.hours}</p>
           <a href={site.phoneHref} className="footer-link" style={{ fontSize: 15.5, fontWeight: 600 }}>{site.phone}</a>
         </div>
 
