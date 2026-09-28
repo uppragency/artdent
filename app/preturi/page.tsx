@@ -4,6 +4,8 @@ import { PageHero } from "@/components/PageHero";
 import { priceCategories, site } from "@/lib/data";
 import { pageMetadata } from "@/lib/seo";
 
+export const dynamic = "force-dynamic";
+
 export const metadata = pageMetadata({
   title: "Prețuri — ArtDent Slobozia",
   description: "Tarife orientative pentru tratamentele ArtDent Slobozia: implantologie, ortodonție, estetică dentară, chirurgie și profilaxie. Plan de tratament clar de la prima consultație.",
@@ -53,7 +55,17 @@ export default function PreturiPage() {
       />
       <section style={{ background: "linear-gradient(180deg, #fff 0%, var(--white-to-blue) 100%)" }}>
         <div style={{ maxWidth: 1000, margin: "0 auto", padding: "clamp(56px, 7vw, 88px) clamp(16px, 3vw, 40px)" }}>
+          <span style={{
+            display: "inline-flex", alignItems: "center", gap: 8, fontSize: 13, fontWeight: 600,
+            padding: "8px 16px", borderRadius: 999, background: "var(--gold-tint-bg)", color: "var(--gold-tint-text)", marginBottom: 24,
+          }}>
+            <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--gold-label)" }} />
+            Prețuri valabile în {new Date().toLocaleDateString("ro-RO", { month: "long", year: "numeric" })}
+          </span>
           <PriceList />
+          <p style={{ marginTop: 28, fontSize: 14, color: "var(--muted)" }}>
+            Te întrebi cât te costă să amâni un tratament? <a href="/cat-costa-sa-amani-un-tratament">Vezi comparația orientativă →</a>
+          </p>
         </div>
       </section>
 

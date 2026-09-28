@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import { useBooking } from "@/lib/booking-context";
@@ -10,10 +10,37 @@ export function BookingFormFields({
 }: { dark?: boolean; autoFocusName?: boolean; defaultName?: string; defaultPhone?: string }) {
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
+  const [name, setName] = useState(defaultName);
+  const [phone, setPhone] = useState(defaultPhone);
   const router = useRouter();
   const { closeModal } = useBooking();
+  const partialSaveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const lastSavedPhone = useRef<string | null>(null);
 
   const inputBg = dark ? "oklch(0.995 0.003 190)" : "#fff";
+
+  // Salvează automat un lead parțial dacă vizitatorul completează numele și
+  // telefonul dar nu trimite formularul — recepția poate suna înapoi, în loc
+  // să piardă complet pacienții nesiguri care abandonează formularul.
+  useEffect(() => {
+    if (sent) return;
+    if (partialSaveTimer.current) clearTimeout(partialSaveTimer.current);
+    const trimmedName = name.trim();
+    const digits = phone.replace(/[^0-9]/g, "");
+    if (trimmedName.length < 2 || digits.length < 9) return;
+    partialSaveTimer.current = setTimeout(() => {
+      if (lastSavedPhone.current === digits) return;
+      lastSavedPhone.current = digits;
+      fetch("/api/partial-lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: trimmedName, phone, sourcePage: typeof window !== "undefined" ? window.location.pathname : null }),
+      }).catch(() => {});
+    }, 2500);
+    return () => {
+      if (partialSaveTimer.current) clearTimeout(partialSaveTimer.current);
+    };
+  }, [name, phone, sent]);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -30,6 +57,11 @@ export function BookingFormFields({
       message: null,
       source_page: sourcePage,
     });
+    fetch("/api/partial-lead", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ phone }),
+    }).catch(() => {});
     // Notificare email către clinică — dezactivată temporar la cererea clientului.
     // Pentru reactivare, decomentează blocul de mai jos (rămâne fire-and-forget,
     // nu blochează redirect-ul pacientului).
@@ -63,10 +95,10 @@ export function BookingFormFields({
   return (
     <form onSubmit={handleSubmit} style={{ display: "grid", gap: 14 }}>
       <label style={labelStyle}>Nume
-        <input name="name" type="text" required placeholder="Numele tău" defaultValue={defaultName} style={inputStyle} autoFocus={autoFocusName} />
+        <input name="name" type="text" required placeholder="Numele tău" value={name} onChange={(e) => setName(e.target.value)} style={inputStyle} autoFocus={autoFocusName} />
       </label>
       <label style={labelStyle}>Telefon
-        <input name="phone" type="tel" required placeholder="07xx xxx xxx" defaultValue={defaultPhone} style={inputStyle} />
+        <input name="phone" type="tel" required placeholder="07xx xxx xxx" value={phone} onChange={(e) => setPhone(e.target.value)} style={inputStyle} />
       </label>
       <label style={labelStyle}>Email
         <input name="email" type="email" placeholder="nume@exemplu.ro" style={inputStyle} />
@@ -87,7 +119,9 @@ export function BookingFormFields({
         ) : sending ? "Se trimite…" : "Trimite solicitarea"}
       </button>
       <span style={{ fontSize: 12.5, lineHeight: 1.5, color: "oklch(0.55 0.015 195)" }}>
-        {sent ? "Te redirecționăm…" : "Te contactăm telefonic pentru confirmare. Datele nu sunt folosite în alt scop."}
+        {sent
+          ? "Te redirecționăm…"
+          : "Te contactăm telefonic pentru confirmare. Dacă începi să completezi formularul dar nu îl trimiți, te putem contacta oricum, ca să nu pierzi timpul. Datele nu sunt folosite în alt scop."}
       </span>
     </form>
   );

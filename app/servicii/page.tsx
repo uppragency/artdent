@@ -65,6 +65,13 @@ export default async function ServiciiPage() {
         </div>
 
         <h2 className="font-display" style={{ marginTop: 56, fontSize: "clamp(26px, 3.6vw, 38px)", color: "var(--teal-deep)" }}>Tarife orientative</h2>
+        <span style={{
+          display: "inline-flex", alignItems: "center", gap: 8, fontSize: 13, fontWeight: 600,
+          padding: "8px 16px", borderRadius: 999, background: "var(--gold-tint-bg)", color: "var(--gold-tint-text)", marginTop: 12,
+        }}>
+          <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--gold-label)" }} />
+          Prețuri valabile în {new Date().toLocaleDateString("ro-RO", { month: "long", year: "numeric" })}
+        </span>
         <div style={{ marginTop: 24, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 16 }}>
           {pricing.map((p) => (
             <div key={p.title} style={{

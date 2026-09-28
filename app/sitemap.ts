@@ -1,7 +1,10 @@
 import type { MetadataRoute } from "next";
 import { site, services, doctor, teamMembers, galleryItems, beforeAfterCases, guides } from "@/lib/data";
+import { getPublishedPosts } from "@/lib/blog";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export const dynamic = "force-dynamic";
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = site.siteUrl;
   const now = new Date();
 
@@ -26,12 +29,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/intrebari-frecvente`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     { url: `${base}/contact`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/ghiduri`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${base}/blog`, lastModified: now, changeFrequency: "weekly", priority: 0.65 },
     { url: `${base}/frica-de-dentist`, lastModified: now, changeFrequency: "yearly", priority: 0.5 },
     { url: `${base}/prima-vizita-copil-la-dentist`, lastModified: now, changeFrequency: "yearly", priority: 0.5 },
     { url: `${base}/ingrijire-dentara-varstnici`, lastModified: now, changeFrequency: "yearly", priority: 0.5 },
     { url: `${base}/prima-consultatie-adulti`, lastModified: now, changeFrequency: "yearly", priority: 0.5 },
     { url: `${base}/urgente-dentare`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     { url: `${base}/traumatism-dentar`, lastModified: now, changeFrequency: "yearly", priority: 0.5 },
+    { url: `${base}/cat-costa-sa-amani-un-tratament`, lastModified: now, changeFrequency: "yearly", priority: 0.55 },
+    { url: `${base}/artdent-kids`, lastModified: now, changeFrequency: "yearly", priority: 0.5 },
     { url: `${base}/dentist-slobozia`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/cabinet-stomatologic-ialomita`, lastModified: now, changeFrequency: "monthly", priority: 0.75 },
     { url: `${base}/harta-site`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
@@ -62,5 +68,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.55,
   }));
 
-  return [...staticPages, ...servicePages, ...teamPages, ...guidePages];
+  const posts = await getPublishedPosts();
+  const blogPages: MetadataRoute.Sitemap = posts.map((p) => ({
+    url: `${base}/blog/${p.slug}`,
+    lastModified: p.published_at,
+    changeFrequency: "monthly",
+    priority: 0.5,
+  }));
+
+  return [...staticPages, ...servicePages, ...teamPages, ...guidePages, ...blogPages];
 }

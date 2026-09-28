@@ -35,6 +35,16 @@ const extraGuides = [
     title: "Urgențe dentare",
     excerpt: "Ce faci și pe cine suni în caz de durere, dinte spart sau umflătură.",
   },
+  {
+    slug: "cat-costa-sa-amani-un-tratament",
+    title: "Cât te costă să amâni un tratament",
+    excerpt: "Comparație orientativă între costul unui tratament acum și costul lui dacă îl amâni.",
+  },
+  {
+    slug: "artdent-kids",
+    title: "ArtDent Kids",
+    excerpt: "O poveste prietenoasă, cu mascota ArtDent, pentru cei mici înainte de prima vizită.",
+  },
 ];
 
 export default function GhiduriPage() {

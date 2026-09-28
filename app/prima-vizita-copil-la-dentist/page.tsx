@@ -42,6 +42,9 @@ export default function PrimaVizitaCopilPage() {
             <p style={{ marginTop: 16, fontSize: 14, color: "var(--muted)" }}>
               Pentru întrebări înainte de programare, ne poți contacta la <a href={site.phoneHref} className="font-mono-label">{site.phone}</a>.
             </p>
+            <p style={{ marginTop: 8, fontSize: 14, color: "var(--muted)" }}>
+              Ai un copil mic? <a href="/artdent-kids">Arată-i povestea ArtDent Kids →</a>
+            </p>
           </div>
         </div>
       </section>

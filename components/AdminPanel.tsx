@@ -3,6 +3,14 @@
 import { useEffect, useMemo, useState } from "react";
 import { getPushStatus, subscribeToPush } from "@/lib/push-client";
 
+type PartialLead = {
+  id: string;
+  name: string;
+  phone: string;
+  source_page: string | null;
+  created_at: string;
+};
+
 type Submission = {
   id: string;
   name: string;
@@ -53,6 +61,8 @@ export function AdminPanel() {
   const [showArchived, setShowArchived] = useState(false);
   const [pushStatus, setPushStatus] = useState<"granted" | "denied" | "default" | "unsupported">("default");
   const [pushBusy, setPushBusy] = useState(false);
+  const [partialLeads, setPartialLeads] = useState<PartialLead[]>([]);
+  const [showPartialLeads, setShowPartialLeads] = useState(false);
 
   useEffect(() => {
     getPushStatus().then(setPushStatus);
@@ -75,6 +85,7 @@ export function AdminPanel() {
       const data = await res.json();
       setSubmissions(data.submissions || []);
       setStatus("unlocked");
+      loadPartialLeads();
     } else if (res.status === 401) {
       setStatus("locked");
     } else {
@@ -82,6 +93,23 @@ export function AdminPanel() {
       setServerError(data.error || `Eroare server (${res.status})`);
       setStatus("server_error");
     }
+  }
+
+  async function loadPartialLeads() {
+    const res = await fetch("/api/admin/partial-leads");
+    if (res.ok) {
+      const data = await res.json();
+      setPartialLeads(data.leads || []);
+    }
+  }
+
+  async function dismissPartialLead(id: string) {
+    setPartialLeads((prev) => prev.filter((l) => l.id !== id));
+    await fetch("/api/admin/partial-leads", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id }),
+    });
   }
 
   useEffect(() => {
@@ -321,6 +349,46 @@ export function AdminPanel() {
           ))}
         </div>
       </div>
+
+      {/* Lead-uri parțiale (formular completat, netrimis) */}
+      {partialLeads.length > 0 && (
+        <div style={{ border: "1px solid oklch(0.75 0.1 88)", borderRadius: 8, background: "oklch(0.97 0.03 88)", marginBottom: 24, overflow: "hidden" }}>
+          <button
+            onClick={() => setShowPartialLeads((v) => !v)}
+            style={{
+              width: "100%", fontFamily: "inherit", cursor: "pointer", background: "none", border: 0,
+              padding: "14px 18px", display: "flex", justifyContent: "space-between", alignItems: "center",
+            }}
+          >
+            <span style={{ fontSize: 13.5, fontWeight: 600, color: "oklch(0.4 0.1 88)" }}>
+              {partialLeads.length} {partialLeads.length === 1 ? "persoană a început" : "persoane au început"} formularul dar nu l-au trimis — merită un telefon
+            </span>
+            <span style={{ fontSize: 13, color: "oklch(0.4 0.1 88)" }}>{showPartialLeads ? "Ascunde ▲" : "Vezi ▼"}</span>
+          </button>
+          {showPartialLeads && (
+            <div style={{ padding: "0 18px 16px", display: "grid", gap: 8 }}>
+              {partialLeads.map((l) => (
+                <div key={l.id} style={{
+                  display: "flex", flexWrap: "wrap", gap: 10, alignItems: "center", justifyContent: "space-between",
+                  padding: "10px 14px", borderRadius: 6, background: "#fff", border: "1px solid var(--line)",
+                }}>
+                  <span style={{ fontSize: 13.5 }}>
+                    <strong>{l.name}</strong> · {l.phone}
+                    {l.source_page && <span style={{ color: "var(--muted)" }}> · {l.source_page}</span>}
+                  </span>
+                  <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+                    <a href={whatsappLink(l.phone, l.name) || "#"} target="_blank" rel="noreferrer" style={{ fontSize: 12.5, fontWeight: 600 }}>WhatsApp</a>
+                    <a href={`tel:${l.phone}`} style={{ fontSize: 12.5, fontWeight: 600 }}>Sună</a>
+                    <button onClick={() => dismissPartialLead(l.id)} className="btn-outline-dark" style={{ fontFamily: "inherit", fontSize: 11.5, fontWeight: 600, padding: "6px 10px", borderRadius: 4, background: "none", cursor: "pointer" }}>
+                      Rezolvat
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Filtre */}
       <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginBottom: 18, alignItems: "center" }}>

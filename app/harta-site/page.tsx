@@ -19,6 +19,7 @@ const groups: { title: string; links: { label: string; href: string }[] }[] = [
       { label: "Prețuri", href: "/preturi" },
       { label: "Testimoniale & rezultate", href: "/testimoniale" },
       { label: "Întrebări frecvente", href: "/intrebari-frecvente" },
+      { label: "Blog", href: "/blog" },
       { label: "Contact", href: "/contact" },
       { label: "Dentist Slobozia", href: "/dentist-slobozia" },
       { label: "Cabinet stomatologic Ialomița", href: "/cabinet-stomatologic-ialomita" },
@@ -43,6 +44,8 @@ const groups: { title: string; links: { label: string; href: string }[] }[] = [
       { label: "Îngrijire dentară pentru vârstnici", href: "/ingrijire-dentara-varstnici" },
       { label: "Prima consultație (adulți)", href: "/prima-consultatie-adulti" },
       { label: "Traumatism dentar", href: "/traumatism-dentar" },
+      { label: "Cât te costă să amâni un tratament", href: "/cat-costa-sa-amani-un-tratament" },
+      { label: "ArtDent Kids", href: "/artdent-kids" },
     ],
   },
   {

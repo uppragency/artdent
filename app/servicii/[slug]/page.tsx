@@ -85,9 +85,20 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
             ))}
           </div>
 
-          <OpenBookingButton className="btn-teal" style={{ display: "inline-flex", marginTop: 32, fontSize: 15.5, fontWeight: 600, padding: "16px 28px", borderRadius: 4 }}>
-            Programează o consultație
-          </OpenBookingButton>
+          <div style={{ marginTop: 32, display: "flex", flexWrap: "wrap", gap: 12 }}>
+            <OpenBookingButton className="btn-teal" style={{ display: "inline-flex", fontSize: 15.5, fontWeight: 600, padding: "16px 28px", borderRadius: 4 }}>
+              Programează o consultație
+            </OpenBookingButton>
+            <a
+              href={`https://wa.me/${site.whatsappNumber}?text=${encodeURIComponent(`Bună, vreau o programare pentru ${service.title.toLowerCase()}.`)}`}
+              target="_blank"
+              rel="noreferrer"
+              className="btn-outline-dark"
+              style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: 15.5, fontWeight: 600, padding: "16px 28px", borderRadius: 4 }}
+            >
+              Scrie-ne pe WhatsApp
+            </a>
+          </div>
           <div style={{ marginTop: 16 }}>
             <TrustBadges light={false} />
           </div>
@@ -127,7 +138,10 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         <ServiceFaq items={detail.faq} />
 
         <p style={{ marginTop: 28, fontSize: 14, color: "var(--muted)" }}>
-          Nu ai găsit răspunsul căutat? Sună-ne la <a href={site.phoneHref} className="font-mono-label">{site.phone}</a> sau scrie-ne pe WhatsApp.
+          Nu ai găsit răspunsul căutat? Sună-ne la <a href={site.phoneHref} className="font-mono-label">{site.phone}</a> sau{" "}
+          <a href={`https://wa.me/${site.whatsappNumber}?text=${encodeURIComponent(`Bună, am o întrebare despre ${service.title.toLowerCase()}.`)}`} target="_blank" rel="noreferrer">
+            scrie-ne pe WhatsApp
+          </a>.
         </p>
 
         {crossSell.length > 0 && (
