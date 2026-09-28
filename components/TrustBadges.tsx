@@ -1,4 +1,4 @@
-const badges = ["Răspuns în aceeași zi", "Fără obligații", "Prima discuție e gratuită"];
+const badges = ["Răspuns în aceeași zi", "Fără obligații", "Plan de tratament transparent"];
 
 export function TrustBadges({ light = true }: { light?: boolean }) {
   const color = light ? "oklch(0.9 0.02 130)" : "var(--muted)";

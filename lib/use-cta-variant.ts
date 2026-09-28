@@ -6,7 +6,7 @@ const STORAGE_KEY = "artdent_cta_variant";
 
 export const CTA_VARIANTS = {
   a: "Programează-te acum",
-  b: "Solicită o consultație gratuită",
+  b: "Solicită o consultație",
 } as const;
 
 export type CtaVariant = keyof typeof CTA_VARIANTS;

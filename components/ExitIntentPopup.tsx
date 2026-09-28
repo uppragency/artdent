@@ -84,7 +84,7 @@ export function ExitIntentPopup() {
           className="btn-teal"
           style={{ fontSize: 15.5, fontWeight: 600, padding: "15px 26px", borderRadius: 4, minHeight: 50, width: "100%", border: 0, cursor: "pointer", fontFamily: "inherit" }}
         >
-          Solicită consultația gratuită
+          Solicită o consultație
         </button>
       </div>
     </div>
