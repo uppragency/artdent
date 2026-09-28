@@ -8,7 +8,7 @@ export function BlogViewTracker({ slug }: { slug: string }) {
   useEffect(() => {
     if (sent.current) return;
     sent.current = true;
-    fetch("/api/blog/view", {
+    fetch("/api/noutati/view", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ slug }),

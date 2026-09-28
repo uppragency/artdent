@@ -29,7 +29,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/intrebari-frecvente`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     { url: `${base}/contact`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/ghiduri`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${base}/blog`, lastModified: now, changeFrequency: "weekly", priority: 0.65 },
+    { url: `${base}/noutati`, lastModified: now, changeFrequency: "weekly", priority: 0.65 },
     { url: `${base}/frica-de-dentist`, lastModified: now, changeFrequency: "yearly", priority: 0.5 },
     { url: `${base}/prima-vizita-copil-la-dentist`, lastModified: now, changeFrequency: "yearly", priority: 0.5 },
     { url: `${base}/ingrijire-dentara-varstnici`, lastModified: now, changeFrequency: "yearly", priority: 0.5 },
@@ -70,7 +70,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const posts = await getPublishedPosts();
   const blogPages: MetadataRoute.Sitemap = posts.map((p) => ({
-    url: `${base}/blog/${p.slug}`,
+    url: `${base}/noutati/${p.slug}`,
     lastModified: p.published_at,
     changeFrequency: "monthly",
     priority: 0.5,

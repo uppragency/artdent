@@ -39,7 +39,7 @@ export function Footer() {
             { label: "Despre noi", href: "/despre" },
             { label: "Prețuri", href: "/preturi" },
             { label: "Întrebări frecvente", href: "/intrebari-frecvente" },
-            { label: "Blog", href: "/blog" },
+            { label: "Noutăți", href: "/noutati" },
             { label: "Verifică programarea", href: "/verifica-programare" },
           ].map((l, i, arr) => (
             <a key={l.label} href={l.href} className="footer-link" style={{

@@ -14,9 +14,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const post = await getPostBySlug(slug);
   if (!post) return {};
   return pageMetadata({
-    title: `${post.title} — Blog ArtDent Slobozia`,
+    title: `${post.title} — Noutăți ArtDent Slobozia`,
     description: post.meta_description,
-    path: `/blog/${slug}`,
+    path: `/noutati/${slug}`,
     image: post.cover_image || undefined,
   });
 }
@@ -40,7 +40,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     image: post.cover_image ? `${site.siteUrl}${post.cover_image}` : `${site.siteUrl}/images/og-image.jpg`,
     author: { "@type": "Organization", name: "ArtDent Slobozia" },
     publisher: { "@type": "Organization", name: "ArtDent Slobozia" },
-    mainEntityOfPage: `${site.siteUrl}/blog/${slug}`,
+    mainEntityOfPage: `${site.siteUrl}/noutati/${slug}`,
   };
 
   return (
@@ -48,10 +48,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
       <BlogViewTracker slug={slug} />
       <PageHero
-        eyebrow="Blog"
+        eyebrow="Noutăți"
         title={post.title}
-        crumbs={[{ label: "Acasă", href: "/" }, { label: "Blog", href: "/blog" }, { label: post.title }]}
-        currentPath={`/blog/${slug}`}
+        crumbs={[{ label: "Acasă", href: "/" }, { label: "Noutăți", href: "/noutati" }, { label: post.title }]}
+        currentPath={`/noutati/${slug}`}
       />
       <section style={{ background: "linear-gradient(180deg, #fff 0%, var(--white-to-blue) 100%)" }}>
         <div style={{

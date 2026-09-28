@@ -1,4 +1,4 @@
-import { guides } from "@/lib/data";
+import { guides, extraGuides } from "@/lib/data";
 import { PageHero } from "@/components/PageHero";
 import { BookingSection } from "@/components/BookingSection";
 import { Reveal } from "@/components/Reveal";
@@ -8,44 +8,6 @@ export const metadata = {
   description: "Ghiduri utile despre sănătatea orală: sensibilitate dentară, bruxism, alimentație, sarcină, diabet și afecțiuni cardiovasculare.",
   alternates: { canonical: "/ghiduri" },
 };
-
-const extraGuides = [
-  {
-    slug: "frica-de-dentist",
-    title: "Frica de dentist",
-    excerpt: "Cum abordăm anxietatea legată de vizitele la dentist, pas cu pas, în ritmul tău.",
-  },
-  {
-    slug: "prima-vizita-copil-la-dentist",
-    title: "Prima vizită a copilului la dentist",
-    excerpt: "Cum pregătești copilul pentru prima vizită și ce se întâmplă efectiv în cabinet.",
-  },
-  {
-    slug: "ingrijire-dentara-varstnici",
-    title: "Îngrijire dentară pentru vârstnici",
-    excerpt: "Particularitățile sănătății orale la vârsta a treia: uscăciune bucală, proteze, recesii gingivale.",
-  },
-  {
-    slug: "prima-consultatie-adulti",
-    title: "Prima consultație (adulți)",
-    excerpt: "Ce se întâmplă pas cu pas la prima ta vizită la ArtDent Slobozia.",
-  },
-  {
-    slug: "urgente-dentare",
-    title: "Urgențe dentare",
-    excerpt: "Ce faci și pe cine suni în caz de durere, dinte spart sau umflătură.",
-  },
-  {
-    slug: "cat-costa-sa-amani-un-tratament",
-    title: "Cât te costă să amâni un tratament",
-    excerpt: "Comparație orientativă între costul unui tratament acum și costul lui dacă îl amâni.",
-  },
-  {
-    slug: "artdent-kids",
-    title: "ArtDent Kids",
-    excerpt: "O poveste prietenoasă, cu mascota ArtDent, pentru cei mici înainte de prima vizită.",
-  },
-];
 
 export default function GhiduriPage() {
   return (

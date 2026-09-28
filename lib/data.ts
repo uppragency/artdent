@@ -795,6 +795,51 @@ export const guides: Guide[] = [
   },
 ];
 
+// Ghiduri publicate ca pagini de sine stătătoare (nu prin generateStaticParams
+// din `guides` de mai sus). Listate în /ghiduri și /noutati.
+export const extraGuides = [
+  {
+    slug: "frica-de-dentist",
+    title: "Frica de dentist",
+    excerpt: "Cum abordăm anxietatea legată de vizitele la dentist, pas cu pas, în ritmul tău.",
+  },
+  {
+    slug: "prima-vizita-copil-la-dentist",
+    title: "Prima vizită a copilului la dentist",
+    excerpt: "Cum pregătești copilul pentru prima vizită și ce se întâmplă efectiv în cabinet.",
+  },
+  {
+    slug: "ingrijire-dentara-varstnici",
+    title: "Îngrijire dentară pentru vârstnici",
+    excerpt: "Particularitățile sănătății orale la vârsta a treia: uscăciune bucală, proteze, recesii gingivale.",
+  },
+  {
+    slug: "prima-consultatie-adulti",
+    title: "Prima consultație (adulți)",
+    excerpt: "Ce se întâmplă pas cu pas la prima ta vizită la ArtDent Slobozia.",
+  },
+  {
+    slug: "urgente-dentare",
+    title: "Urgențe dentare",
+    excerpt: "Ce faci și pe cine suni în caz de durere, dinte spart sau umflătură.",
+  },
+  {
+    slug: "traumatism-dentar",
+    title: "Traumatism dentar",
+    excerpt: "Ce faci imediat, pas cu pas, dacă un dinte s-a spart sau a fost scos accidental.",
+  },
+  {
+    slug: "cat-costa-sa-amani-un-tratament",
+    title: "Cât te costă să amâni un tratament",
+    excerpt: "Comparație orientativă între costul unui tratament acum și costul lui dacă îl amâni.",
+  },
+  {
+    slug: "artdent-kids",
+    title: "ArtDent Kids",
+    excerpt: "O poveste prietenoasă, cu mascota ArtDent, pentru cei mici înainte de prima vizită.",
+  },
+];
+
 export const faqs = [
   { q: "Cât durează un tratament cu implant dentar?", a: "De la inserarea implantului până la coroana finală trec în general 3–6 luni, timp necesar integrării osoase. În cazurile favorabile se poate atașa o coroană provizorie chiar în ziua intervenției, astfel încât să nu rămâi fără dinte." },
   { q: "Intervenția este dureroasă?", a: "Intervenția se face cu anestezie locală, deci nu simți durere în timpul ei. Disconfortul de după este ușor și se controlează cu medicația recomandată; îți explicăm exact la ce să te aștepți în primele 48 de ore." },

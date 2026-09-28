@@ -19,7 +19,7 @@ const groups: { title: string; links: { label: string; href: string }[] }[] = [
       { label: "Prețuri", href: "/preturi" },
       { label: "Testimoniale & rezultate", href: "/testimoniale" },
       { label: "Întrebări frecvente", href: "/intrebari-frecvente" },
-      { label: "Blog", href: "/blog" },
+      { label: "Noutăți", href: "/noutati" },
       { label: "Contact", href: "/contact" },
       { label: "Dentist Slobozia", href: "/dentist-slobozia" },
       { label: "Cabinet stomatologic Ialomița", href: "/cabinet-stomatologic-ialomita" },
