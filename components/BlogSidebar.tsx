@@ -18,7 +18,7 @@ export function BlogSidebar({ topPosts }: { topPosts: BlogPost[] }) {
           <ol style={{ margin: 0, padding: 0, listStyle: "none", display: "grid", gap: 14 }}>
             {topPosts.map((p, i) => (
               <li key={p.id}>
-                <a href={`/blog/${p.slug}`} style={{ display: "flex", gap: 10, alignItems: "baseline" }}>
+                <a href={`/noutati/${p.slug}`} style={{ display: "flex", gap: 10, alignItems: "baseline" }}>
                   <span className="font-mono-label" style={{ fontSize: 13, color: "var(--gold-label-2)", flex: "0 0 auto" }}>
                     {String(i + 1).padStart(2, "0")}
                   </span>
