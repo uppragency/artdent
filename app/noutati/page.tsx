@@ -49,7 +49,7 @@ export default async function NoutatiPage() {
                       border: "1px solid var(--line)", background: "var(--card)", color: "inherit",
                     }}>
                       {p.cover_image && (
-                        <div style={{ aspectRatio: "16/7", borderRadius: 6, overflow: "hidden", backgroundImage: `url(${p.cover_image})`, backgroundSize: "cover", backgroundPosition: "center" }} />
+                        <div role="img" aria-label={p.title} style={{ aspectRatio: "16/7", borderRadius: 6, overflow: "hidden", backgroundImage: `url(${p.cover_image})`, backgroundSize: "cover", backgroundPosition: "center" }} />
                       )}
                       <span className="font-mono-label" style={{ fontSize: 11.5, color: "var(--gold-label-2)" }}>{formatDate(p.published_at)}</span>
                       <h3 className="font-display" style={{ margin: 0, fontSize: "clamp(21px, 2.4vw, 27px)", color: "var(--teal-deep)" }}>{p.title}</h3>

@@ -2,7 +2,7 @@ import { PageHero } from "@/components/PageHero";
 import { BookingSection } from "@/components/BookingSection";
 import { OpenBookingButton } from "@/components/OpenBookingButton";
 import { services, site } from "@/lib/data";
-import { pageMetadata } from "@/lib/seo";
+import { pageMetadata, dentistJsonLd } from "@/lib/seo";
 
 export const metadata = pageMetadata({
   title: "Cabinet stomatologic Ialomița — ArtDent Slobozia",
@@ -11,22 +11,18 @@ export const metadata = pageMetadata({
 });
 
 const nearbyTowns = [
-  { city: "Fetești", distance: "≈ 30 km", time: "≈ 30 min" },
+  { city: "Amara", distance: "≈ 9 km", time: "≈ 10 min", href: "/dentist-amara" },
+  { city: "Fetești", distance: "≈ 30 km", time: "≈ 30 min", href: "/dentist-fetesti" },
   { city: "Urziceni", distance: "≈ 35 km", time: "≈ 35 min" },
-  { city: "Țăndărei", distance: "≈ 25 km", time: "≈ 25 min" },
+  { city: "Țăndărei", distance: "≈ 25 km", time: "≈ 25 min", href: "/dentist-tandarei" },
   { city: "Călărași", distance: "≈ 65 km", time: "≈ 60 min" },
 ];
 
-export default function CabinetStomatologicIalomitaPage() {
-  const localBusinessJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Dentist",
-    name: "ArtDent Slobozia",
-    address: { "@type": "PostalAddress", streetAddress: site.address, addressLocality: site.city, addressRegion: "Ialomița", addressCountry: "RO" },
-    telephone: site.phone,
+export default async function CabinetStomatologicIalomitaPage() {
+  const localBusinessJsonLd = await dentistJsonLd({
     url: `${site.siteUrl}/cabinet-stomatologic-ialomita`,
-    areaServed: ["Slobozia", "Fetești", "Urziceni", "Țăndărei", "Călărași", "Ialomița"],
-  };
+    areaServed: ["Slobozia", "Fetești", "Urziceni", "Țăndărei", "Amara", "Călărași", "Ialomița"],
+  });
 
   return (
     <>
@@ -52,12 +48,20 @@ export default function CabinetStomatologicIalomitaPage() {
             Distanțe orientative din județ
           </h2>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 12, marginBottom: 36 }}>
-            {nearbyTowns.map((t) => (
-              <div key={t.city} style={{ border: "1px solid var(--line)", borderRadius: 8, padding: "14px 18px", background: "var(--card)" }}>
-                <p style={{ margin: 0, fontSize: 15, fontWeight: 600, color: "var(--teal-deep)" }}>{t.city}</p>
-                <p style={{ margin: "4px 0 0", fontSize: 13, color: "var(--muted)" }}>{t.distance} · {t.time} cu mașina</p>
-              </div>
-            ))}
+            {nearbyTowns.map((t) => {
+              const cardStyle = { display: "block" as const, border: "1px solid var(--line)", borderRadius: 8, padding: "14px 18px", background: "var(--card)", color: "inherit" };
+              const inner = (
+                <>
+                  <p style={{ margin: 0, fontSize: 15, fontWeight: 600, color: "var(--teal-deep)" }}>{t.city}{t.href && " →"}</p>
+                  <p style={{ margin: "4px 0 0", fontSize: 13, color: "var(--muted)" }}>{t.distance} · {t.time} cu mașina</p>
+                </>
+              );
+              return t.href ? (
+                <a key={t.city} href={t.href} style={cardStyle}>{inner}</a>
+              ) : (
+                <div key={t.city} style={cardStyle}>{inner}</div>
+              );
+            })}
           </div>
           <p style={{ margin: "-24px 0 36px", fontSize: 12, color: "var(--muted)" }}>Distanțe și timpi aproximativi, cu variații în funcție de trafic.</p>
 

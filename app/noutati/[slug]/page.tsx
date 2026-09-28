@@ -62,7 +62,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           <article>
             <span className="font-mono-label" style={{ fontSize: 11.5, color: "var(--gold-label-2)" }}>{formatDate(post.published_at)}</span>
             {post.cover_image && (
-              <div style={{ marginTop: 16, aspectRatio: "16/7", borderRadius: 8, overflow: "hidden", backgroundImage: `url(${post.cover_image})`, backgroundSize: "cover", backgroundPosition: "center" }} />
+              <div role="img" aria-label={post.title} style={{ marginTop: 16, aspectRatio: "16/7", borderRadius: 8, overflow: "hidden", backgroundImage: `url(${post.cover_image})`, backgroundSize: "cover", backgroundPosition: "center" }} />
             )}
             <div
               className="blog-content"

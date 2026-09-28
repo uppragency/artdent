@@ -7,14 +7,26 @@ import { supabase } from "@/lib/supabase";
 
 type Review = { text: string; name: string; initial: string; meta: string };
 
-const PER_PAGE = 1;
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 640px)");
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+  return isMobile;
+}
 
 export function Testimonials() {
   const { openModal } = useBooking();
   const [reviews, setReviews] = useState<Review[]>(fallbackReviews);
   const [page, setPage] = useState(0);
-  const pageCount = Math.max(1, Math.ceil(reviews.length / PER_PAGE));
-  const visibleReviews = reviews.slice(page * PER_PAGE, page * PER_PAGE + PER_PAGE);
+  const isMobile = useIsMobile();
+  const perPage = isMobile ? 1 : 3;
+  const pageCount = Math.max(1, Math.ceil(reviews.length / perPage));
+  const visibleReviews = reviews.slice(page * perPage, page * perPage + perPage);
 
   useEffect(() => {
     let cancelled = false;
@@ -60,7 +72,7 @@ export function Testimonials() {
 
   useEffect(() => {
     setPage(0);
-  }, [reviews]);
+  }, [reviews, perPage]);
 
   useEffect(() => {
     const t = setInterval(() => setPage((p) => (p + 1) % pageCount), 5000);

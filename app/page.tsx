@@ -1,4 +1,5 @@
-import { site, weeklyHours, services } from "@/lib/data";
+import { site } from "@/lib/data";
+import { dentistJsonLd } from "@/lib/seo";
 import { Hero } from "@/components/Hero";
 import { FirstVisit } from "@/components/FirstVisit";
 import { Solutions } from "@/components/Solutions";
@@ -11,64 +12,12 @@ import { Team } from "@/components/Team";
 import { Faq } from "@/components/Faq";
 import { Testimonials } from "@/components/Testimonials";
 import { BookingSection } from "@/components/BookingSection";
-import { getGoogleAggregateRating } from "@/lib/google-rating";
-
-const DAY_MAP: Record<string, string> = {
-  "Luni": "Monday", "Marți": "Tuesday", "Miercuri": "Wednesday",
-  "Joi": "Thursday", "Vineri": "Friday", "Sâmbătă": "Saturday", "Duminică": "Sunday",
-};
-
-function openingHoursSpecification() {
-  return weeklyHours
-    .filter((d) => d.hours !== "Închis")
-    .map((d) => {
-      const [opens, closes] = d.hours.split("–").map((s) => s.trim());
-      return {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: DAY_MAP[d.day],
-        opens,
-        closes,
-      };
-    });
-}
-
 export default async function HomePage() {
-  const aggregateRating = await getGoogleAggregateRating();
-
-  const dentistJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Dentist",
-    name: "ArtDent Slobozia",
-    alternateName: site.legalName,
-    url: site.siteUrl,
-    image: `${site.siteUrl}/images/og-image.jpg`,
-    telephone: site.phoneHref.replace("tel:", ""),
-    email: site.email,
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "Al. Feroviarului 1",
-      addressLocality: "Slobozia",
-      addressRegion: "Ialomița",
-      postalCode: "920030",
-      addressCountry: "RO",
-    },
-    openingHoursSpecification: openingHoursSpecification(),
-    medicalSpecialty: services.map((s) => s.title),
-    sameAs: [site.facebookUrl, site.instagramUrl],
-    ...(aggregateRating
-      ? {
-          aggregateRating: {
-            "@type": "AggregateRating",
-            ratingValue: aggregateRating.ratingValue,
-            reviewCount: aggregateRating.reviewCount,
-          },
-        }
-      : {}),
-  };
+  const jsonLd = await dentistJsonLd({ url: site.siteUrl });
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(dentistJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <link rel="preload" as="image" href="/images/consultatie-dentist-slobozia.jpg" />
       <Hero />
       <FirstVisit />

@@ -2,7 +2,7 @@ import { PageHero } from "@/components/PageHero";
 import { BookingSection } from "@/components/BookingSection";
 import { OpenBookingButton } from "@/components/OpenBookingButton";
 import { services, usp, site } from "@/lib/data";
-import { pageMetadata } from "@/lib/seo";
+import { pageMetadata, dentistJsonLd } from "@/lib/seo";
 
 export const metadata = pageMetadata({
   title: "Dentist Slobozia — ArtDent, cabinet stomatologic cu servicii complete",
@@ -10,15 +10,8 @@ export const metadata = pageMetadata({
   path: "/dentist-slobozia",
 });
 
-export default function DentistSloboziaPage() {
-  const localBusinessJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Dentist",
-    name: "ArtDent Slobozia",
-    address: { "@type": "PostalAddress", streetAddress: site.address, addressLocality: site.city, addressCountry: "RO" },
-    telephone: site.phone,
-    url: `${site.siteUrl}/dentist-slobozia`,
-  };
+export default async function DentistSloboziaPage() {
+  const localBusinessJsonLd = await dentistJsonLd({ url: `${site.siteUrl}/dentist-slobozia` });
 
   return (
     <>

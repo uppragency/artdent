@@ -57,6 +57,8 @@ export function ServicesGrid() {
             }}
           >
             <div
+              role="img"
+              aria-label={`${s.title} — ArtDent Slobozia`}
               style={{
                 aspectRatio: "4 / 3", backgroundImage: `url(${s.image})`, backgroundSize: "cover",
                 backgroundPosition: "center", position: "relative",
