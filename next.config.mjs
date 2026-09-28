@@ -13,7 +13,7 @@ const securityHeaders = [
       "font-src 'self' https://fonts.gstatic.com",
       "img-src 'self' data: https:",
       "frame-src 'self' https://www.google.com https://maps.google.com",
-      "connect-src 'self' https://*.supabase.co https://www.google-analytics.com https://vitals.vercel-insights.com",
+      "connect-src 'self' https://*.supabase.co https://www.google-analytics.com https://analytics.google.com https://vitals.vercel-insights.com",
     ].join("; "),
   },
 ];
