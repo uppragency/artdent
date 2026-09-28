@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
 import { doctor, teamMembers, site } from "@/lib/data";
-import { PageHero } from "@/components/PageHero";
 import { OpenBookingButton } from "@/components/OpenBookingButton";
 import { BookingSection } from "@/components/BookingSection";
 import { pageMetadata } from "@/lib/seo";
@@ -55,89 +54,115 @@ export default async function TeamMemberPage({ params }: { params: Promise<{ slu
     url: `${site.siteUrl}/echipa/${slug}`,
   };
 
+  const crumbs = [{ label: "Acasă", href: "/" }, { label: "Echipă", href: "/echipa" }, { label: member.name }];
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: crumbs.map((c, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: c.label,
+      item: `${site.siteUrl}${c.href || `/echipa/${slug}`}`,
+    })),
+  };
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }} />
-      <PageHero
-        eyebrow="Echipa medicală"
-        title={member.name}
-        crumbs={[{ label: "Acasă", href: "/" }, { label: "Echipă", href: "/echipa" }, { label: member.name }]}
-        currentPath={`/echipa/${slug}`}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
+
+      <section style={{
+        position: "relative", marginTop: -86, minHeight: 460, overflow: "hidden",
+        backgroundImage: `url(${member.image})`, backgroundSize: "cover", backgroundPosition: "center",
+        display: "flex", alignItems: "flex-end",
+      }}>
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(2,20,25,0.15) 0%, rgba(10,20,18,0.92) 100%)" }} />
+        <div style={{ position: "relative", maxWidth: 1280, margin: "0 auto", width: "100%", padding: "calc(86px + clamp(40px, 6vw, 72px)) clamp(16px, 3vw, 40px) clamp(32px, 5vw, 56px)" }}>
+          <nav aria-label="breadcrumb" style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 8, marginBottom: 16, fontSize: 13 }}>
+            {crumbs.map((c, i) => (
+              <span key={c.label} style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                {i > 0 && <span style={{ color: "rgba(255,255,255,0.4)" }}>/</span>}
+                {c.href ? (
+                  <a href={c.href} style={{ color: "rgba(255,255,255,0.72)" }}>{c.label}</a>
+                ) : (
+                  <span style={{ color: "var(--gold)" }}>{c.label}</span>
+                )}
+              </span>
+            ))}
+          </nav>
+          <span className="font-mono-label" style={{ display: "block", marginBottom: 8, fontSize: 12, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)" }}>
+            {member.role}
+          </span>
+          <h1 className="font-display" style={{ margin: 0, fontWeight: 400, fontSize: "clamp(38px, 6vw, 76px)", lineHeight: 1, color: "#fff" }}>
+            {member.name}
+          </h1>
+        </div>
+      </section>
 
       <section style={{ background: "linear-gradient(180deg, #fff 0%, var(--white-to-blue) 100%)" }}>
-        <div style={{ maxWidth: 760, margin: "0 auto", padding: "clamp(56px, 7vw, 88px) clamp(16px, 3vw, 40px)" }}>
-          <div role="img" aria-label={`Portret ${member.name}, ${member.role} la ArtDent Slobozia`} style={{ aspectRatio: "16/9", borderRadius: 10, marginBottom: 32, backgroundImage: `url(${member.image})`, backgroundSize: "cover", backgroundPosition: "center" }} />
+        <div className="profile-grid-c" style={{ maxWidth: 1100, margin: "0 auto", padding: "clamp(48px, 6vw, 72px) clamp(16px, 3vw, 40px)", display: "grid", gridTemplateColumns: "1fr 320px", gap: "clamp(32px, 5vw, 56px)" }}>
+          <div style={{ display: "grid", gap: 32 }}>
+            <p style={{ margin: 0, fontSize: 17, lineHeight: 1.8, color: "var(--muted-3)", maxWidth: "62ch" }}>{member.bio}</p>
 
-          <span style={{ fontSize: 11, fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold-label)" }}>{member.role}</span>
-          <p style={{ marginTop: 16, fontSize: 16, lineHeight: 1.75, color: "var(--muted-2)", maxWidth: "60ch" }}>{member.bio}</p>
-
-          <div style={{ marginTop: 20, display: "flex", flexWrap: "wrap", gap: 8 }}>
-            {member.specializations.map((s) => (
-              <span key={s} style={{ fontSize: 13, fontWeight: 500, padding: "8px 14px", borderRadius: 999, background: "var(--gold-tint-bg)", color: "var(--gold-tint-text)" }}>{s}</span>
-            ))}
-          </div>
-
-          {experience && experience.length > 0 && (
-            <div style={{ marginTop: 40 }}>
-              <h2 className="font-display" style={{ margin: "0 0 18px", fontWeight: 400, fontSize: "clamp(20px, 2.4vw, 26px)", color: "var(--teal-deep)" }}>
-                Experiență profesională
-              </h2>
-              <div style={{ display: "grid", gap: 14 }}>
-                {experience.map((e) => (
-                  <div key={e.title} style={{ border: "1px solid var(--line)", borderRadius: 8, padding: "18px 20px", background: "var(--card)" }}>
-                    <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", gap: 8, marginBottom: 6 }}>
-                      <span style={{ fontSize: 15.5, fontWeight: 600, color: "var(--teal-deep)" }}>{e.title}</span>
-                      <span className="font-mono-label" style={{ fontSize: 11.5, color: "var(--gold-label-2)" }}>{e.period}</span>
-                    </div>
-                    <p style={{ margin: 0, fontSize: 14, lineHeight: 1.65, color: "var(--muted-2)" }}>{e.text}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {education && education.length > 0 && (
-            <div style={{ marginTop: 40 }}>
-              <h2 className="font-display" style={{ margin: "0 0 18px", fontWeight: 400, fontSize: "clamp(20px, 2.4vw, 26px)", color: "var(--teal-deep)" }}>
-                Educație și formare
-              </h2>
-              <div style={{ display: "grid", gap: 10 }}>
-                {education.map((e, i) => (
-                  <div key={i} style={{ display: "flex", gap: 16, borderTop: i === 0 ? "1px solid var(--line-2)" : undefined, borderBottom: "1px solid var(--line-2)", padding: "14px 0" }}>
-                    <span className="font-mono-label" style={{ fontSize: 12, color: "var(--gold-label-2)", flex: "0 0 auto", minWidth: 110 }}>{e.period}</span>
-                    <div>
-                      <div style={{ fontSize: 14.5, fontWeight: 600, color: "var(--ink)" }}>{e.title}</div>
-                      <div style={{ fontSize: 13, color: "var(--muted)" }}>{e.place}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {credentialGroups && credentialGroups.length > 0 && (
-            <div style={{ marginTop: 40, display: "grid", gap: 28 }}>
-              {credentialGroups.map((g) => (
-                <div key={g.heading}>
-                  <h3 style={{ margin: "0 0 12px", fontSize: 16.5, fontWeight: 600, color: "var(--teal-deep)" }}>{g.heading}</h3>
-                  <ul style={{ margin: 0, padding: "0 0 0 18px", display: "grid", gap: 8 }}>
-                    {g.items.map((it, i) => (
-                      <li key={i} style={{ fontSize: 14, lineHeight: 1.6, color: "var(--muted-2)" }}>{it}</li>
-                    ))}
-                  </ul>
-                </div>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+              {member.specializations.map((s) => (
+                <span key={s} style={{ fontSize: 13, fontWeight: 500, padding: "8px 14px", borderRadius: 999, background: "var(--gold-tint-bg)", color: "var(--gold-tint-text)" }}>{s}</span>
               ))}
             </div>
-          )}
 
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 32 }}>
-            <OpenBookingButton className="btn-teal" style={{ fontSize: 15.5, fontWeight: 600, padding: "16px 28px", borderRadius: 4, display: "inline-flex", alignItems: "center" }}>
-              Programează o consultație
+            {experience && experience.length > 0 && (
+              <div style={{ display: "grid", gap: 18 }}>
+                <h2 className="font-display" style={{ margin: 0, fontWeight: 400, fontSize: "clamp(22px, 2.8vw, 30px)", color: "var(--teal-deep)" }}>
+                  Experiență profesională
+                </h2>
+                {experience.map((e, i) => (
+                  <div key={e.title} style={{ display: "grid", gridTemplateColumns: "140px 1fr", gap: 20, padding: "20px 0", borderTop: i === 0 ? "1px solid var(--line)" : "1px solid var(--line)" }}>
+                    <span className="font-mono-label" style={{ fontSize: 12.5, color: "var(--gold-label-2)" }}>{e.period}</span>
+                    <div>
+                      <div style={{ fontSize: 16.5, fontWeight: 600, color: "var(--teal-deep)" }}>{e.title}</div>
+                      <div style={{ fontSize: 14, lineHeight: 1.6, color: "var(--muted-2)", marginTop: 4 }}>{e.text}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {credentialGroups && credentialGroups.length > 0 && (
+              <div style={{ display: "grid", gap: 28 }}>
+                {credentialGroups.map((g) => (
+                  <div key={g.heading}>
+                    <h3 style={{ margin: "0 0 12px", fontSize: 16.5, fontWeight: 600, color: "var(--teal-deep)" }}>{g.heading}</h3>
+                    <ul style={{ margin: 0, padding: "0 0 0 18px", display: "grid", gap: 8 }}>
+                      {g.items.map((it, i) => (
+                        <li key={i} style={{ fontSize: 14, lineHeight: 1.6, color: "var(--muted-2)" }}>{it}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <div style={{ display: "grid", gap: 16, alignContent: "start" }}>
+            <OpenBookingButton className="btn-teal" style={{ display: "flex", fontSize: 15, fontWeight: 700, padding: "16px 24px", borderRadius: 4, textAlign: "center", justifyContent: "center" }}>
+              Programează consultație
             </OpenBookingButton>
-            <a href={site.phoneHref} className="btn-outline-dark" style={{ fontSize: 15.5, fontWeight: 600, padding: "16px 28px", borderRadius: 4, display: "inline-flex", alignItems: "center" }}>
+            <a href={site.phoneHref} className="btn-outline-dark" style={{ display: "flex", fontSize: 15, fontWeight: 700, padding: "16px 24px", borderRadius: 4, textAlign: "center", justifyContent: "center" }}>
               {site.phone}
             </a>
+
+            {education && education.length > 0 && (
+              <>
+                <div style={{ height: 1, background: "var(--line)", margin: "12px 0" }} />
+                <span className="font-mono-label" style={{ fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--gold-label-2)" }}>Educație</span>
+                {education.map((e, i) => (
+                  <div key={i}>
+                    <div style={{ fontSize: 14, fontWeight: 600, color: "var(--ink)" }}>{e.title}</div>
+                    <div style={{ fontSize: 12.5, color: "var(--muted)" }}>{e.place} · {e.period}</div>
+                  </div>
+                ))}
+              </>
+            )}
           </div>
         </div>
       </section>

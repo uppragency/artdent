@@ -215,6 +215,16 @@ h2.font-display::after {
   .pricing-card span.font-display { font-size: 22px !important; }
 }
 
+/* Echipă (listing) — grid stil C: 2 coloane desktop, 1 pe mobil */
+@media (max-width: 640px) {
+  .team-grid-c { grid-template-columns: 1fr !important; }
+}
+
+/* Profil medic — grid stil C: 1 coloană + sidebar pe mobil */
+@media (max-width: 860px) {
+  .profile-grid-c { grid-template-columns: 1fr !important; }
+}
+
 /* Team: desktop feature vs mobile 2x2 grid */
 .team-mobile-grid { display: none; }
 @media (max-width: 640px) {

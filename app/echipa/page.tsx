@@ -22,27 +22,30 @@ export default function EchipaPage() {
       crumbs={[{ label: "Acasă", href: "/" }, { label: "Echipă" }]}
       currentPath="/echipa"
     />
-    <section style={{ background: "linear-gradient(180deg, #fff 0%, var(--white-to-blue) 100%)" }}>
-      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "clamp(56px, 7vw, 88px) clamp(16px, 3vw, 40px)" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 20 }}>
+    <section style={{ background: "var(--teal-deep)", borderRadius: "48px 48px 0 0", marginTop: -48, position: "relative", zIndex: 1 }}>
+      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "clamp(64px, 8vw, 96px) clamp(16px, 3vw, 40px)" }}>
+        <div className="team-grid-c" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 2, background: "rgba(250,246,238,0.15)" }}>
           {all.map((m, i) => (
             <Reveal key={m.slug} delay={i * 70}>
-              <a href={`/echipa/${m.slug}`} className="team-card" style={{ display: "block", border: "1px solid var(--line)", borderRadius: 10, background: "var(--card)", padding: 24, height: "100%", color: "inherit" }}>
-                <div role="img" aria-label={`Portret ${m.name}, ${m.role} la ArtDent Slobozia`} style={{ aspectRatio: "4/3", borderRadius: 6, backgroundImage: `url(${m.image})`, backgroundSize: "cover", backgroundPosition: "center" }} />
-                <p className="font-mono-label" style={{ marginTop: 14, fontSize: 11, color: "var(--gold-label)" }}>{m.role}</p>
-                <h2 className="font-display" style={{ margin: "4px 0 0", fontSize: 22, color: "var(--teal-deep)" }}>{m.name}</h2>
-                <p style={{ margin: "8px 0 0", fontSize: 14, color: "var(--muted-2)" }}>{m.bio}</p>
-                <div style={{ marginTop: 12, display: "flex", flexWrap: "wrap", gap: 6 }}>
-                  {m.specializations.map((s) => (
-                    <span key={s} style={{ fontSize: 12.5, padding: "6px 12px", borderRadius: 999, background: "var(--gold-tint-bg)", color: "var(--gold-tint-text)" }}>{s}</span>
-                  ))}
+              <a
+                href={`/echipa/${m.slug}`}
+                aria-label={`Portret ${m.name}, ${m.role} la ArtDent Slobozia`}
+                style={{
+                  position: "relative", display: "block", aspectRatio: "4/3", overflow: "hidden",
+                  backgroundImage: `url(${m.image})`, backgroundSize: "cover", backgroundPosition: "center",
+                }}
+              >
+                <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, transparent 40%, rgba(15,25,23,0.88) 100%)" }} />
+                <div style={{ position: "absolute", left: 24, right: 24, bottom: 22, display: "grid", gap: 4 }}>
+                  <span className="font-mono-label" style={{ fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--gold)" }}>{m.role}</span>
+                  <h2 className="font-display" style={{ margin: 0, fontWeight: 400, fontSize: "clamp(24px, 2.6vw, 34px)", lineHeight: 1.05, color: "#fff" }}>{m.name}</h2>
                 </div>
               </a>
             </Reveal>
           ))}
         </div>
 
-        <OpenBookingButton className="btn-teal" style={{ display: "inline-flex", marginTop: 40, fontSize: 15.5, fontWeight: 600, padding: "16px 28px", borderRadius: 4 }}>
+        <OpenBookingButton className="btn-outline-light-noscale" style={{ display: "inline-flex", marginTop: 40, fontSize: 15.5, fontWeight: 600, padding: "16px 28px", borderRadius: 4 }}>
           Programează o consultație
         </OpenBookingButton>
       </div>
