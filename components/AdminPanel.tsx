@@ -41,9 +41,18 @@ const STATUS_OPTIONS: { value: string; label: string; bg: string; text: string }
   { value: "anulata", label: "Anulată", bg: "oklch(0.93 0.04 27)", text: "oklch(0.45 0.15 27)" },
 ];
 
+const PARTIAL_STATUS_META = { value: "lead_partial", label: "Lead parțial", bg: "oklch(0.94 0.05 88)", text: "oklch(0.45 0.08 88)" };
+
+const FILTER_STATUS_OPTIONS = [...STATUS_OPTIONS, PARTIAL_STATUS_META];
+
 function statusMeta(value: string) {
+  if (value === "lead_partial") return PARTIAL_STATUS_META;
   return STATUS_OPTIONS.find((s) => s.value === value) || STATUS_OPTIONS[0];
 }
+
+type Row =
+  | ({ kind: "submission" } & Submission)
+  | ({ kind: "partial" } & Pick<PartialLead, "id" | "name" | "phone" | "source_page" | "created_at">);
 
 export function AdminPanel() {
   const [status, setStatus] = useState<"checking" | "locked" | "unlocked" | "server_error">("checking");
@@ -62,7 +71,6 @@ export function AdminPanel() {
   const [pushStatus, setPushStatus] = useState<"granted" | "denied" | "default" | "unsupported">("default");
   const [pushBusy, setPushBusy] = useState(false);
   const [partialLeads, setPartialLeads] = useState<PartialLead[]>([]);
-  const [showPartialLeads, setShowPartialLeads] = useState(false);
 
   useEffect(() => {
     getPushStatus().then(setPushStatus);
@@ -207,22 +215,33 @@ export function AdminPanel() {
 
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
-    const list = submissions.filter((s) => {
-      if (!showArchived && s.archived) return false;
-      if (q && !(s.name?.toLowerCase().includes(q) || s.phone?.toLowerCase().includes(q))) return false;
-      if (statusFilter !== "toate" && s.status !== statusFilter) return false;
-      const d = new Date(s.created_at);
+    const rows: Row[] = [
+      ...submissions.map((s): Row => ({ kind: "submission", ...s })),
+      ...partialLeads.map((l): Row => ({ kind: "partial", id: l.id, name: l.name, phone: l.phone, source_page: l.source_page, created_at: l.created_at })),
+    ];
+    const list = rows.filter((r) => {
+      if (r.kind === "submission" && !showArchived && r.archived) return false;
+      if (q && !(r.name?.toLowerCase().includes(q) || r.phone?.toLowerCase().includes(q))) return false;
+      if (statusFilter !== "toate") {
+        if (statusFilter === "lead_partial") {
+          if (r.kind !== "partial") return false;
+        } else if (r.kind !== "submission" || r.status !== statusFilter) {
+          return false;
+        }
+      }
+      const d = new Date(r.created_at);
       if (dateFrom && d < new Date(dateFrom)) return false;
       if (dateTo && d > new Date(dateTo + "T23:59:59")) return false;
       return true;
     });
+    const statusOf = (r: Row) => (r.kind === "submission" ? r.status : "lead_partial");
     const sorted = [...list].sort((a, b) => {
       if (sortBy === "data_asc") return new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
-      if (sortBy === "status") return a.status.localeCompare(b.status);
+      if (sortBy === "status") return statusOf(a).localeCompare(statusOf(b));
       return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
     });
     return sorted;
-  }, [submissions, search, dateFrom, dateTo, statusFilter, sortBy, showArchived]);
+  }, [submissions, partialLeads, search, dateFrom, dateTo, statusFilter, sortBy, showArchived]);
 
   if (status === "checking") {
     return <p style={{ padding: 40, fontSize: 14, color: "var(--muted)" }}>Se încarcă…</p>;
@@ -350,44 +369,10 @@ export function AdminPanel() {
         </div>
       </div>
 
-      {/* Lead-uri parțiale (formular completat, netrimis) */}
       {partialLeads.length > 0 && (
-        <div style={{ border: "1px solid oklch(0.75 0.1 88)", borderRadius: 8, background: "oklch(0.97 0.03 88)", marginBottom: 24, overflow: "hidden" }}>
-          <button
-            onClick={() => setShowPartialLeads((v) => !v)}
-            style={{
-              width: "100%", fontFamily: "inherit", cursor: "pointer", background: "none", border: 0,
-              padding: "14px 18px", display: "flex", justifyContent: "space-between", alignItems: "center",
-            }}
-          >
-            <span style={{ fontSize: 13.5, fontWeight: 600, color: "oklch(0.4 0.1 88)" }}>
-              {partialLeads.length} {partialLeads.length === 1 ? "persoană a început" : "persoane au început"} formularul dar nu l-au trimis — merită un telefon
-            </span>
-            <span style={{ fontSize: 13, color: "oklch(0.4 0.1 88)" }}>{showPartialLeads ? "Ascunde ▲" : "Vezi ▼"}</span>
-          </button>
-          {showPartialLeads && (
-            <div style={{ padding: "0 18px 16px", display: "grid", gap: 8 }}>
-              {partialLeads.map((l) => (
-                <div key={l.id} style={{
-                  display: "flex", flexWrap: "wrap", gap: 10, alignItems: "center", justifyContent: "space-between",
-                  padding: "10px 14px", borderRadius: 6, background: "#fff", border: "1px solid var(--line)",
-                }}>
-                  <span style={{ fontSize: 13.5 }}>
-                    <strong>{l.name}</strong> · {l.phone}
-                    {l.source_page && <span style={{ color: "var(--muted)" }}> · {l.source_page}</span>}
-                  </span>
-                  <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-                    <a href={whatsappLink(l.phone, l.name) || "#"} target="_blank" rel="noreferrer" style={{ fontSize: 12.5, fontWeight: 600 }}>WhatsApp</a>
-                    <a href={`tel:${l.phone}`} style={{ fontSize: 12.5, fontWeight: 600 }}>Sună</a>
-                    <button onClick={() => dismissPartialLead(l.id)} className="btn-outline-dark" style={{ fontFamily: "inherit", fontSize: 11.5, fontWeight: 600, padding: "6px 10px", borderRadius: 4, background: "none", cursor: "pointer" }}>
-                      Rezolvat
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
+        <p style={{ fontSize: 13, color: "oklch(0.45 0.08 88)", fontWeight: 600, marginBottom: 14 }}>
+          {partialLeads.length} {partialLeads.length === 1 ? "lead parțial nerezolvat" : "lead-uri parțiale nerezolvate"} — afișate mai jos, împreună cu programările, cu fundal evidențiat.
+        </p>
       )}
 
       {/* Filtre */}
@@ -402,7 +387,7 @@ export function AdminPanel() {
           style={{ fontFamily: "inherit", fontSize: 14, padding: "10px 14px", borderRadius: 4, border: "1px solid var(--line)" }}
         >
           <option value="toate">Toate statusurile</option>
-          {STATUS_OPTIONS.map((opt) => (
+          {FILTER_STATUS_OPTIONS.map((opt) => (
             <option key={opt.value} value={opt.value}>{opt.label}</option>
           ))}
         </select>
@@ -454,12 +439,16 @@ export function AdminPanel() {
               </tr>
             </thead>
             <tbody>
-              {filtered.map((s) => {
-                const meta = statusMeta(s.status);
-                const isStale = s.status === "noua" && Date.now() - new Date(s.created_at).getTime() > DAY_MS;
-                const wa = whatsappLink(s.phone, s.name);
+              {filtered.map((r) => {
+                const isPartial = r.kind === "partial";
+                const meta = statusMeta(isPartial ? "lead_partial" : r.status);
+                const isStale = !isPartial && r.status === "noua" && Date.now() - new Date(r.created_at).getTime() > DAY_MS;
+                const wa = whatsappLink(r.phone, r.name);
                 return (
-                  <tr key={s.id} style={{ borderTop: "1px solid var(--line)", background: isStale ? "oklch(0.97 0.03 27 / 0.5)" : undefined }}>
+                  <tr key={`${r.kind}-${r.id}`} style={{
+                    borderTop: "1px solid var(--line)",
+                    background: isPartial ? "oklch(0.97 0.03 88 / 0.6)" : isStale ? "oklch(0.97 0.03 27 / 0.5)" : undefined,
+                  }}>
                     <td style={{ padding: "12px 16px", whiteSpace: "nowrap", color: "var(--muted)" }}>
                       {isStale && (
                         <span title="Nerezolvată de peste 24h" style={{
@@ -467,17 +456,17 @@ export function AdminPanel() {
                           background: "oklch(0.55 0.19 27)", marginRight: 8, verticalAlign: "middle",
                         }} />
                       )}
-                      {new Date(s.created_at).toLocaleString("ro-RO")}
+                      {new Date(r.created_at).toLocaleString("ro-RO")}
                     </td>
-                    <td style={{ padding: "12px 16px", fontWeight: 600 }}>{s.name}</td>
+                    <td style={{ padding: "12px 16px", fontWeight: 600 }}>{r.name}</td>
                     <td style={{ padding: "12px 16px" }}>
                       <div style={{ display: "grid", gap: 4 }}>
-                        {s.phone && <a href={`tel:${s.phone}`} style={{ color: "var(--teal-600)" }}>{s.phone}</a>}
-                        {s.email && <a href={`mailto:${s.email}`} style={{ color: "var(--teal-600)", fontSize: 12.5 }}>{s.email}</a>}
-                        {!s.phone && !s.email && "—"}
+                        {r.phone && <a href={`tel:${r.phone}`} style={{ color: "var(--teal-600)" }}>{r.phone}</a>}
+                        {!isPartial && r.email && <a href={`mailto:${r.email}`} style={{ color: "var(--teal-600)", fontSize: 12.5 }}>{r.email}</a>}
+                        {!r.phone && (isPartial || !r.email) && "—"}
                         <div style={{ display: "flex", gap: 8, marginTop: 2 }}>
-                          {s.phone && (
-                            <a href={`tel:${s.phone}`} style={{
+                          {r.phone && (
+                            <a href={`tel:${r.phone}`} style={{
                               fontSize: 11.5, fontWeight: 600, padding: "4px 9px", borderRadius: 999,
                               background: "var(--gold-tint-bg)", color: "var(--gold-tint-text)",
                             }}>Sună</a>
@@ -491,41 +480,64 @@ export function AdminPanel() {
                         </div>
                       </div>
                     </td>
-                    <td style={{ padding: "12px 16px", color: "var(--muted)" }}>{s.source_page || "—"}</td>
+                    <td style={{ padding: "12px 16px", color: "var(--muted)" }}>{r.source_page || "—"}</td>
                     <td style={{ padding: "12px 16px" }}>
-                      <select
-                        value={s.status}
-                        onChange={(e) => updateStatus(s.id, e.target.value)}
-                        style={{
-                          fontFamily: "inherit", fontSize: 13, fontWeight: 600, padding: "7px 10px", borderRadius: 999,
-                          border: "none", background: meta.bg, color: meta.text, cursor: "pointer",
-                        }}
-                      >
-                        {STATUS_OPTIONS.map((opt) => (
-                          <option key={opt.value} value={opt.value}>{opt.label}</option>
-                        ))}
-                      </select>
+                      {isPartial ? (
+                        <span style={{
+                          display: "inline-block", fontSize: 13, fontWeight: 600, padding: "7px 10px", borderRadius: 999,
+                          background: meta.bg, color: meta.text,
+                        }}>{meta.label}</span>
+                      ) : (
+                        <select
+                          value={r.status}
+                          onChange={(e) => updateStatus(r.id, e.target.value)}
+                          style={{
+                            fontFamily: "inherit", fontSize: 13, fontWeight: 600, padding: "7px 10px", borderRadius: 999,
+                            border: "none", background: meta.bg, color: meta.text, cursor: "pointer",
+                          }}
+                        >
+                          {STATUS_OPTIONS.map((opt) => (
+                            <option key={opt.value} value={opt.value}>{opt.label}</option>
+                          ))}
+                        </select>
+                      )}
                     </td>
                     <td style={{ padding: "12px 16px", minWidth: 200 }}>
-                      <textarea
-                        defaultValue={s.note || ""}
-                        onChange={(e) => updateNoteLocal(s.id, e.target.value)}
-                        placeholder="ex: a sunat, reprogramăm marți…"
-                        rows={2}
-                        style={{
-                          fontFamily: "inherit", fontSize: 12.5, padding: "6px 8px", borderRadius: 4,
-                          border: "1px solid var(--line)", width: "100%", resize: "vertical", color: "var(--ink)",
-                        }}
-                      />
+                      {isPartial ? (
+                        <span style={{ fontSize: 12.5, color: "var(--muted)", fontStyle: "italic" }}>
+                          A completat numele și telefonul, dar nu a trimis formularul.
+                        </span>
+                      ) : (
+                        <textarea
+                          defaultValue={r.note || ""}
+                          onChange={(e) => updateNoteLocal(r.id, e.target.value)}
+                          placeholder="ex: a sunat, reprogramăm marți…"
+                          rows={2}
+                          style={{
+                            fontFamily: "inherit", fontSize: 12.5, padding: "6px 8px", borderRadius: 4,
+                            border: "1px solid var(--line)", width: "100%", resize: "vertical", color: "var(--ink)",
+                          }}
+                        />
+                      )}
                     </td>
                     <td style={{ padding: "12px 16px", whiteSpace: "nowrap" }}>
-                      <button
-                        onClick={() => toggleArchived(s.id, !s.archived)}
-                        className="btn-outline-dark"
-                        style={{ fontFamily: "inherit", fontSize: 12, fontWeight: 600, padding: "6px 12px", borderRadius: 4, background: "none", cursor: "pointer" }}
-                      >
-                        {s.archived ? "Dezarhivează" : "Arhivează"}
-                      </button>
+                      {isPartial ? (
+                        <button
+                          onClick={() => dismissPartialLead(r.id)}
+                          className="btn-outline-dark"
+                          style={{ fontFamily: "inherit", fontSize: 12, fontWeight: 600, padding: "6px 12px", borderRadius: 4, background: "none", cursor: "pointer" }}
+                        >
+                          Rezolvat
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => toggleArchived(r.id, !r.archived)}
+                          className="btn-outline-dark"
+                          style={{ fontFamily: "inherit", fontSize: 12, fontWeight: 600, padding: "6px 12px", borderRadius: 4, background: "none", cursor: "pointer" }}
+                        >
+                          {r.archived ? "Dezarhivează" : "Arhivează"}
+                        </button>
+                      )}
                     </td>
                   </tr>
                 );
