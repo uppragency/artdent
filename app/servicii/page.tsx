@@ -89,9 +89,9 @@ export default async function ServiciiPage() {
           <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--gold-label)" }} />
           Prețuri valabile în {new Date().toLocaleDateString("ro-RO", { month: "long", year: "numeric" })}
         </span>
-        <div style={{ marginTop: 24, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 16 }}>
+        <div className="pricing-grid" style={{ marginTop: 24, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 16 }}>
           {pricing.map((p) => (
-            <div key={p.title} style={{
+            <div key={p.title} className="pricing-card" style={{
               display: "grid", gap: 12, padding: 26, borderRadius: 8,
               background: p.popular ? "var(--teal-deep)" : "var(--card)",
               border: `1px solid ${p.popular ? "var(--teal-deep)" : "var(--line)"}`,
