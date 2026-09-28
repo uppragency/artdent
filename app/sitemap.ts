@@ -9,11 +9,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...galleryItems.map((g) => `${base}${g.src}`),
     ...beforeAfterCases.flatMap((c) => [`${base}${c.before}`, `${base}${c.after}`]),
     `${base}/images/og-image.jpg`,
-    `${base}/images/cabinet.jpeg`,
-    `${base}/images/detaliu-tratament.jpg`,
-    `${base}/images/portret-pacient-medic.jpg`,
-    `${base}/images/unit-dentar-vertical.jpg`,
-    `${base}/images/sala-tratament-larg.jpg`,
+    `${base}/images/cabinet-stomatologic-slobozia.jpg`,
+    `${base}/images/detaliu-tratament-dentar-slobozia.jpg`,
+    `${base}/images/consultatie-dentist-slobozia.jpg`,
+    `${base}/images/unit-dentar-cabinet-slobozia.jpg`,
+    `${base}/images/sala-tratament-dentara-slobozia.jpg`,
   ];
 
   const staticPages: MetadataRoute.Sitemap = [
@@ -33,6 +33,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/urgente-dentare`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     { url: `${base}/traumatism-dentar`, lastModified: now, changeFrequency: "yearly", priority: 0.5 },
     { url: `${base}/dentist-slobozia`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${base}/cabinet-stomatologic-ialomita`, lastModified: now, changeFrequency: "monthly", priority: 0.75 },
     { url: `${base}/harta-site`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
     { url: `${base}/termeni-si-conditii`, lastModified: now, changeFrequency: "yearly", priority: 0.2 },
     { url: `${base}/politica-de-confidentialitate`, lastModified: now, changeFrequency: "yearly", priority: 0.2 },

@@ -1,15 +1,47 @@
-import { site } from "@/lib/data";
+import { site, weeklyHours } from "@/lib/data";
 import { BookingFormFields } from "@/components/BookingFormFields";
 import { BookingSection } from "@/components/BookingSection";
 import { PageHero } from "@/components/PageHero";
 import { WeeklySchedule } from "@/components/WeeklySchedule";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = { title: "Contact — ArtDent Slobozia", alternates: { canonical: "/contact" } };
+export const metadata = pageMetadata({
+  title: "Contact — ArtDent Slobozia",
+  description: "Adresă, telefon, program și formular de programare pentru ArtDent Slobozia, Al. Feroviarului 1. Luni–Vineri, 09:00–19:00.",
+  path: "/contact",
+});
+
+const DAY_MAP: Record<string, string> = {
+  "Luni": "Monday", "Marți": "Tuesday", "Miercuri": "Wednesday",
+  "Joi": "Thursday", "Vineri": "Friday", "Sâmbătă": "Saturday", "Duminică": "Sunday",
+};
+
+function openingHoursSpecification() {
+  return weeklyHours
+    .filter((d) => d.hours !== "Închis")
+    .map((d) => {
+      const [opens, closes] = d.hours.split("–").map((s) => s.trim());
+      return { "@type": "OpeningHoursSpecification", dayOfWeek: DAY_MAP[d.day], opens, closes };
+    });
+}
 
 export default async function ContactPage({ searchParams }: { searchParams: Promise<{ name?: string; phone?: string }> }) {
   const params = await searchParams;
+
+  const dentistJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Dentist",
+    name: "ArtDent Slobozia",
+    url: `${site.siteUrl}/contact`,
+    telephone: site.phone,
+    email: site.email,
+    address: { "@type": "PostalAddress", streetAddress: site.address, addressLocality: site.city, addressCountry: "RO" },
+    openingHoursSpecification: openingHoursSpecification(),
+  };
+
   return (
     <>
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(dentistJsonLd) }} />
     <PageHero
       eyebrow="Contact"
       title="Programează-te astăzi"

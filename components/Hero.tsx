@@ -80,24 +80,15 @@ export function Hero() {
         }}>
           <div role="img" aria-label="Pacient tratat de un medic la clinica ArtDent Slobozia" style={{
             gridColumn: "span 2", position: "relative", borderRadius: 6, overflow: "hidden",
-            backgroundImage: "url(/images/portret-pacient-medic.jpg)", backgroundSize: "cover", backgroundPosition: "center",
-          }}>
-            <div style={{
-              position: "absolute", top: -16, right: -12, background: "#fff", borderRadius: 999,
-              padding: "12px 18px", display: "flex", alignItems: "center", gap: 8,
-              boxShadow: "0 14px 32px -18px rgba(2,47,58,0.5)", animation: "artdentPop .5s ease .3s both",
-            }}>
-              <span style={{ fontSize: 13, letterSpacing: "0.1em", color: "var(--gold-star)" }}>★★★★★</span>
-              <span style={{ fontSize: 13.5, fontWeight: 700, color: "var(--teal-deeper)" }}>4,9 Google</span>
-            </div>
-          </div>
+            backgroundImage: "url(/images/consultatie-dentist-slobozia.jpg)", backgroundSize: "cover", backgroundPosition: "center",
+          }} />
           <div role="img" aria-label="Cabinetul stomatologic ArtDent Slobozia" style={{
             borderRadius: 6, overflow: "hidden",
-            backgroundImage: "url(/images/cabinet.jpeg)", backgroundSize: "cover", backgroundPosition: "center",
+            backgroundImage: "url(/images/cabinet-stomatologic-slobozia.jpg)", backgroundSize: "cover", backgroundPosition: "center",
           }} />
           <div role="img" aria-label="Detaliu al unui tratament stomatologic la ArtDent Slobozia" style={{
             borderRadius: 6, overflow: "hidden",
-            backgroundImage: "url(/images/detaliu-tratament.jpg)", backgroundSize: "cover", backgroundPosition: "center",
+            backgroundImage: "url(/images/detaliu-tratament-dentar-slobozia.jpg)", backgroundSize: "cover", backgroundPosition: "center",
           }} />
         </div>
       </div>

@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { services, serviceDetails, relatedServices, site, processSteps } from "@/lib/data";
+import { services, serviceDetails, relatedServices, site, processSteps, guides } from "@/lib/data";
 import { OpenBookingButton } from "@/components/OpenBookingButton";
 import { BookingSection } from "@/components/BookingSection";
 import { ServiceFaq } from "@/components/ServiceFaq";
@@ -8,6 +8,7 @@ import { Reveal } from "@/components/Reveal";
 import { BenefitIcon } from "@/components/BenefitIcon";
 import { SectionSeam } from "@/components/SectionSeam";
 import { TrustBadges } from "@/components/TrustBadges";
+import { pageMetadata } from "@/lib/seo";
 
 export function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));
@@ -17,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const detail = serviceDetails[slug];
   if (!detail) return {};
-  return { title: detail.metaTitle, description: detail.metaDescription, alternates: { canonical: `/servicii/${slug}` } };
+  return pageMetadata({ title: detail.metaTitle, description: detail.metaDescription, path: `/servicii/${slug}` });
 }
 
 export default async function ServiceDetailPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -27,6 +28,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
   if (!service || !detail) notFound();
 
   const otherServices = services.filter((s) => s.slug !== slug);
+  const relatedGuides = guides.filter((g) => g.relatedServiceSlug === slug);
   const crossSell = (relatedServices[slug] || [])
     .map((s) => services.find((sv) => sv.slug === s))
     .filter((s): s is (typeof services)[number] => Boolean(s));
@@ -139,6 +141,22 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
                 {s.title}
               </a>
             ))}
+          </div>
+        )}
+
+        {relatedGuides.length > 0 && (
+          <div style={{ marginTop: 20, paddingTop: 24, borderTop: crossSell.length > 0 ? "none" : "1px solid var(--line)", display: "grid", gap: 10 }}>
+            <span style={{ fontSize: 13.5, color: "var(--muted)" }}>Ghiduri utile despre acest subiect:</span>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
+              {relatedGuides.map((g) => (
+                <a key={g.slug} href={`/ghiduri/${g.slug}`} style={{
+                  fontSize: 13, fontWeight: 600, padding: "7px 14px", borderRadius: 999,
+                  background: "var(--card)", border: "1px solid var(--line)", color: "var(--teal-deep)",
+                }}>
+                  {g.title} →
+                </a>
+              ))}
+            </div>
           </div>
         )}
       </section>

@@ -3,6 +3,7 @@ import { doctor, teamMembers, site } from "@/lib/data";
 import { PageHero } from "@/components/PageHero";
 import { OpenBookingButton } from "@/components/OpenBookingButton";
 import { BookingSection } from "@/components/BookingSection";
+import { pageMetadata } from "@/lib/seo";
 
 const allMembers = [doctor, ...teamMembers];
 
@@ -14,11 +15,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const member = allMembers.find((m) => m.slug === slug);
   if (!member) return {};
-  return {
+  const shortBio = member.bio.length > 150 ? `${member.bio.slice(0, 147)}...` : member.bio;
+  return pageMetadata({
     title: `${member.name} — ArtDent Slobozia`,
-    description: `${member.name}, ${member.role} la ArtDent Slobozia. ${member.bio}`,
-    alternates: { canonical: `/echipa/${slug}` },
-  };
+    description: `${member.name}, ${member.role} la ArtDent Slobozia. ${shortBio}`,
+    path: `/echipa/${slug}`,
+    image: member.image,
+  });
 }
 
 export default async function TeamMemberPage({ params }: { params: Promise<{ slug: string }> }) {

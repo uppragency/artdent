@@ -38,11 +38,9 @@ export function Header() {
         minHeight: headerMinH, transition: "min-height .3s ease",
         display: "flex", alignItems: "center", justifyContent: "space-between", gap: 20, borderRadius: 999,
       }}>
-        <a href="/" className="logo-mark" style={{ display: "flex", alignItems: "baseline", gap: 8, color: "#fff", flex: "0 0 auto" }}>
+        <a href="/" className="logo-mark" style={{ display: "flex", alignItems: "center", gap: 8, color: "#fff", flex: "0 0 auto" }}>
+          <img src="/images/mascota-artdent.svg" alt="Mascota ArtDent" width={30} height={38} style={{ display: "block" }} />
           <span className="font-display logo-text" style={{ fontSize: 26, letterSpacing: "-0.01em" }}>ArtDent</span>
-          <span className="font-mono-label" style={{ fontSize: 10, fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.6)" }}>
-            {site.city}
-          </span>
         </a>
 
         <nav data-desk style={{ display: "flex", alignItems: "center", alignSelf: "stretch", gap: "clamp(18px, 2vw, 32px)" }}>

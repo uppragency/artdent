@@ -2,8 +2,13 @@ import { PriceList } from "@/components/PriceList";
 import { BookingSection } from "@/components/BookingSection";
 import { PageHero } from "@/components/PageHero";
 import { priceCategories, site } from "@/lib/data";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = { title: "Prețuri — ArtDent Slobozia", alternates: { canonical: "/preturi" } };
+export const metadata = pageMetadata({
+  title: "Prețuri — ArtDent Slobozia",
+  description: "Tarife orientative pentru tratamentele ArtDent Slobozia: implantologie, ortodonție, estetică dentară, chirurgie și profilaxie. Plan de tratament clar de la prima consultație.",
+  path: "/preturi",
+});
 
 function parsePrice(raw: string): { low: number; high: number } | null {
   const nums = raw.match(/\d+/g);

@@ -1,4 +1,5 @@
 import { featuredSolutions } from "@/lib/data";
+import { OpenBookingButton } from "@/components/OpenBookingButton";
 
 export function Solutions() {
   return (
@@ -26,9 +27,14 @@ export function Solutions() {
             <h3 style={{ margin: 0, fontSize: "clamp(21px, 2.4vw, 28px)", fontWeight: 600, letterSpacing: "-0.02em", lineHeight: 1.2 }}>{s.title}</h3>
             <div style={{ display: "grid", gap: 14, justifyItems: "start" }}>
               <p style={{ margin: 0, fontSize: 15.5, lineHeight: 1.65, color: "var(--muted-2)" }}>{s.text}</p>
-              <a href={s.href || "#programare"} style={{ fontSize: 14.5, fontWeight: 600 }}>
-                {s.href ? "Află mai multe" : "Programează o consultație"} →
-              </a>
+              <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "8px 18px" }}>
+                {s.href ? (
+                  <a href={s.href} style={{ fontSize: 14.5, fontWeight: 600 }}>Află mai multe →</a>
+                ) : null}
+                <OpenBookingButton style={{ fontSize: 14.5, fontWeight: 600 }}>
+                  Programează-te →
+                </OpenBookingButton>
+              </div>
             </div>
           </div>
         ))}

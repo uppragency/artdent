@@ -1,4 +1,5 @@
 import { processSteps } from "@/lib/data";
+import { OpenBookingButton } from "@/components/OpenBookingButton";
 
 export function FirstVisit() {
   return (
@@ -30,6 +31,11 @@ export function FirstVisit() {
             </div>
             <h3 style={{ margin: 0, fontSize: 18.5, fontWeight: 600, letterSpacing: "-0.01em" }}>{s.title}</h3>
             <p style={{ margin: 0, fontSize: 14.5, lineHeight: 1.6, color: "var(--muted)" }}>{s.text}</p>
+            {s.n === "1" && (
+              <OpenBookingButton className="btn-teal" style={{ display: "inline-flex", width: "fit-content", fontSize: 14, fontWeight: 600, padding: "12px 22px", borderRadius: 4 }}>
+                Programează-te
+              </OpenBookingButton>
+            )}
           </div>
         ))}
       </div>

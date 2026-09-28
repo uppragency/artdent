@@ -1,11 +1,12 @@
 import { PageHero } from "@/components/PageHero";
 import { site } from "@/lib/data";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Urgențe dentare Slobozia — durere de dinți | ArtDent Slobozia",
   description: "Ai o urgență dentară în Slobozia? Sună-ne direct pentru durere de dinți, dinte spart sau umflătură. Program Luni–Vineri, 09:00–19:00.",
-  alternates: { canonical: "/urgente-dentare" },
-};
+  path: "/urgente-dentare",
+});
 
 const situations = [
   { title: "Durere de dinți persistentă", text: "O durere care nu trece la analgezice uzuale sau se agravează în timp poate indica o infecție sau o carie profundă care necesită tratament de urgență." },

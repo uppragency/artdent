@@ -2,12 +2,13 @@ import { PageHero } from "@/components/PageHero";
 import { BookingSection } from "@/components/BookingSection";
 import { OpenBookingButton } from "@/components/OpenBookingButton";
 import { services, usp, site } from "@/lib/data";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Dentist Slobozia — ArtDent, cabinet stomatologic cu servicii complete",
   description: "Cauți un dentist în Slobozia? ArtDent oferă implantologie, ortodonție, estetică dentară și tratamente generale, cu prețuri transparente și programare rapidă.",
-  alternates: { canonical: "/dentist-slobozia" },
-};
+  path: "/dentist-slobozia",
+});
 
 export default function DentistSloboziaPage() {
   const localBusinessJsonLd = {

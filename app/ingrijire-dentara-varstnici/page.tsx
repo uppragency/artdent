@@ -2,12 +2,13 @@ import { PageHero } from "@/components/PageHero";
 import { BookingSection } from "@/components/BookingSection";
 import { OpenBookingButton } from "@/components/OpenBookingButton";
 import { site } from "@/lib/data";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Îngrijire dentară pentru vârstnici | ArtDent Slobozia",
   description: "Particularitățile sănătății orale la vârsta a treia: uscăciunea bucală, recesiile gingivale, protezele și cum le gestionăm la ArtDent Slobozia.",
-  alternates: { canonical: "/ingrijire-dentara-varstnici" },
-};
+  path: "/ingrijire-dentara-varstnici",
+});
 
 const paragraphs = [
   "Sănătatea orală la vârsta a treia are particularități care merită atenție specială. Pe măsură ce înaintăm în vârstă, apar mai frecvent probleme precum uscăciunea gurii (adesea cauzată de anumite medicamente), recesiile gingivale care expun rădăcina dintelui la carii, uzura dentară acumulată în timp și, în multe cazuri, necesitatea unor lucrări protetice pentru dinții pierduți.",

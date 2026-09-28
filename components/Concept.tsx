@@ -22,11 +22,11 @@ export function Concept() {
           </div>
           <div role="img" aria-label="Unit dentar modern la clinica ArtDent Slobozia" style={{
             borderRadius: 6, minHeight: 190, overflow: "hidden",
-            backgroundImage: "url(/images/unit-dentar-vertical.jpg)", backgroundSize: "cover", backgroundPosition: "center",
+            backgroundImage: "url(/images/unit-dentar-cabinet-slobozia.jpg)", backgroundSize: "cover", backgroundPosition: "center",
           }} />
           <div role="img" aria-label="Sală de tratament la clinica ArtDent Slobozia, cadru larg cu lumină naturală" style={{
             gridColumn: "span 2", borderRadius: 6, minHeight: 200, overflow: "hidden",
-            backgroundImage: "url(/images/sala-tratament-larg.jpg)", backgroundSize: "cover", backgroundPosition: "center",
+            backgroundImage: "url(/images/sala-tratament-dentara-slobozia.jpg)", backgroundSize: "cover", backgroundPosition: "center",
           }} />
         </div>
 

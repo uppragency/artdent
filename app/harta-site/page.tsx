@@ -1,7 +1,12 @@
 import { services, teamMembers, doctor, guides } from "@/lib/data";
 import { PageHero } from "@/components/PageHero";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = { title: "Harta site — ArtDent Slobozia", alternates: { canonical: "/harta-site" } };
+export const metadata = pageMetadata({
+  title: "Harta site — ArtDent Slobozia",
+  description: "Toate paginile site-ului ArtDent Slobozia: servicii, echipă, ghiduri și informații de contact.",
+  path: "/harta-site",
+});
 
 const groups: { title: string; links: { label: string; href: string }[] }[] = [
   {
@@ -16,6 +21,7 @@ const groups: { title: string; links: { label: string; href: string }[] }[] = [
       { label: "Întrebări frecvente", href: "/intrebari-frecvente" },
       { label: "Contact", href: "/contact" },
       { label: "Dentist Slobozia", href: "/dentist-slobozia" },
+      { label: "Cabinet stomatologic Ialomița", href: "/cabinet-stomatologic-ialomita" },
       { label: "Urgențe dentare", href: "/urgente-dentare" },
     ],
   },

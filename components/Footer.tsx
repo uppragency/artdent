@@ -77,9 +77,12 @@ export function Footer() {
       </div>
 
       <div style={{ padding: "clamp(16px, 3vw, 32px) 0 clamp(4px, 1vw, 12px)", textAlign: "center", overflow: "visible" }}>
-        <span className="font-display" style={{ fontSize: "clamp(80px, 15vw, 220px)", lineHeight: 1.15, color: "var(--teal-deep)", letterSpacing: "-0.01em", whiteSpace: "nowrap" }}>
-          ArtDent Slobozia
-        </span>
+        <img src="/images/mascota-artdent.svg" alt="Mascota ArtDent" width={56} height={70} style={{ display: "inline-block", marginBottom: 4 }} />
+        <div>
+          <span className="font-display" style={{ fontSize: "clamp(80px, 15vw, 220px)", lineHeight: 1.15, color: "var(--teal-deep)", letterSpacing: "-0.01em", whiteSpace: "nowrap" }}>
+            ArtDent Slobozia
+          </span>
+        </div>
       </div>
     </footer>
   );

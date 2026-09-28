@@ -3,12 +3,34 @@ import { BookingSection } from "@/components/BookingSection";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
 import { SectionSeam } from "@/components/SectionSeam";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = { title: "Despre noi — ArtDent Slobozia", alternates: { canonical: "/despre" } };
+export const metadata = pageMetadata({
+  title: "Despre noi — ArtDent Slobozia",
+  description: "Echipa, valorile și abordarea clinicii ArtDent Slobozia, coordonată de Dr. Mihaela Zupcu. Medici cu experiență în implantologie, ortodonție și chirurgie dento-alveolară.",
+  path: "/despre",
+});
 
 export default function DesprePage() {
+  const allStaff = [doctor, ...teamMembers];
+
+  const organizationJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "MedicalOrganization",
+    name: "ArtDent Slobozia",
+    url: `${site.siteUrl}/despre`,
+    address: { "@type": "PostalAddress", streetAddress: site.address, addressLocality: site.city, addressCountry: "RO" },
+    telephone: site.phone,
+    employee: allStaff.map((m) => ({
+      "@type": "Person",
+      name: m.name,
+      jobTitle: m.role,
+    })),
+  };
+
   return (
     <>
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }} />
     <PageHero
       eyebrow="Despre noi"
       title="Te ajutăm să-ți recapeți zâmbetul"
@@ -22,7 +44,7 @@ export default function DesprePage() {
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "clamp(28px, 4vw, 48px)", alignItems: "center" }}>
           <div role="img" aria-label="Pacient în cabinetul ArtDent Slobozia, în timpul unei consultații" style={{
             borderRadius: 10, overflow: "hidden", minHeight: 320,
-            backgroundImage: "url(/images/portret-pacient-medic.jpg)", backgroundSize: "cover", backgroundPosition: "center",
+            backgroundImage: "url(/images/consultatie-dentist-slobozia.jpg)", backgroundSize: "cover", backgroundPosition: "center",
           }} />
           <div style={{ display: "grid", gap: 16 }}>
             <p style={{ margin: 0, fontSize: 16.5, lineHeight: 1.7, color: "var(--muted-3)" }}>

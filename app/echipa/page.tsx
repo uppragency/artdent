@@ -3,8 +3,13 @@ import { OpenBookingButton } from "@/components/OpenBookingButton";
 import { BookingSection } from "@/components/BookingSection";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = { title: "Echipă — ArtDent Slobozia", alternates: { canonical: "/echipa" } };
+export const metadata = pageMetadata({
+  title: "Echipă — ArtDent Slobozia",
+  description: "Cunoaște medicii și echipa ArtDent Slobozia: stomatologie generală, ortodonție, chirurgie dento-alveolară și implantologie, sub coordonarea Dr. Mihaela Zupcu.",
+  path: "/echipa",
+});
 
 export default function EchipaPage() {
   const all = [doctor, ...teamMembers];
@@ -23,7 +28,7 @@ export default function EchipaPage() {
           {all.map((m, i) => (
             <Reveal key={m.slug} delay={i * 70}>
               <a href={`/echipa/${m.slug}`} className="team-card" style={{ display: "block", border: "1px solid var(--line)", borderRadius: 10, background: "var(--card)", padding: 24, height: "100%", color: "inherit" }}>
-                <div role="img" aria-label={`Portret ${m.name}, ${m.role}`} style={{ aspectRatio: "4/3", borderRadius: 6, backgroundImage: `url(${m.image})`, backgroundSize: "cover", backgroundPosition: "center" }} />
+                <div role="img" aria-label={`Portret ${m.name}, ${m.role} la ArtDent Slobozia`} style={{ aspectRatio: "4/3", borderRadius: 6, backgroundImage: `url(${m.image})`, backgroundSize: "cover", backgroundPosition: "center" }} />
                 <p className="font-mono-label" style={{ marginTop: 14, fontSize: 11, color: "var(--gold-label)" }}>{m.role}</p>
                 <h2 className="font-display" style={{ margin: "4px 0 0", fontSize: 22, color: "var(--teal-deep)" }}>{m.name}</h2>
                 <p style={{ margin: "8px 0 0", fontSize: 14, color: "var(--muted-2)" }}>{m.bio}</p>

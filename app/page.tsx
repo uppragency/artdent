@@ -11,6 +11,7 @@ import { Team } from "@/components/Team";
 import { Faq } from "@/components/Faq";
 import { Testimonials } from "@/components/Testimonials";
 import { BookingSection } from "@/components/BookingSection";
+import { getGoogleAggregateRating } from "@/lib/google-rating";
 
 const DAY_MAP: Record<string, string> = {
   "Luni": "Monday", "Marți": "Tuesday", "Miercuri": "Wednesday",
@@ -31,7 +32,9 @@ function openingHoursSpecification() {
     });
 }
 
-export default function HomePage() {
+export default async function HomePage() {
+  const aggregateRating = await getGoogleAggregateRating();
+
   const dentistJsonLd = {
     "@context": "https://schema.org",
     "@type": "Dentist",
@@ -52,11 +55,21 @@ export default function HomePage() {
     openingHoursSpecification: openingHoursSpecification(),
     medicalSpecialty: services.map((s) => s.title),
     sameAs: [site.facebookUrl, site.instagramUrl],
+    ...(aggregateRating
+      ? {
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: aggregateRating.ratingValue,
+            reviewCount: aggregateRating.reviewCount,
+          },
+        }
+      : {}),
   };
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(dentistJsonLd) }} />
+      <link rel="preload" as="image" href="/images/consultatie-dentist-slobozia.jpg" />
       <Hero />
       <FirstVisit />
       <Solutions />

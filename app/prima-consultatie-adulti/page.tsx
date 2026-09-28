@@ -2,12 +2,13 @@ import { PageHero } from "@/components/PageHero";
 import { BookingSection } from "@/components/BookingSection";
 import { OpenBookingButton } from "@/components/OpenBookingButton";
 import { processSteps, site } from "@/lib/data";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Cum arată prima consultație la ArtDent Slobozia",
   description: "Ce se întâmplă pas cu pas la prima ta vizită la ArtDent Slobozia: discuție, examinare, plan de tratament transparent.",
-  alternates: { canonical: "/prima-consultatie-adulti" },
-};
+  path: "/prima-consultatie-adulti",
+});
 
 export default function PrimaConsultatieAdultiPage() {
   return (

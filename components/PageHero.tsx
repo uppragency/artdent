@@ -1,4 +1,4 @@
-import { ToothMotif } from "@/components/ToothMotif";
+import { MascotMotif } from "@/components/MascotMotif";
 import { site } from "@/lib/data";
 
 type Crumb = { label: string; href?: string };
@@ -47,7 +47,7 @@ export function PageHero({ eyebrow, title, crumbs, accent, currentPath }: { eyeb
         position: "absolute", width: 320, height: 320, borderRadius: "50%",
         background: "oklch(0.83 0.1 88 / 0.13)", filter: "blur(70px)", top: -100, right: -80, pointerEvents: "none",
       }} />
-      <ToothMotif style={{ bottom: -30, left: -20, transform: "rotate(-12deg)" }} />
+      <MascotMotif style={{ bottom: -30, left: -20, transform: "rotate(-12deg)" }} />
       <div style={{
         maxWidth: 1100, margin: "0 auto",
         padding: "calc(86px + clamp(40px, 6vw, 72px)) clamp(16px, 3vw, 40px) clamp(40px, 6vw, 64px)",

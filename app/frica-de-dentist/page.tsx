@@ -2,12 +2,13 @@ import { PageHero } from "@/components/PageHero";
 import { BookingSection } from "@/components/BookingSection";
 import { OpenBookingButton } from "@/components/OpenBookingButton";
 import { site } from "@/lib/data";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Frica de dentist — cum te putem ajuta | ArtDent Slobozia",
   description: "Frica de dentist este comună și tratabilă. Află cum abordăm anxietatea pacienților la ArtDent Slobozia, pas cu pas, în ritmul tău.",
-  alternates: { canonical: "/frica-de-dentist" },
-};
+  path: "/frica-de-dentist",
+});
 
 const paragraphs = [
   "Frica de dentist este una dintre cele mai frecvente forme de anxietate legată de sănătate și afectează pacienți de toate vârstele. Ea poate proveni dintr-o experiență neplăcută din trecut, dintr-o senzație de lipsă de control sau pur și simplu din teama de durere sau de necunoscut. Este important să știi că această reacție este normală și că amânarea vizitelor din acest motiv nu face decât să agraveze problemele dentare, ceea ce, la rândul său, poate crește anxietatea pentru vizita următoare.",

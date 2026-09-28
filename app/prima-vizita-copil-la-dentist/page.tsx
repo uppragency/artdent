@@ -2,12 +2,13 @@ import { PageHero } from "@/components/PageHero";
 import { BookingSection } from "@/components/BookingSection";
 import { OpenBookingButton } from "@/components/OpenBookingButton";
 import { site } from "@/lib/data";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Prima vizită a copilului la dentist | ArtDent Slobozia",
   description: "Cum pregătești copilul pentru prima vizită la dentist și ce se întâmplă efectiv în cabinet, explicat pentru părinți.",
-  alternates: { canonical: "/prima-vizita-copil-la-dentist" },
-};
+  path: "/prima-vizita-copil-la-dentist",
+});
 
 const paragraphs = [
   "Prima vizită la dentist este un moment important pentru orice copil, iar modul în care este gestionată poate influența relația sa cu îngrijirea dentară pentru mult timp. Recomandarea generală este ca prima consultație să aibă loc încă de la apariția primilor dinți sau, cel târziu, în jurul vârstei de un an, chiar dacă nu există o problemă vizibilă. Scopul acestei vizite timpurii este familiarizarea copilului cu cabinetul, nu neapărat un tratament.",

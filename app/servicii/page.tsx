@@ -1,14 +1,46 @@
-import { pricing, services } from "@/lib/data";
+import { pricing, services, site } from "@/lib/data";
 import { OpenBookingButton } from "@/components/OpenBookingButton";
 import { BookingSection } from "@/components/BookingSection";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
+import { getGoogleAggregateRating } from "@/lib/google-rating";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = { title: "Servicii și prețuri — ArtDent Slobozia", alternates: { canonical: "/servicii" } };
+export const metadata = pageMetadata({
+  title: "Servicii și prețuri — ArtDent Slobozia",
+  description: "Servicii stomatologice complete la ArtDent Slobozia: implantologie, ortodonție, estetică dentară, chirurgie, proteze și profilaxie, cu tarife orientative.",
+  path: "/servicii",
+});
 
-export default function ServiciiPage() {
+export default async function ServiciiPage() {
+  const aggregateRating = await getGoogleAggregateRating();
+
+  const itemListJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: services.map((s, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      item: {
+        "@type": "MedicalProcedure",
+        name: s.title,
+        url: `${site.siteUrl}/servicii/${s.slug}`,
+        ...(aggregateRating
+          ? {
+              aggregateRating: {
+                "@type": "AggregateRating",
+                ratingValue: aggregateRating.ratingValue,
+                reviewCount: aggregateRating.reviewCount,
+              },
+            }
+          : {}),
+      },
+    })),
+  };
+
   return (
     <>
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }} />
     <PageHero
       eyebrow="Servicii & prețuri"
       title="Tot ce ai nevoie, într-un singur loc"

@@ -692,6 +692,8 @@ export type Guide = {
   relatedServiceLabel?: string;
 };
 
+export const guidesUpdatedAt = "2026-09-28";
+
 export const guides: Guide[] = [
   {
     slug: "sensibilitate-dentara-cauze-si-solutii",

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { beforeAfterCases, galleryItems } from "@/lib/data";
+import { useBooking } from "@/lib/booking-context";
 
 const GALLERY_INITIAL_MOBILE_COUNT = 2;
 const CASES_INITIAL_MOBILE_COUNT = 2;
@@ -58,6 +59,7 @@ function BeforeAfterCard({ label, before, after }: { label: string; before: stri
 
 export function GalleryAndBeforeAfter() {
   const isMobile = useIsMobile();
+  const { openModal } = useBooking();
 
   const [galleryCount, setGalleryCount] = useState(GALLERY_INITIAL_MOBILE_COUNT);
   const visibleGalleryItems = isMobile ? galleryItems.slice(0, galleryCount) : galleryItems;
@@ -78,7 +80,7 @@ export function GalleryAndBeforeAfter() {
         </div>
         <div className="gallery-grid">
           {visibleGalleryItems.map((item) => (
-            <div key={item.src} role="img" aria-label={item.label} style={{
+            <div key={item.src} role="img" aria-label={`${item.label} — ArtDent Slobozia`} style={{
               aspectRatio: "4/3", borderRadius: 6, overflow: "hidden",
               backgroundImage: `url(${item.src})`, backgroundSize: "cover", backgroundPosition: "center",
             }} />
@@ -127,6 +129,16 @@ export function GalleryAndBeforeAfter() {
             </button>
           </div>
         )}
+        <div style={{ display: "flex", justifyContent: "center", marginTop: 40 }}>
+          <a
+            href="#programare"
+            onClick={(e) => { e.preventDefault(); openModal(); }}
+            className="btn-teal"
+            style={{ fontSize: 15.5, fontWeight: 600, padding: "16px 28px", borderRadius: 4 }}
+          >
+            Programează-te
+          </a>
+        </div>
       </section>
     </section>
   );

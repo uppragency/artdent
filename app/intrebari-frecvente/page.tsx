@@ -3,13 +3,13 @@ import { PageHero } from "@/components/PageHero";
 import { OpenBookingButton } from "@/components/OpenBookingButton";
 import { BookingSection } from "@/components/BookingSection";
 import { FaqSearch } from "@/components/FaqSearch";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Întrebări frecvente — ArtDent Slobozia",
-  description:
-    "Răspunsuri la cele mai frecvente întrebări despre tratamentele stomatologice de la ArtDent Slobozia: implantologie, ortodonție, estetică dentară, chirurgie și profilaxie.",
-  alternates: { canonical: "/intrebari-frecvente" },
-};
+  description: "Răspunsuri la cele mai frecvente întrebări despre tratamentele stomatologice de la ArtDent Slobozia: implantologie, ortodonție, estetică dentară, chirurgie și profilaxie.",
+  path: "/intrebari-frecvente",
+});
 
 export default function IntrebariFrecventePage() {
   const allQA = [

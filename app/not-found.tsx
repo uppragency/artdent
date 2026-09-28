@@ -1,6 +1,6 @@
 import { site } from "@/lib/data";
 import { OpenBookingButton } from "@/components/OpenBookingButton";
-import { ToothMotif } from "@/components/ToothMotif";
+import { MascotMotif } from "@/components/MascotMotif";
 
 export const metadata = { title: "Pagina nu a fost găsită — ArtDent Slobozia" };
 
@@ -23,7 +23,7 @@ export default function NotFound() {
         position: "absolute", width: 360, height: 360, borderRadius: "50%",
         background: "oklch(0.83 0.1 88 / 0.13)", filter: "blur(70px)", top: -100, right: -80, pointerEvents: "none",
       }} />
-      <ToothMotif style={{ bottom: -30, left: -20, transform: "rotate(-12deg)" }} />
+      <MascotMotif style={{ bottom: -30, left: -20, transform: "rotate(-12deg)" }} />
 
       <div style={{ maxWidth: 640, margin: "0 auto", padding: "86px clamp(16px, 3vw, 40px) 64px", textAlign: "center", position: "relative" }}>
         <span className="font-mono-label" style={{ fontSize: 13, letterSpacing: "0.2em", color: "oklch(0.78 0.08 88)" }}>EROARE 404</span>

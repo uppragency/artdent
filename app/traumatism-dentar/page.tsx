@@ -1,11 +1,12 @@
 import { PageHero } from "@/components/PageHero";
 import { site } from "@/lib/data";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Ce faci în caz de traumatism dentar | ArtDent Slobozia",
   description: "Dinte spart sau scos accidental? Iată ce trebuie să faci imediat, pas cu pas, până ajungi la cabinet.",
-  alternates: { canonical: "/traumatism-dentar" },
-};
+  path: "/traumatism-dentar",
+});
 
 const paragraphs = [
   "Un traumatism dentar (dinte spart, ciobit sau scos complet din alveolă) este o urgență reală în care timpul de reacție influențează direct șansele de recuperare. Cel mai important lucru este să rămâi calm și să acționezi rapid, mai ales în cazul unui dinte scos complet.",
