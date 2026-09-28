@@ -8,6 +8,7 @@ import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import { MobileStickyBar } from "@/components/MobileStickyBar";
 import { CookieConsent } from "@/components/CookieConsent";
 import { ExitIntentPopup } from "@/components/ExitIntentPopup";
+import { AnalyticsListener } from "@/components/AnalyticsListener";
 import { Analytics } from "@vercel/analytics/next";
 import { site } from "@/lib/data";
 
@@ -108,6 +109,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <MobileStickyBar />
           <CookieConsent />
           <ExitIntentPopup />
+          <AnalyticsListener />
           <Analytics />
         </BookingProvider>
       </body>

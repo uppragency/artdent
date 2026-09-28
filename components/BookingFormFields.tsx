@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import { useBooking } from "@/lib/booking-context";
+import { trackEvent } from "@/lib/analytics";
 
 export function BookingFormFields({
   dark = false, autoFocusName = false, defaultName = "", defaultPhone = "",
@@ -76,6 +77,11 @@ export function BookingFormFields({
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name, phone, sourcePage }),
     }).catch(() => {});
+    // Trimis direct la reușita formularului — mai fiabil decât un eveniment
+    // custom bazat pe page_view pe /multumim (nu depinde de finalizarea
+    // redirect-ului). Numele corespunde evenimentului "Programare_Lead"
+    // configurat în GA4.
+    trackEvent("Programare_Lead", { method: "formular_programare", source_page: sourcePage });
     setSending(false);
     setSent(true);
     const params = new URLSearchParams({ name, phone });
