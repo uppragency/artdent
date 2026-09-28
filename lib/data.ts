@@ -69,15 +69,15 @@ export const usp = [
 ];
 
 export const services = [
-  { num: "01", slug: "cosmetica-dentara", title: "Cosmetică Dentară", text: "Albire profesională, fațete ceramice și reconturări pentru un zâmbet echilibrat, cu aspect natural.", items: ["Albire profesională", "Fațete ceramice", "Reconturare estetică"] },
-  { num: "02", slug: "tratament-ortodontic", title: "Tratament Ortodontic", text: "Aparate fixe metalice sau ceramice și gutiere transparente, pentru copii și adulți.", items: ["Aparate fixe", "Gutiere transparente", "Monitorizare periodică"] },
-  { num: "03", slug: "tratamente-generale", title: "Tratamente Generale", text: "Consultație, obturații, tratamente de canal și restaurări, cu materiale certificate.", items: ["Consultație și diagnostic", "Obturații", "Tratamente de canal"] },
-  { num: "04", slug: "chirurgie-buco-dentara", title: "Chirurgie Buco-Dentară", text: "Extracții simple și complexe, inclusiv molari de minte, în condiții de siguranță.", items: ["Extracții simple", "Extracții molari de minte", "Chirurgie parodontală"] },
-  { num: "05", slug: "profilaxie", title: "Profilaxie", text: "Detartraj, periaj profesional și air-flow, plus recomandări de igienă adaptate ție.", items: ["Detartraj", "Periaj profesional", "Air-flow"] },
-  { num: "06", slug: "radiografii", title: "Radiografii Retroalveolare", text: "Imagistică digitală realizată în clinică, pentru diagnostic rapid și precis.", items: ["Radiografie digitală", "Interpretare imediată", "Arhivă digitală"] },
-  { num: "07", slug: "implant-dentar-all-on-4-6", title: "Implant Dentar & Reabilitare pe Implanturi", text: "Implant unic sau reabilitare completă pe implanturi (proteză pe bară), planificate digital.", items: ["Implant unic", "Proteză pe bară cu implant", "Plan digital de tratament"] },
-  { num: "08", slug: "proteze-dentare", title: "Proteze Dentare", text: "Proteze acrilice, elastice sau pe implant, adaptate individual pentru confort și funcționalitate.", items: ["Proteză acrilică", "Proteză elastică", "Proteză pe implant"] },
-  { num: "09", slug: "coroane-dentare", title: "Coroane Dentare", text: "Coroane ceramice, metalo-ceramice sau pe implant, pentru refacerea formei și funcției dintelui.", items: ["Coroană ceramică", "Coroană metalo-ceramică", "Coroană pe implant"] },
+  { num: "01", slug: "cosmetica-dentara", title: "Cosmetică Dentară", text: "Albire profesională, fațete ceramice și reconturări pentru un zâmbet echilibrat, cu aspect natural.", items: ["Albire profesională", "Fațete ceramice", "Reconturare estetică"], image: "/images/gallery/tratament-detaliu-1.jpg" },
+  { num: "02", slug: "tratament-ortodontic", title: "Tratament Ortodontic", text: "Aparate fixe metalice sau ceramice și gutiere transparente, pentru copii și adulți.", items: ["Aparate fixe", "Gutiere transparente", "Monitorizare periodică"], image: "/images/gallery/tratament-detaliu-2.jpg" },
+  { num: "03", slug: "tratamente-generale", title: "Tratamente Generale", text: "Consultație, obturații, tratamente de canal și restaurări, cu materiale certificate.", items: ["Consultație și diagnostic", "Obturații", "Tratamente de canal"], image: "/images/gallery/tratament-cabinet.jpg" },
+  { num: "04", slug: "chirurgie-buco-dentara", title: "Chirurgie Buco-Dentară", text: "Extracții simple și complexe, inclusiv molari de minte, în condiții de siguranță.", items: ["Extracții simple", "Extracții molari de minte", "Chirurgie parodontală"], image: "/images/gallery/tratament-detaliu-3.jpg" },
+  { num: "05", slug: "profilaxie", title: "Profilaxie", text: "Detartraj, periaj profesional și air-flow, plus recomandări de igienă adaptate ție.", items: ["Detartraj", "Periaj profesional", "Air-flow"], image: "/images/gallery/tratament-detaliu-4.jpg" },
+  { num: "06", slug: "radiografii", title: "Radiografii Retroalveolare", text: "Imagistică digitală realizată în clinică, pentru diagnostic rapid și precis.", items: ["Radiografie digitală", "Interpretare imediată", "Arhivă digitală"], image: "/images/gallery/sala-tratament-1.jpg" },
+  { num: "07", slug: "implant-dentar-all-on-4-6", title: "Implant Dentar & Reabilitare pe Implanturi", text: "Implant unic sau reabilitare completă pe implanturi (proteză pe bară), planificate digital.", items: ["Implant unic", "Proteză pe bară cu implant", "Plan digital de tratament"], image: "/images/gallery/tratament-detaliu-5.jpg" },
+  { num: "08", slug: "proteze-dentare", title: "Proteze Dentare", text: "Proteze acrilice, elastice sau pe implant, adaptate individual pentru confort și funcționalitate.", items: ["Proteză acrilică", "Proteză elastică", "Proteză pe implant"], image: "/images/gallery/tratament-detaliu-6.jpg" },
+  { num: "09", slug: "coroane-dentare", title: "Coroane Dentare", text: "Coroane ceramice, metalo-ceramice sau pe implant, pentru refacerea formei și funcției dintelui.", items: ["Coroană ceramică", "Coroană metalo-ceramică", "Coroană pe implant"], image: "/images/gallery/tratament-detaliu-7.jpg" },
 ];
 
 export const relatedServices: Record<string, string[]> = {
@@ -342,6 +342,8 @@ export const values = [
   { num: "02", title: "Susținerea excelenței și a fericirii membrilor echipei", text: "Căutarea continuă a oportunităților pentru a inova și pentru a îmbunătăți experiența la ArtDent." },
   { num: "03", title: "Pasiune", text: "Dedicarea și grija pentru a atinge cele mai înalte standarde." },
   { num: "04", title: "Îndeplinirea misiunii", text: "Servicii și susținere dedicate comunității locale." },
+  { num: "05", title: "Transparență", text: "Plan de tratament și costuri comunicate clar de la prima consultație, fără surprize pe parcurs." },
+  { num: "06", title: "Formare continuă", text: "Participare constantă la cursuri și congrese de specialitate, pentru protocoale medicale actuale." },
 ];
 
 export const priceCategories = [

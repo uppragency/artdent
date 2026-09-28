@@ -21,7 +21,7 @@ export function Concept() {
             <span className="font-display" style={{ fontSize: 25, lineHeight: 1.12, color: "oklch(0.97 0.012 90)" }}>Implantologie avansată în Slobozia</span>
           </div>
           <div role="img" aria-label="Unit dentar modern la clinica ArtDent Slobozia" style={{
-            borderRadius: 6, minHeight: 190, overflow: "hidden",
+            borderRadius: 6, minHeight: 340, overflow: "hidden",
             backgroundImage: "url(/images/unit-dentar-cabinet-slobozia.jpg)", backgroundSize: "cover", backgroundPosition: "center",
           }} />
           <div role="img" aria-label="Sală de tratament la clinica ArtDent Slobozia, cadru larg cu lumină naturală" style={{
