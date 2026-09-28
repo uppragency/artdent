@@ -63,14 +63,13 @@ export function BookingFormFields({
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ phone }),
     }).catch(() => {});
-    // Notificare email către clinică — dezactivată temporar la cererea clientului.
-    // Pentru reactivare, decomentează blocul de mai jos (rămâne fire-and-forget,
+    // Notificare email către clinică + confirmare pacient (fire-and-forget,
     // nu blochează redirect-ul pacientului).
-    // fetch("/api/notify-submission", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({ name, phone, email: submittedEmail, sourcePage }),
-    // }).catch(() => {});
+    fetch("/api/notify-submission", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, phone, email: submittedEmail, sourcePage }),
+    }).catch(() => {});
     // Notificare push către panoul de admin (fire-and-forget, eșuează silențios dacă push nu e configurat).
     fetch("/api/push/notify-new-submission", {
       method: "POST",
