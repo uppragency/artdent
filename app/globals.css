@@ -225,6 +225,16 @@ h2.font-display::after {
   .profile-grid-c { grid-template-columns: 1fr !important; }
 }
 
+/* Servicii — grid foto: 3 coloane desktop, 1 pe mobil */
+@media (max-width: 640px) {
+  .services-photo-grid { grid-template-columns: 1fr !important; }
+}
+
+/* Noutăți (listă + articol): sidebar sub conținut pe mobil */
+@media (max-width: 860px) {
+  .noutati-grid { grid-template-columns: 1fr !important; }
+}
+
 /* Team: desktop feature vs mobile 2x2 grid */
 .team-mobile-grid { display: none; }
 @media (max-width: 640px) {
