@@ -69,13 +69,13 @@ export default async function TeamMemberPage({ params }: { params: Promise<{ slu
       />
 
       <section style={{ background: "linear-gradient(180deg, #fff 0%, var(--white-to-blue) 100%)" }}>
-        <div className="profile-grid-c" style={{ maxWidth: 1100, margin: "0 auto", padding: "clamp(48px, 6vw, 72px) clamp(16px, 3vw, 40px)", display: "grid", gridTemplateColumns: "1fr 320px", gap: "clamp(32px, 5vw, 56px)" }}>
-          <div style={{ display: "grid", gap: 32 }}>
+        <div className="profile-grid-c" style={{ maxWidth: 1100, margin: "0 auto", padding: "clamp(48px, 6vw, 72px) clamp(16px, 3vw, 40px)", display: "grid", gridTemplateColumns: "1fr 320px", alignItems: "start", gap: "clamp(32px, 5vw, 56px)" }}>
+          <div style={{ display: "grid", gap: 32, alignContent: "start" }}>
             <p style={{ margin: 0, fontSize: 17, lineHeight: 1.8, color: "var(--muted-3)", maxWidth: "62ch" }}>{member.bio}</p>
 
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+            <div style={{ display: "flex", flexWrap: "wrap", alignItems: "flex-start", alignSelf: "start", gap: 8 }}>
               {member.specializations.map((s) => (
-                <span key={s} style={{ fontSize: 13, fontWeight: 500, padding: "8px 14px", borderRadius: 999, background: "var(--gold-tint-bg)", color: "var(--gold-tint-text)" }}>{s}</span>
+                <span key={s} style={{ display: "inline-flex", alignItems: "center", lineHeight: 1, fontSize: 13, fontWeight: 500, padding: "8px 14px", borderRadius: 999, background: "var(--gold-tint-bg)", color: "var(--gold-tint-text)" }}>{s}</span>
               ))}
             </div>
 
