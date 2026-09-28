@@ -49,16 +49,33 @@ export default async function ServiciiPage() {
     />
     <section style={{ background: "linear-gradient(180deg, #fff 0%, var(--white-to-blue) 100%)" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "clamp(56px, 7vw, 88px) clamp(16px, 3vw, 40px)" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 16 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }} className="services-photo-grid">
           {services.map((s, i) => (
             <Reveal key={s.slug} delay={i * 60}>
-              <a id={s.slug} href={`/servicii/${s.slug}`} className="service-card" style={{ display: "block", borderRadius: 8, padding: 26, color: "inherit", height: "100%" }}>
-                <span className="font-mono-label" style={{ fontSize: 11.5, color: "var(--gold-label-2)" }}>{s.num}</span>
-                <h2 className="font-display" style={{ margin: "8px 0 0", fontSize: 20, color: "var(--teal-deep)" }}>{s.title}</h2>
-                <p style={{ margin: "8px 0 0", fontSize: 14.5, color: "var(--muted)" }}>{s.text}</p>
-                <ul style={{ margin: "12px 0 0", padding: 0, listStyle: "none", display: "grid", gap: 4 }}>
-                  {s.items.map((it) => <li key={it} style={{ fontSize: 13, color: "var(--muted)" }}>· {it}</li>)}
-                </ul>
+              <a id={s.slug} href={`/servicii/${s.slug}`} style={{
+                display: "flex", flexDirection: "column", textDecoration: "none", color: "inherit",
+                background: "var(--card)", borderRadius: 12, overflow: "hidden", height: "100%",
+                boxShadow: "0 1px 2px rgba(2,75,92,0.08)", border: "1px solid var(--line)",
+              }}>
+                <div style={{ position: "relative", height: 168, overflow: "hidden" }}>
+                  <img src={s.image} alt={s.title} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                  <span className="font-mono-label" style={{
+                    position: "absolute", top: 12, left: 12, background: "rgba(2,75,92,0.88)", color: "#fff",
+                    fontSize: 11, padding: "4px 10px", borderRadius: 20,
+                  }}>{s.num}</span>
+                </div>
+                <div style={{ padding: 20, display: "grid", gap: 10, flex: 1 }}>
+                  <h2 className="font-display" style={{ margin: 0, fontSize: 18.5, color: "var(--teal-deep)" }}>{s.title}</h2>
+                  <p style={{ margin: 0, fontSize: 13.5, lineHeight: 1.55, color: "var(--muted)" }}>{s.text}</p>
+                  <ul style={{ margin: "4px 0 0", padding: 0, listStyle: "none", display: "flex", flexWrap: "wrap", gap: 6 }}>
+                    {s.items.map((it) => (
+                      <li key={it} style={{
+                        fontSize: 12, color: "var(--gold-tint-text)", background: "var(--gold-tint-bg)",
+                        padding: "4px 10px", borderRadius: 999,
+                      }}>{it}</li>
+                    ))}
+                  </ul>
+                </div>
               </a>
             </Reveal>
           ))}

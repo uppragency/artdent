@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { doctor, teamMembers, site } from "@/lib/data";
 import { OpenBookingButton } from "@/components/OpenBookingButton";
 import { BookingSection } from "@/components/BookingSection";
+import { PageHero } from "@/components/PageHero";
 import { pageMetadata } from "@/lib/seo";
 
 const allMembers = [doctor, ...teamMembers];
@@ -55,49 +56,17 @@ export default async function TeamMemberPage({ params }: { params: Promise<{ slu
   };
 
   const crumbs = [{ label: "Acasă", href: "/" }, { label: "Echipă", href: "/echipa" }, { label: member.name }];
-  const breadcrumbJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: crumbs.map((c, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      name: c.label,
-      item: `${site.siteUrl}${c.href || `/echipa/${slug}`}`,
-    })),
-  };
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
 
-      <section style={{
-        position: "relative", marginTop: -86, minHeight: 460, overflow: "hidden",
-        backgroundImage: `url(${member.image})`, backgroundSize: "cover", backgroundPosition: "center",
-        display: "flex", alignItems: "flex-end",
-      }}>
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(2,20,25,0.15) 0%, rgba(10,20,18,0.92) 100%)" }} />
-        <div style={{ position: "relative", maxWidth: 1280, margin: "0 auto", width: "100%", padding: "calc(86px + clamp(40px, 6vw, 72px)) clamp(16px, 3vw, 40px) clamp(32px, 5vw, 56px)" }}>
-          <nav aria-label="breadcrumb" style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 8, marginBottom: 16, fontSize: 13 }}>
-            {crumbs.map((c, i) => (
-              <span key={c.label} style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                {i > 0 && <span style={{ color: "rgba(255,255,255,0.4)" }}>/</span>}
-                {c.href ? (
-                  <a href={c.href} style={{ color: "rgba(255,255,255,0.72)" }}>{c.label}</a>
-                ) : (
-                  <span style={{ color: "var(--gold)" }}>{c.label}</span>
-                )}
-              </span>
-            ))}
-          </nav>
-          <span className="font-mono-label" style={{ display: "block", marginBottom: 8, fontSize: 12, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)" }}>
-            {member.role}
-          </span>
-          <h1 className="font-display" style={{ margin: 0, fontWeight: 400, fontSize: "clamp(38px, 6vw, 76px)", lineHeight: 1, color: "#fff" }}>
-            {member.name}
-          </h1>
-        </div>
-      </section>
+      <PageHero
+        eyebrow={member.role}
+        title={member.name}
+        crumbs={crumbs}
+        currentPath={`/echipa/${slug}`}
+      />
 
       <section style={{ background: "linear-gradient(180deg, #fff 0%, var(--white-to-blue) 100%)" }}>
         <div className="profile-grid-c" style={{ maxWidth: 1100, margin: "0 auto", padding: "clamp(48px, 6vw, 72px) clamp(16px, 3vw, 40px)", display: "grid", gridTemplateColumns: "1fr 320px", gap: "clamp(32px, 5vw, 56px)" }}>
@@ -144,6 +113,11 @@ export default async function TeamMemberPage({ params }: { params: Promise<{ slu
           </div>
 
           <div style={{ display: "grid", gap: 16, alignContent: "start" }}>
+            <div style={{
+              borderRadius: 12, overflow: "hidden", aspectRatio: "4/5",
+              backgroundImage: `url(${member.image})`, backgroundSize: "cover", backgroundPosition: "center top",
+              border: "1px solid var(--line)",
+            }} />
             <OpenBookingButton className="btn-teal" style={{ display: "flex", fontSize: 15, fontWeight: 700, padding: "16px 24px", borderRadius: 4, textAlign: "center", justifyContent: "center" }}>
               Programează consultație
             </OpenBookingButton>
