@@ -62,14 +62,7 @@ export async function POST(req: NextRequest) {
       from: fromEmail,
       to: [email],
       subject: "Am primit solicitarea ta — ArtDent Slobozia",
-      html: `
-        <div style="font-family: sans-serif; font-size: 15px; line-height: 1.6; color: #222;">
-          <h2 style="margin: 0 0 14px; color: #024B5C;">Mulțumim, ${escapeHtml(name || "pentru solicitare")}!</h2>
-          <p>Am primit cererea ta de programare la ArtDent Slobozia. O să te sune cineva din echipa noastră în cel mai scurt timp, pentru a stabili ziua și ora exactă.</p>
-          <p>Dacă e ceva urgent, ne poți suna direct la <strong>0723 192 716</strong>.</p>
-          <p style="margin-top: 24px; font-size: 13px; color: #666;">ArtDent Slobozia</p>
-        </div>
-      `,
+      html: patientConfirmationHtml(name),
     });
   }
 
@@ -81,4 +74,75 @@ export async function POST(req: NextRequest) {
 
 function escapeHtml(s: string) {
   return s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c] as string));
+}
+
+function patientConfirmationHtml(name: string) {
+  const displayName = escapeHtml(name || "pentru solicitare");
+  return `<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Am primit solicitarea ta — ArtDent Slobozia</title>
+</head>
+<body style="margin:0; padding:0; background:#F4F1EA; font-family: Georgia, 'Times New Roman', serif;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F4F1EA; padding: 32px 16px;">
+    <tr>
+      <td align="center">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width: 560px; background:#ffffff; border-radius: 10px; overflow: hidden;">
+
+          <!-- Header -->
+          <tr>
+            <td style="background:#0D5B70; padding: 32px 40px; text-align: center;">
+              <div style="font-family: Georgia, serif; font-size: 24px; color: #ffffff; letter-spacing: 0.5px;">ArtDent Slobozia</div>
+              <div style="font-family: Arial, sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #E0C67A; margin-top: 6px;">Cabinet Stomatologic</div>
+            </td>
+          </tr>
+
+          <!-- Body -->
+          <tr>
+            <td style="padding: 40px 40px 8px; font-family: Arial, sans-serif;">
+              <h1 style="margin:0 0 18px; font-family: Georgia, serif; font-weight: 400; font-size: 26px; color: #0D5B70;">Mulțumim, ${displayName}!</h1>
+              <p style="margin:0 0 16px; font-size: 15px; line-height: 1.7; color: #333333;">
+                Am primit cererea ta de programare la ArtDent Slobozia. Cineva din echipa noastră te va suna în cel mai scurt timp, pentru a stabili împreună ziua și ora exactă.
+              </p>
+              <p style="margin:0 0 28px; font-size: 15px; line-height: 1.7; color: #333333;">
+                Dacă între timp apare ceva urgent, ne poți suna direct.
+              </p>
+
+              <!-- CTA telefon -->
+              <table role="presentation" cellpadding="0" cellspacing="0" style="margin: 0 0 32px;">
+                <tr>
+                  <td style="background:#0D5B70; border-radius: 4px;">
+                    <a href="tel:+40723192716" style="display:block; padding: 14px 28px; font-family: Arial, sans-serif; font-size: 15px; font-weight: bold; color:#ffffff; text-decoration:none;">
+                      Sună-ne: 0723 192 716
+                    </a>
+                  </td>
+                </tr>
+              </table>
+
+              <div style="height:1px; background:#E7E2D5; margin: 0 0 28px;"></div>
+
+              <p style="margin:0 0 4px; font-size: 13px; color: #8a8a8a;">Cu drag,</p>
+              <p style="margin:0; font-size: 15px; color: #0D5B70; font-weight: bold;">Echipa ArtDent Slobozia</p>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="background:#F9F7F1; padding: 24px 40px; text-align:center; font-family: Arial, sans-serif;">
+              <p style="margin:0 0 6px; font-size: 12.5px; color:#8a8a8a;">Al. Feroviarului 1, Slobozia, Ialomița</p>
+              <p style="margin:0; font-size: 12.5px; color:#8a8a8a;">
+                <a href="https://artdentslobozia.ro" style="color:#0D5B70; text-decoration:none;">artdentslobozia.ro</a>
+                &nbsp;·&nbsp; 0723 192 716
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`;
 }
