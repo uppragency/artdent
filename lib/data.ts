@@ -649,14 +649,6 @@ export const teamMembers = [
     image: "/images/team/maria-voicu.jpg",
   },
   {
-    slug: "alina-cojocaru",
-    name: "Alina Cojocaru",
-    role: "Asistentă Medicală",
-    specializations: ["Asistență medicală"],
-    bio: "Asistentă medicală în cadrul echipei ArtDent, dedicată confortului și siguranței pacienților pe parcursul tratamentelor.",
-    image: "/images/team/alina-cojocaru.jpg",
-  },
-  {
     slug: "mela-moraru",
     name: "Mela Moraru",
     role: "Tehnician dentar",
