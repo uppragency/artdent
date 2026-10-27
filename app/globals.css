@@ -286,3 +286,15 @@ h2.font-display::after {
 .blog-content li { margin: 0; }
 .blog-content a { color: var(--teal-600); font-weight: 600; }
 .blog-content strong { color: var(--ink); }
+
+/* Articole: răspuns scurt (extras ușor de citat de motoare AI), tabele, bloc de contact */
+.blog-content .answer-box { padding: 18px 20px; border-radius: 8px; border: 1px solid var(--line-2); border-left: 4px solid var(--gold-label-2); background: var(--white-to-blue); color: var(--ink); }
+.blog-content .answer-box p { margin: 0; }
+.blog-content .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--card); }
+.blog-content table { width: 100%; border-collapse: collapse; font-size: 14.5px; line-height: 1.55; }
+.blog-content th, .blog-content td { padding: 10px 14px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+.blog-content th { background: var(--white-to-blue); color: var(--teal-deep); font-weight: 600; }
+.blog-content tr:last-child td { border-bottom: 0; }
+.blog-content .contact-box { padding: 18px 20px; border-radius: 8px; border: 1px solid var(--line); background: var(--card); }
+.blog-content .contact-box p { margin: 0 0 6px; }
+.blog-content .contact-box p:last-child { margin-bottom: 0; }

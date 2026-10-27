@@ -1,4 +1,5 @@
 import { supabase } from "@/lib/supabase";
+import { staticArticles } from "@/lib/articles";
 
 export type BlogPost = {
   id: string;
@@ -16,6 +17,22 @@ export type BlogPost = {
 // Supabase nu răspunde, ca paginile de blog să nu pice site-ul dacă baza
 // de date are o problemă temporară.
 
+// Articolele din cod (lib/articles) sunt adăugate peste cele din Supabase.
+// Dacă același slug există în Supabase, varianta din Supabase are prioritate.
+function staticPosts(): BlogPost[] {
+  const now = Date.now();
+  return staticArticles
+    .filter((a) => new Date(a.published_at).getTime() <= now)
+    .map((a) => ({ ...a, id: `static-${a.slug}`, views: 0 }));
+}
+
+function mergePosts(dbPosts: BlogPost[]): BlogPost[] {
+  const slugs = new Set(dbPosts.map((p) => p.slug));
+  return [...dbPosts, ...staticPosts().filter((p) => !slugs.has(p.slug))].sort(
+    (a, b) => new Date(b.published_at).getTime() - new Date(a.published_at).getTime(),
+  );
+}
+
 export async function getPublishedPosts(): Promise<BlogPost[]> {
   try {
     const { data, error } = await supabase
@@ -23,10 +40,10 @@ export async function getPublishedPosts(): Promise<BlogPost[]> {
       .select("*")
       .lte("published_at", new Date().toISOString())
       .order("published_at", { ascending: false });
-    if (error || !data) return [];
-    return data as BlogPost[];
+    if (error || !data) return mergePosts([]);
+    return mergePosts(data as BlogPost[]);
   } catch {
-    return [];
+    return mergePosts([]);
   }
 }
 
@@ -38,11 +55,11 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
       .eq("slug", slug)
       .lte("published_at", new Date().toISOString())
       .maybeSingle();
-    if (error || !data) return null;
-    return data as BlogPost;
+    if (data && !error) return data as BlogPost;
   } catch {
-    return null;
+    // continuăm cu articolele din cod
   }
+  return staticPosts().find((p) => p.slug === slug) ?? null;
 }
 
 export async function getTopPostsByViews(limit = 5): Promise<BlogPost[]> {

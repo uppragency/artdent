@@ -21,6 +21,34 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   });
 }
 
+function stripTags(html: string) {
+  return html
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&nbsp;/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+// Extrage perechile întrebare/răspuns din secțiunea „Întrebări frecvente" (H3 + paragrafele de după)
+// pentru schema FAQPage, folosită de Google și de motoarele de răspuns AI.
+function extractFaq(html: string): { q: string; a: string }[] {
+  const start = html.search(/<h2[^>]*>\s*Întrebări frecvente\s*<\/h2>/i);
+  if (start === -1) return [];
+  const rest = html.slice(start).replace(/<h2[^>]*>\s*Întrebări frecvente\s*<\/h2>/i, "");
+  const nextH2 = rest.search(/<h2[\s>]/i);
+  const section = nextH2 === -1 ? rest : rest.slice(0, nextH2);
+  const out: { q: string; a: string }[] = [];
+  const re = /<h3[^>]*>([\s\S]*?)<\/h3>([\s\S]*?)(?=<h3|$)/gi;
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(section))) {
+    const q = stripTags(m[1]);
+    const a = stripTags(m[2]);
+    if (q && a) out.push({ q, a });
+  }
+  return out;
+}
+
 function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString("ro-RO", { day: "numeric", month: "long", year: "numeric" });
 }
@@ -30,22 +58,62 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const [post, topPosts] = await Promise.all([getPostBySlug(slug), getTopPostsByViews(5)]);
   if (!post) notFound();
 
+  const url = `${site.siteUrl}/noutati/${slug}`;
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: post.title,
     description: post.meta_description,
+    inLanguage: "ro-RO",
     datePublished: post.published_at,
     dateModified: post.published_at,
     image: post.cover_image ? `${site.siteUrl}${post.cover_image}` : `${site.siteUrl}/images/og-image.jpg`,
-    author: { "@type": "Organization", name: "ArtDent Slobozia" },
-    publisher: { "@type": "Organization", name: "ArtDent Slobozia" },
-    mainEntityOfPage: `${site.siteUrl}/noutati/${slug}`,
+    author: { "@type": "Organization", name: "ArtDent Slobozia", url: site.siteUrl },
+    publisher: {
+      "@type": "Dentist",
+      name: "ArtDent Slobozia",
+      url: site.siteUrl,
+      telephone: site.phoneHref.replace("tel:", ""),
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Al. Feroviarului 1",
+        addressLocality: "Slobozia",
+        addressRegion: "Ialomița",
+        postalCode: "920030",
+        addressCountry: "RO",
+      },
+    },
+    contentLocation: { "@type": "Place", name: "Slobozia, Ialomița, România" },
+    wordCount: stripTags(post.content).split(" ").length,
+    mainEntityOfPage: url,
+  };
+  const faq = extractFaq(post.content);
+  const faqJsonLd = faq.length
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faq.map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: { "@type": "Answer", text: f.a },
+        })),
+      }
+    : null;
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Acasă", item: site.siteUrl },
+      { "@type": "ListItem", position: 2, name: "Noutăți", item: `${site.siteUrl}/noutati` },
+      { "@type": "ListItem", position: 3, name: post.title, item: url },
+    ],
   };
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
+      {faqJsonLd && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />}
       <BlogViewTracker slug={slug} />
       <PageHero
         eyebrow="Noutăți"
