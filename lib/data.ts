@@ -335,7 +335,7 @@ export const pricing = [
   { title: "Consultație inițială", price: "de la 100 lei", text: "Examinare clinică, diagnostic și plan de tratament personalizat.", popular: false },
   { title: "Igienizare completă", price: "de la 250 lei", text: "Detartraj, periaj profesional și air-flow.", popular: false },
   { title: "Implant dentar", price: "de la 2.500 lei", text: "Implant, bont și coroană finală, planificate digital.", popular: true },
-  { title: "Aparat dentar ortodontic", price: "de la 3.500 lei", text: "Fix sau gutiere transparente, cu plată etapizată pe durata tratamentului.", popular: false },
+  { title: "Aparat dentar ortodontic", price: "de la 2.400 lei", text: "Fix sau gutiere transparente, cu plată etapizată pe durata tratamentului.", popular: false },
 ];
 
 export const values = [
@@ -495,7 +495,7 @@ export const priceCategories = [
     slug: "ortodontie",
     title: "Ortodonție",
     items: [
-      { name: "Aparat ortodontic", price: "2.700 lei" },
+      { name: "Aparat ortodontic", price: "2.400 lei" },
       { name: "Aparat ortodontic autoligaturant", price: "3.500 lei" },
       { name: "Dijunctor", price: "1.700 lei" },
       { name: "Dijunctor cu 2 mini-implanturi", price: "3.000 lei" },
